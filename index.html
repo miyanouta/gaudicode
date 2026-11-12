@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAUDICODE 競輪出走表＋予想</title>
+<style>
+  :root{
+    --bg:#070a12; --panel:#121828; --panel2:#1a2338; --line:#2b3550;
+    --text:#eef1f8; --sub:#9aa7c2; --accent:#ffb020; --accent2:#4da3ff;
+    --good:#39d98a; --bad:#ff6b6b; --card:#1a2338;
+    --gold-grad:linear-gradient(135deg,#ffd23e,#ff9d00);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;color:var(--text);
+    background:radial-gradient(1100px 480px at 85% -120px,rgba(255,176,32,.13),transparent 60%),
+               radial-gradient(900px 500px at -10% 110%,rgba(77,163,255,.10),transparent 60%),
+               linear-gradient(180deg,#0a0f1d,#070a12 320px)}
+  header{padding:16px 18px 12px;border-bottom:2px solid transparent;
+    background:linear-gradient(180deg,rgba(255,255,255,.03),transparent),#0d1322;
+    border-image:linear-gradient(90deg,transparent,var(--accent),transparent) 1;
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  header h1{font-size:21px;margin:0;letter-spacing:.04em;font-weight:900}
+  header h1 .g{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 22px rgba(255,176,32,.25)}
+  header h1 .sub{display:block;font-size:10.5px;letter-spacing:.42em;color:var(--sub);font-weight:600;margin-top:2px}
+  .datebox{margin-left:auto;display:flex;gap:8px;align-items:center}
+  .datebox input[type=date]{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:15px}
+  .datebox button{background:var(--panel2);border:1px solid var(--line);color:var(--text);font-weight:700;border-radius:9px;padding:8px 14px;font-size:14px;cursor:pointer;transition:.15s}
+  .datebox button:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .datebox button#fetchBtn{background:var(--gold-grad);color:#191102;border:0;box-shadow:0 4px 14px rgba(255,157,0,.35)}
+  .meta{width:100%;color:var(--sub);font-size:12.5px}
+  .layout{display:grid;grid-template-columns:216px 1fr;gap:0;min-height:calc(100vh - 92px)}
+  .venues{border-right:1px solid var(--line);background:rgba(255,255,255,.015);display:flex;flex-direction:column}
+  .venues h2{font-size:12px;color:var(--sub);margin:13px 12px 7px;font-weight:700;letter-spacing:.14em}
+  .venue-list{overflow-y:auto;flex:1;padding:0 8px 12px;max-height:calc(100vh - 140px)}
+  .venue{display:block;width:100%;text-align:left;background:transparent;border:1px solid transparent;border-left:3px solid transparent;color:var(--text);border-radius:10px;padding:9px 10px;cursor:pointer;margin-bottom:4px;transition:.15s}
+  .venue:hover{background:var(--panel2)}
+  .venue.active{background:linear-gradient(90deg,rgba(255,176,32,.16),rgba(255,176,32,.03));border-color:rgba(255,176,32,.45);border-left:3px solid var(--accent)}
+  .venue .vn{font-size:16.5px;font-weight:800}
+  .venue .vt{display:block;font-size:11.5px;color:var(--sub);margin-top:2px;line-height:1.35}
+  .venue .badge{font-size:10.5px;background:var(--gold-grad);color:#191102;border-radius:5px;padding:1px 6px;font-weight:800;margin-left:5px;vertical-align:2px}
+  main{padding:16px 18px 34px;min-width:0}
+  .races{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:15px}
+  .race{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:7px 15px;font-size:15px;cursor:pointer;font-weight:700;transition:.15s}
+  .race:hover{border-color:var(--accent2);transform:translateY(-1px)}
+  .race.active{background:linear-gradient(135deg,#6db9ff,#2f7fe0);color:#04182e;border-color:transparent;box-shadow:0 4px 14px rgba(77,163,255,.35)}
+  .race.pending{opacity:.55}
+  h3.race-title{margin:2px 0 12px;font-size:20px;font-weight:900;letter-spacing:.02em}
+  h3.race-title small{color:var(--sub);font-size:13px;margin-left:8px;font-weight:600}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 130px),var(--panel);
+    border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:15px;overflow-x:auto;
+    box-shadow:0 8px 22px rgba(0,0,0,.35)}
+  .card h4{margin:0 0 11px;font-size:15.5px;color:var(--text);font-weight:800;border-left:4px solid var(--accent);padding-left:9px;letter-spacing:.03em}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+  th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:center;white-space:nowrap}
+  tbody tr:nth-child(even){background:rgba(255,255,255,.022)}
+  tbody tr:hover{background:rgba(255,176,32,.06)}
+  th{color:var(--sub);font-weight:600;font-size:12.5px}
+  td.name{text-align:left;font-weight:700}
+  .mark{font-size:17px;font-weight:800}
+  .mark.hon{color:var(--accent);text-shadow:0 0 10px rgba(255,176,32,.5)}
+  .pred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+  .pred-box{background:var(--panel2);border:1px solid rgba(255,255,255,.04);border-radius:11px;padding:10px 12px}
+  .pred-box .k{font-size:12px;color:var(--sub);margin-bottom:4px}
+  .pred-box .v{font-size:16.5px;font-weight:700;line-height:1.5}
+  .comment{white-space:pre-wrap;line-height:1.75;font-size:14.5px}
+  .plan-tabs{display:inline-flex;gap:4px;margin:13px 0 9px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px}
+  .plan-tab{border:0;background:transparent;color:var(--sub);border-radius:999px;padding:7px 16px;font-size:14px;cursor:pointer;font-weight:800;transition:.15s}
+  .plan-tab.active{background:var(--gold-grad);color:#191102;box-shadow:0 3px 10px rgba(255,157,0,.35)}
+  .plan-panel{display:none;background:var(--panel2);border:1px solid rgba(255,255,255,.04);border-radius:11px;padding:11px 13px}
+  .plan-panel.active{display:block}
+  .plan-panel .combos{font-size:17px;font-weight:700;line-height:1.6}
+  .plan-panel .combos .odds{font-size:12.5px;color:var(--accent2);font-weight:700;margin-left:3px}
+  .plan-panel .ana{margin-top:8px;font-size:13.5px;color:var(--accent)}
+  .rec-chip{display:inline-block;margin:2px 0 8px;padding:3px 11px;border-radius:999px;font-size:13px;font-weight:700}
+  .rec-buy{background:#e3f4e5;color:#1c6b2a;border:1px solid #9ed3a6}
+  .rec-skip{background:#f3f3f3;color:#777;border:1px solid #ccc}
+  details.comment-fold{margin-top:12px}
+  details.comment-fold summary{cursor:pointer;color:var(--sub);font-size:13.5px}
+  .result-card{border:1px solid var(--accent);background:linear-gradient(180deg,rgba(255,176,32,.10),rgba(255,176,32,.03))}
+  .result-top{font-size:17px;font-weight:800;line-height:1.7}
+  .hit-badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:700;margin:2px 4px 2px 0;background:#2a2f45;color:var(--sub)}
+  .hit-badge.hit{background:var(--gold-grad);color:#191102}
+  .race.done{box-shadow:inset 0 0 0 1px var(--accent)}
+  .empty{color:var(--sub);padding:26px 8px;text-align:center;line-height:1.8}
+  .warn{background:#3a2b12;border:1px solid #6b5316;color:#ffd98a;border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:14px;line-height:1.7}
+  footer{padding:14px 16px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);line-height:1.7}
+  @media (max-width:760px){
+    .layout{grid-template-columns:1fr}
+    .venues{border-right:0;border-bottom:1px solid var(--line)}
+    .venue-list{max-height:180px}
+  }
+  .anim-wrap{display:flex;gap:12px;flex-wrap:wrap}
+  .anim-wrap canvas{background:#17301d;border-radius:12px;max-width:100%;height:auto;flex:1 1 340px;border:1px solid rgba(255,176,32,.35);box-shadow:inset 0 0 40px rgba(0,0,0,.45)}
+  .anim-side{flex:0 1 180px;min-width:150px}
+  .anim-status{font-weight:800;font-size:15.5px;margin-bottom:6px;min-height:22px;color:var(--accent)}
+  .anim-side ol{margin:0;padding-left:22px;font-size:13px;line-height:1.65}
+  .anim-chip{display:inline-block;width:16px;height:16px;border-radius:50%;border:1px solid #888;text-align:center;line-height:16px;font-size:10px;font-weight:700;vertical-align:-3px;margin-right:2px}
+  .anim-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:11px}
+  .anim-controls button{padding:8px 16px;border-radius:999px;border:0;background:var(--gold-grad);color:#191102;cursor:pointer;font-size:14px;font-weight:800;box-shadow:0 3px 10px rgba(255,157,0,.3)}
+  .anim-controls button#animReset{background:var(--panel2);color:var(--text);border:1px solid var(--line);box-shadow:none}
+  .anim-controls button.off{background:var(--panel2);color:var(--sub);border:1px solid var(--line);box-shadow:none}
+  .anim-controls select{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:5px 8px;font-size:14px}
+  .anim-note{font-size:12px;color:var(--sub)}
+</style>
+<style>#fetchBtn,#resultsBtn{display:none!important}</style></head>
+<body>
+<header>
+  <h1><span class="g">GAUDICODE</span> 競輪出走表＋予想<span class="sub">KEIRIN AI PREDICTION ENGINE</span></h1>
+  <div class="datebox">
+    <input type="date" id="dateInput">
+    <button id="todayBtn">今日</button>
+    <button id="fetchBtn" style="background:var(--accent2);color:#06121f">出走表を取得</button>
+    <button id="resultsBtn">結果を更新</button>
+  </div>
+  <div class="meta" id="metaLine">データを読み込んでいます…</div>
+</header>
+
+<div class="layout">
+  <aside class="venues">
+    <h2>競輪場（縦スクロールで選択）</h2>
+    <div class="venue-list" id="venueList"></div>
+  </aside>
+  <main>
+    <div class="races" id="raceList"></div>
+    <div id="content"></div>
+  </main>
+</div>
+
+<footer>
+  データ出典: 楽天Kドリームス（自動取得）。予想は GAUDICODE KEIRIN AI の出力であり、的中・利益を保証するものではありません。車券の購入はご自身の判断と責任で行ってください。
+</footer>
+
+<script>
+const state = { data:null, venueIdx:0, raceIdx:0 };
+const $ = (id)=>document.getElementById(id);
+
+function todayStr(){
+  const d = new Date();
+  const p = (n)=>String(n).padStart(2,'0');
+  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+}
+
+let resultsTimer = null;
+let ensurePollingFor = null;
+
+async function load(dateStr, keepSelection){
+  $('metaLine').textContent = 'データを読み込んでいます…';
+  if(!keepSelection){ $('venueList').innerHTML=''; $('raceList').innerHTML=''; $('content').innerHTML=''; }
+  try{
+    const res = await fetch('data/'+dateStr+'.json', {cache:'no-store'});
+    if(!res.ok) throw new Error('not found');
+    state.data = await res.json();
+    if(!keepSelection){ state.venueIdx = 0; state.raceIdx = 0; }
+    if(state.venueIdx >= state.data.venues.length) state.venueIdx = 0;
+    const gen = state.data.generatedAt ? new Date(state.data.generatedAt).toLocaleString('ja-JP') : '-';
+    const resUpd = state.data.resultsUpdatedAt ? ' ／ 結果更新: ' + new Date(state.data.resultsUpdatedAt).toLocaleTimeString('ja-JP') : '';
+    $('metaLine').textContent = state.data.date + ' の開催 ' + state.data.venues.length + '場 ／ データ生成: ' + gen + resUpd + (state.data.note ? ' ／ ' + state.data.note : '');
+    renderVenues(); renderRaces(); renderContent();
+    setupResultsAutoRefresh(dateStr);
+  }catch(e){
+    state.data = null;
+    if(resultsTimer){ clearInterval(resultsTimer); resultsTimer = null; }
+    ensureData(dateStr);
+  }
+}
+
+// データが無い日付は、サーバーに自動取得を依頼して完了を待つ (過去日も可)
+async function ensureData(dateStr){
+  if(ensurePollingFor === dateStr) return;
+  try{
+    const res = await fetch('/api/ensure', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({date: dateStr})});
+    if(!res.ok) throw new Error('no api');
+    const j = await res.json();
+    if(j.exists){ load(dateStr); return; }
+    ensurePollingFor = dateStr;
+    $('metaLine').textContent = dateStr + ' のデータを取得しています…（数分かかります。そのまま待ってください）';
+    $('content').innerHTML = '<div class="empty">この日の出走表と予想を自動で取得しています。<br>完了すると自動で表示が切り替わります。</div>';
+    const timer = setInterval(async ()=>{
+      try{
+        const s = await (await fetch('/api/status?date='+dateStr)).json();
+        if(s.exists && !s.running){
+          clearInterval(timer);
+          if(ensurePollingFor === dateStr) ensurePollingFor = null;
+          load(dateStr);
+        }
+      }catch(_){ /* 次のポーリングで再試行 */ }
+    }, 4000);
+    setTimeout(()=>{ clearInterval(timer); if(ensurePollingFor === dateStr){ ensurePollingFor = null; $('metaLine').textContent = dateStr + ' の取得に時間がかかっています。「出走表を取得」ボタンで再試行できます。'; } }, 10*60*1000);
+  }catch(e){
+    $('metaLine').textContent = dateStr + ' のデータはまだありません。';
+    $('content').innerHTML = '<div class="empty">この日のデータはまだ取得されていません。<br>データは毎朝7時ごろに自動で追加されます。</div>';
+  }
+}
+
+// 今日の結果は自動で取り込む (開いている間、3分ごとに静かに更新)
+function setupResultsAutoRefresh(dateStr){
+  if(resultsTimer){ clearInterval(resultsTimer); resultsTimer = null; }
+  if(dateStr !== todayStr()) return;
+  updateResults(dateStr, true);
+  resultsTimer = setInterval(()=>{ if(($('dateInput').value||todayStr()) === dateStr) updateResults(dateStr, true); }, 3*60*1000);
+}
+
+let resultsBusy = false;
+async function updateResults(dateStr, silent){
+  if(resultsBusy) return;
+  if(!state.data){ if(!silent) $('metaLine').textContent = '先にその日のデータを読み込んでください。'; return; }
+  resultsBusy = true;
+  const btn = $('resultsBtn');
+  if(!silent){ btn.disabled = true; btn.textContent = '結果を取得中…'; }
+  try{
+    const res = await fetch('/api/results', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({date: dateStr})});
+    const j = await res.json().catch(()=>({ok:false,error:'応答を読み取れませんでした'}));
+    if(j.ok){
+      const v = state.venueIdx, r = state.raceIdx;
+      await load(dateStr, true);
+      state.venueIdx = Math.min(v, state.data.venues.length-1);
+      state.raceIdx = r;
+      renderVenues(); renderRaces(); renderContent();
+      if(!silent) $('metaLine').textContent += ' ／ 結果を更新しました。';
+    }else if(!silent){
+      $('metaLine').textContent = '結果を取得できませんでした: ' + (j.error || '不明なエラー') + ' ／ サーバー版（node server.mjs）で開いたときだけ動きます。';
+    }
+  }catch(e){
+    if(!silent) $('metaLine').textContent = '結果を取得できませんでした: サーバーに接続できません（サーバー版でのみ動作します）。';
+  }finally{
+    resultsBusy = false;
+    if(!silent){ btn.disabled = false; btn.textContent = '結果を更新'; }
+  }
+}
+
+function renderVenues(){
+  const el = $('venueList'); el.innerHTML='';
+  state.data.venues.forEach((v,i)=>{
+    const ready = v.races.filter(r=>r.status==='ready').length;
+    const b = document.createElement('button');
+    b.className = 'venue' + (i===state.venueIdx?' active':'');
+    b.innerHTML = '<span class="vn">'+v.name+'</span><span class="badge">'+v.grade+'</span>' +
+      '<span class="vt">'+(v.title||'')+'<br>'+v.races.length+'R' + (ready? ' ／ '+ready+'R表示可':'') + '</span>';
+    b.onclick = ()=>{ state.venueIdx=i; state.raceIdx=0; renderVenues(); renderRaces(); renderContent(); };
+    el.appendChild(b);
+  });
+}
+
+function renderRaces(){
+  const el = $('raceList'); el.innerHTML='';
+  const v = state.data.venues[state.venueIdx];
+  v.races.forEach((r,i)=>{
+    const b = document.createElement('button');
+    b.className = 'race' + (i===state.raceIdx?' active':'') + (r.status!=='ready'?' pending':'') + (r.result?' done':'');
+    b.textContent = r.no + 'R' + (r.result?'✓':'');
+    b.onclick = ()=>{ state.raceIdx=i; renderRaces(); renderContent(); };
+    el.appendChild(b);
+  });
+}
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function renderContent(){
+  const v = state.data.venues[state.venueIdx];
+  const r = v.races[state.raceIdx];
+  const c = $('content');
+  if(!r || r.status!=='ready'){
+    c.innerHTML = '<h3 class="race-title">'+v.name+' '+ (r?r.no:'') +'R</h3>' +
+      '<div class="empty">このレースの出走表はまだ取得されていません。<br>自動取得が完了すると、出走表とGAUDICODE予想が表示されます。</div>';
+    return;
+  }
+  let html = '<h3 class="race-title">'+v.name+' '+r.no+'R<small>'+esc(r.name||'')+'</small></h3>';
+
+  // 結果 (確定していれば)
+  if(r.result){
+    const z = r.result;
+    const nameOf = (n)=>{ const rd = (r.riders||[]).find(x=>x.num===n); return rd ? rd.name : ''; };
+    const medals = ['1着','2着','3着'];
+    html += '<div class="card result-card"><h4>結果</h4><div class="result-top">' +
+      z.top3.map((n,i)=>medals[i]+' '+n+'番 '+esc(nameOf(n))).join(' ／ ') + '</div>';
+    html += '<div style="margin-top:6px;font-size:14.5px">';
+    if(z.sanrenpuku) html += '三連複 ' + esc(z.sanrenpuku.combo) + ' ／ ' + (z.sanrenpuku.payout!=null ? z.sanrenpuku.payout.toLocaleString()+'円' : '-') + '　';
+    if(z.sanrentan) html += '三連単 ' + esc(z.sanrentan.combo.replace(/-/g,'→')) + ' ／ ' + (z.sanrentan.payout!=null ? z.sanrentan.payout.toLocaleString()+'円' : '-');
+    html += '</div>';
+    if(z.hits){
+      const hb = (label,hit)=>'<span class="hit-badge'+(hit?' hit':'')+'">'+label+(hit?' 的中':'')+'</span>';
+      html += '<div style="margin-top:8px">' +
+        (z.hits.teppan!==undefined ? hb('三連複・鉄板', z.hits.teppan) : '') +
+        (z.hits.balance!==undefined ? hb('三連複・バランス', z.hits.balance) : '') +
+        (z.hits.shoubu!==undefined ? hb('三連複・勝負', z.hits.shoubu) : '') +
+        (z.hits.tanBalance!==undefined ? hb('三連単・バランス', z.hits.tanBalance) : '') +
+        (z.hits.tanShoubu!==undefined ? hb('三連単・勝負', z.hits.tanShoubu) : '') +
+        (z.hits.tanBalance===undefined && z.hits.sanrentan!==undefined ? hb('三連単', z.hits.sanrentan) : '') +
+        '</div>';
+    }
+    html += '</div>';
+  }
+
+  // 出走表
+  html += '<div class="card"><h4>出走表</h4><table><thead><tr>' +
+    '<th>印</th><th>枠</th><th>車</th><th>選手名</th><th>年齢/府県</th><th>期</th><th>級班</th><th>脚質</th><th>得点</th><th>S</th><th>B</th><th>逃</th><th>捲</th><th>差</th><th>マ</th>' +
+    '</tr></thead><tbody>';
+  r.riders.forEach(x=>{
+    const hon = x.gaudiMark==='◎' ? ' hon':'';
+    html += '<tr><td class="mark'+hon+'">'+esc(x.gaudiMark||'')+'</td><td>'+x.waku+'</td><td>'+x.num+'</td>' +
+      '<td class="name">'+esc(x.name)+'</td><td>'+x.age+'/'+esc(x.pref)+'</td><td>'+x.term+'</td><td>'+esc(x.class)+'</td>' +
+      '<td>'+esc(x.style||'-')+'</td><td>'+Number(x.tokuten).toFixed(2)+'</td><td>'+x.s+'</td><td>'+x.b+'</td><td>'+x.nige+'</td><td>'+x.makuri+'</td><td>'+x.sashi+'</td><td>'+x.mark+'</td></tr>';
+  });
+  html += '</tbody></table></div>';
+
+  // 予想
+  const p = r.prediction;
+  if(p){
+    html += '<div class="card"><h4>GAUDICODE予想</h4><div class="pred-grid">';
+    if(p.honmei) html += '<div class="pred-box"><div class="k">本命</div><div class="v">◎ '+p.honmei.num+'番 '+esc(p.honmei.name)+'</div></div>';
+    if(!p.plans && p.sanrenpuku) html += '<div class="pred-box"><div class="k">三連複</div><div class="v">'+p.sanrenpuku.map(esc).join(' ／ ')+'</div></div>';
+    if(p.sanrentan) html += '<div class="pred-box"><div class="k">三連単</div><div class="v">'+p.sanrentan.map(esc).join(' ／ ')+'</div></div>';
+    if(p.wide) html += '<div class="pred-box"><div class="k">ワイド</div><div class="v">'+p.wide.map(esc).join(' ／ ')+'</div></div>';
+    if(p.balance) html += '<div class="pred-box"><div class="k">均衡指数</div><div class="v">'+esc(p.balance)+'</div></div>';
+    if(p.confidence) html += '<div class="pred-box"><div class="k">信頼度</div><div class="v">'+esc(p.confidence)+'</div></div>';
+    html += '</div>';
+
+    // プラン（鉄板=GAUDI純正 / バランス・勝負=補正レイヤー）タブ表示
+    if(p.plans){
+      const tiers = [['teppan','鉄板'],['balance','バランス'],['shoubu','勝負']]
+        .filter(([k])=>p.plans[k] && p.plans[k].length);
+      const defaultTier = p.plans.balance ? 'balance' : (tiers[0] && tiers[0][0]);
+      html += '<div class="plan-tabs">' + tiers.map(([k,label])=>
+        '<button class="plan-tab'+(k===defaultTier?' active':'')+'" onclick="switchPlan(this,\''+k+'\')">'+label+'（'+p.plans[k].length+'点）</button>').join('') + '</div>';
+      html += tiers.map(([k])=>
+        '<div class="plan-panel'+(k===defaultTier?' active':'')+'" data-plan="'+k+'"><div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">三連複</div><div class="combos">'+p.plans[k].map(c=>{ const o = r.odds && r.odds[c.split('-').map(Number).sort((a,b)=>a-b).join('-')]; return esc(c) + (o ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''); }).join(' ／ ')+'</div>' +
+        (p.plansTan && p.plansTan[k] ? '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">三連単</div><div class="combos" style="font-size:15px">'+p.plansTan[k].map(esc).join(' ／ ')+'</div>' : '') +
+        (k==='shoubu' && p.recommend ? '<div class="rec-chip '+(p.recommend.verdict==='buy'?'rec-buy':'rec-skip')+'">判定：'+esc(p.recommend.label)+'（'+esc(p.recommend.reason)+'）</div>' : '') +
+        (k==='shoubu' && p.ana ? '<div class="ana">穴候補: '+p.ana.num+'番 '+esc(p.ana.name)+'（'+esc(p.ana.reason)+'）</div>' : '') +
+        '</div>').join('');
+      html += '<div style="font-size:12px;color:var(--sub);margin-top:6px">鉄板は穴候補を中心にした買い目（全点に穴候補入り）。バランスは補助層とGAUDI純正を足したもの、勝負は中核5人のボックスと併合したものです。三連単も穴候補を3着内に入れています。' + (r.odds ? '買い目横の数字は三連複オッズ（取得時点）です。' : '') + '</div>';
+    }
+
+    if(p.comment) html += '<details class="comment-fold"><summary>コメント・展開を読む</summary><div class="comment" style="margin-top:8px">'+esc(p.comment)+'</div></details>';
+    html += '</div>';
+  }
+
+  // 展開アニメーション
+  html += '<div class="card"><h4>🏁 展開アニメーション <span class="anim-note">シミュレーション（予想ベース）</span></h4>' +
+    '<div class="anim-wrap"><canvas id="animCanvas" width="720" height="440"></canvas>' +
+    '<div class="anim-side"><div class="anim-status" id="animStatus">スタート前</div><ol id="animOrder"></ol></div></div>' +
+    '<div class="anim-controls"><button id="animPlay" type="button">▶ 再生</button><button id="animReset" type="button">↺ リセット</button><button id="animSound" type="button">🔊 音声ON</button>' +
+    '<label class="anim-note">速度 <select id="animSpeed"><option value="2">2倍</option><option value="4">4倍</option><option value="8">8倍</option></select></label>' +
+    '<span class="anim-note">着順は印・脚質・並びから作る想定です。実際の結果とは関係ありません。</span></div></div>';
+
+  r._key = (state.date || '') + '|' + v.name;
+  r._venue = v.name;
+  c.innerHTML = html;
+  initAnim(r);
+}
+
+function switchPlan(btn, key){
+  const card = btn.closest('.card');
+  card.querySelectorAll('.plan-tab').forEach(b=>b.classList.toggle('active', b===btn));
+  card.querySelectorAll('.plan-panel').forEach(pn=>pn.classList.toggle('active', pn.dataset.plan===key));
+}
+
+// ================= 音声 (鐘 + 実況) =================
+const AUDIO = { ctx: null, muted: false };
+function audioCtx(){
+  if(!AUDIO.ctx){ try{ AUDIO.ctx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){} }
+  if(AUDIO.ctx && AUDIO.ctx.state === 'suspended') AUDIO.ctx.resume();
+  return AUDIO.ctx;
+}
+function bellStrike(t, freq){
+  const ctx = AUDIO.ctx; if(!ctx) return;
+  const master = ctx.createGain(); master.gain.value = 0.5; master.connect(ctx.destination);
+  [[1,.5],[2.02,.28],[2.74,.2],[3.76,.12],[5.4,.05]].forEach(([m, g]) => {
+    const o = ctx.createOscillator(), gn = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = freq * m;
+    gn.gain.setValueAtTime(g * 0.35, t); gn.gain.exponentialRampToValueAtTime(0.0001, t + 0.4);
+    o.connect(gn); gn.connect(master); o.start(t); o.stop(t + 0.45);
+  });
+}
+function ringBell(){
+  if(AUDIO.muted || !audioCtx()) return;
+  const t0 = AUDIO.ctx.currentTime + 0.02;
+  for(let i = 0; i < 12; i++) bellStrike(t0 + i * 0.4, 1567.98); // 残り1周半から最終周回に入るまで鳴り続ける
+}
+function goalChime(){
+  if(AUDIO.muted || !audioCtx()) return;
+  const t0 = AUDIO.ctx.currentTime + 0.02;
+  [1318.5, 1567.98, 2093].forEach((f, i) => bellStrike(t0 + i * 0.12, f));
+}
+function speak(text, force){
+  if(AUDIO.muted || !('speechSynthesis' in window)) return;
+  try{
+    if(window.speechSynthesis.speaking && !force) return;
+    if(force) window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ja-JP'; u.rate = 1.08; u.pitch = 1.0;
+    const v = window.speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith('ja'));
+    if(v) u.voice = v;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+function stopSpeech(){ try{ if('speechSynthesis' in window) window.speechSynthesis.cancel(); }catch(e){} }
+
+// ================= 展開アニメーション (シミュレーション) =================
+const CAR_COLORS = {1:['#f5f5f5','#111'],2:['#26262b','#fff'],3:['#d92b2b','#fff'],4:['#2255cc','#fff'],5:['#f2c418','#111'],6:['#1f9d4d','#fff'],7:['#f07d18','#fff'],8:['#f28bbd','#111'],9:['#8e44ad','#fff']};
+let ANIM = null;
+
+function animSeed(str){ let h = 2166136261; for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function mulberry32(a){ return function(){ a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function gauss(x, mu, sig){ const d = (x - mu) / sig; return Math.exp(-0.5 * d * d); }
+function smoothstep(x, a, b){ const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); }
+
+// バンク (スタジアム型) の外周パス。Rを変えると内外のラインが作れる
+function stadiumPts(R){
+  const cx = 360, cy = 220, a = 175, pts = [];
+  const seg = (x0, y0, x1, y1, n) => { for(let i=0;i<n;i++) pts.push([x0 + (x1-x0)*i/n, y0 + (y1-y0)*i/n]); };
+  const arc = (ccx, ccy, ang0, ang1, n) => { for(let i=0;i<n;i++){ const t = ang0 + (ang1-ang0)*i/n; pts.push([ccx + R*Math.cos(t), ccy + R*Math.sin(t)]); } };
+  seg(cx-a, cy+R, cx+a, cy+R, 90);            // ホーム直線 (下)
+  arc(cx+a, cy, Math.PI/2, -Math.PI/2, 90);   // 第2コーナー〜バック
+  seg(cx+a, cy-R, cx-a, cy-R, 90);            // バック直線 (上)
+  arc(cx-a, cy, -Math.PI/2, -Math.PI*3/2, 90); // 第3〜4コーナー (外側を通る)
+  return pts;
+}
+const ANIM_TRACK = (()=>{ 
+  const pts = stadiumPts(125); const cum = [0];
+  for(let i=1;i<=pts.length;i++){ const p = pts[i-1], q = pts[i%pts.length]; cum.push(cum[i-1] + Math.hypot(q[0]-p[0], q[1]-p[1])); }
+  // ホーム直線の中心 = GOAL (45番目の点), バック直線の中心 = BACK (225番目の点)
+  return { pts, cum, L: cum[cum.length-1], goal: cum[45], back: cum[225] };
+})();
+function trackPos(s, lanePx){
+  const { pts, cum, L } = ANIM_TRACK;
+  let d = ((s % L) + L) % L;
+  let lo = 0, hi = cum.length - 1;
+  while(lo < hi - 1){ const mid = (lo + hi) >> 1; if(cum[mid] <= d) lo = mid; else hi = mid; }
+  const p = pts[lo % pts.length], q = pts[(lo + 1) % pts.length];
+  const segLen = Math.max(1e-6, cum[lo+1] - cum[lo]); const t = (d - cum[lo]) / segLen;
+  const x = p[0] + (q[0]-p[0]) * t, y = p[1] + (q[1]-p[1]) * t;
+  let tx = q[0]-p[0], ty = q[1]-p[1]; const m = Math.hypot(tx, ty) || 1; tx /= m; ty /= m;
+  let nx = ty, ny = -tx; // 外向き法線 (中心から離れる側)
+  if((x-360)*nx + (y-220)*ny < 0){ nx = -nx; ny = -ny; }
+  return { x: x + nx*lanePx, y: y + ny*lanePx, tx, ty };
+}
+
+function initAnim(race){
+  if(ANIM && ANIM.raf) cancelAnimationFrame(ANIM.raf);
+  stopSpeech();
+  const canvas = document.getElementById('animCanvas');
+  if(!canvas || !race.riders || race.riders.length < 3){ ANIM = null; return; }
+  const ctx = canvas.getContext('2d');
+  const rand = mulberry32(animSeed((race._key || '') + '|' + race.no));
+  const riders = race.riders;
+  const toks = riders.map(r => r.tokuten || 0);
+  const tMin = Math.min(...toks), tMax = Math.max(...toks);
+  const markW = { '◎': 1.0, '○': 0.82, '▲': 0.66, '☆': 0.55, '△': 0.4 };
+  const byNum = new Map(riders.map(r => [r.num, r]));
+  let startOrder = [];
+  if(Array.isArray(race.lineup)) for(const g of race.lineup) for(const n of g) if(byNum.has(n) && !startOrder.includes(n)) startOrder.push(n);
+  for(const r of [...riders].sort((a,b)=>a.num-b.num)) if(!startOrder.includes(r.num)) startOrder.push(r.num);
+  const L = ANIM_TRACK.L, total = 3 * L, V = total / 46;
+  const state = startOrder.map((num, idx) => {
+    const r = byNum.get(num);
+    const sn = 0.55 * (markW[r.gaudiMark] ?? 0.25) + 0.45 * ((r.tokuten - tMin) / Math.max(1e-6, tMax - tMin));
+    const style = r.style || '';
+    const early = ((r.nige || 0) >= 1 || (r.b || 0) >= 3 || style.includes('逃')) ? 0.055 : 0.015;
+    const bellA = (r.makuri || 0) >= 2 ? 0.06 : (r.makuri || 0) >= 1 ? 0.038 : 0.01;
+    const late = ((r.sashi || 0) + (r.mark || 0)) >= 3 ? 0.058 : ((r.sashi || 0) + (r.mark || 0)) >= 1 ? 0.032 : 0.012;
+    const fade = (early > 0.03 && sn < 0.45) ? 0.05 : 0.012;
+    const chase = (early > 0.03 ? 0.008 : 0.02 + 0.014 * sn) * (0.7 + 0.6 * rand()); // 鐘の後、後方から上がってくる動き
+    return { num, name: r.name, mark: r.gaudiMark || '', dist: -idx * 7, lane: idx % 3, laneT: idx % 3,
+      fb: 0.962 + 0.06 * sn + (rand() - 0.5) * 0.05, early, bellA: bellA * (0.7 + 0.6 * rand()), chase, late: late * (0.7 + 0.6 * rand()), fade, done: false };
+  });
+  ANIM = { ctx, canvas, state, total, L, V, playing: false, finished: [], bellRang: false, bellAt: 0, last: 0, raf: 0, done: false,
+    venue: race._venue || '', no: race.no, said: { start: false, final: false, chase: false }, leaderNum: null, leaderSpokeAt: performance.now(), atBell: null };
+  const playBtn = document.getElementById('animPlay');
+  playBtn.onclick = () => {
+    ANIM.playing = !ANIM.playing;
+    playBtn.textContent = ANIM.playing ? '⏸ 一時停止' : '▶ 再生';
+    if(ANIM.playing){
+      audioCtx();
+      if(!ANIM.said.start && !ANIM.done){ ANIM.said.start = true; speak((ANIM.venue ? ANIM.venue + '競輪' : '') + ANIM.no + 'レース、スタートしました', true); }
+      ANIM.last = performance.now(); ANIM.raf = requestAnimationFrame(animFrame);
+    } else stopSpeech();
+  };
+  const soundBtn = document.getElementById('animSound');
+  if(soundBtn){
+    soundBtn.textContent = AUDIO.muted ? '🔇 音声OFF' : '🔊 音声ON';
+    soundBtn.classList.toggle('off', AUDIO.muted);
+    soundBtn.onclick = () => {
+      AUDIO.muted = !AUDIO.muted;
+      soundBtn.textContent = AUDIO.muted ? '🔇 音声OFF' : '🔊 音声ON';
+      soundBtn.classList.toggle('off', AUDIO.muted);
+      if(AUDIO.muted) stopSpeech(); else audioCtx();
+    };
+  }
+  document.getElementById('animReset').onclick = () => { const rk = race; initAnim(rk); document.getElementById('animStatus').textContent = 'スタート前'; drawAnim(); };
+  drawAnim(); updateAnimOrder();
+}
+
+function animFrame(now){
+  if(!ANIM || !ANIM.playing) return;
+  const speedMult = Number((document.getElementById('animSpeed') || {}).value || 1);
+  let dt = Math.min(0.05, (now - ANIM.last) / 1000) * speedMult;
+  ANIM.last = now;
+  const { state, total, L, V } = ANIM;
+  for(const s of state){
+    if(s.done) continue;
+    const ph = Math.min(1, Math.max(0, s.dist / total));
+    const f = 1 + s.early * gauss(ph, 0.16, 0.09) + s.bellA * gauss(ph, 0.60, 0.07) + s.chase * gauss(ph, 0.74, 0.11) + s.late * gauss(ph, 0.93, 0.05) - s.fade * smoothstep(ph, 0.78, 1);
+    s.dist += V * s.fb * f * dt;
+    if(s.dist >= total){ s.dist = total; s.done = true; ANIM.finished.push(s); }
+  }
+  const order = [...state].sort((a, b) => b.dist - a.dist);
+  order.forEach((s, i) => { s.laneT = (i % 4) * 0.55; });
+  for(const s of state) s.lane += (s.laneT - s.lane) * Math.min(1, dt * 3);
+  const leader = order[0];
+  const lapsLeft = Math.max(0, 3 - Math.floor(Math.max(0, leader.dist) / L));
+  const st = document.getElementById('animStatus');
+  // 実況: 先頭交代 (序盤を過ぎてから、間隔を空けて)
+  if(leader.num !== ANIM.leaderNum){
+    const prev = ANIM.leaderNum; ANIM.leaderNum = leader.num;
+    if(prev !== null && leader.dist > total * 0.5 && now - ANIM.leaderSpokeAt > 6000){
+      ANIM.leaderSpokeAt = now; speak('先頭は' + leader.num + '番、' + leader.name);
+    }
+  }
+  // 実況: 鐘のあと後方から大きく上がってきた選手
+  if(ANIM.atBell && !ANIM.said.chase && leader.dist > total * 0.78 && now - ANIM.leaderSpokeAt > 4000){
+    const nowRank = new Map(order.map((s, i) => [s.num, i]));
+    const climber = order.slice(0, 3).find(s => (ANIM.atBell.get(s.num) ?? 99) - nowRank.get(s.num) >= 3);
+    if(climber){ ANIM.said.chase = true; ANIM.leaderSpokeAt = now; speak('後ろから' + climber.num + '番、' + climber.name + 'が上がってきました'); }
+  }
+  if(!ANIM.said.final && leader.dist > total * 0.88){
+    ANIM.said.final = true; speak('最後の直線です。先頭は' + leader.num + '番、' + leader.name, true);
+  }
+  if(ANIM.finished.length === state.length){
+    ANIM.playing = false; ANIM.done = true;
+    const pb = document.getElementById('animPlay'); if(pb) pb.textContent = '▶ 再生';
+    const top3 = ANIM.finished.slice(0, 3).map((s, i) => (i+1) + '着 ' + s.num + '番 ' + s.name).join(' ／ ');
+    if(st) st.textContent = '🏁 ゴール（想定）: ' + top3;
+    goalChime();
+    speak('ゴールイン。' + ANIM.finished.slice(0, 3).map((s, i) => (i+1) + '着' + s.num + '番、' + s.name).join('。'), true);
+  } else if(!ANIM.bellRang && leader.dist >= 1.5 * L){
+    ANIM.bellRang = true; ANIM.bellAt = now;
+    ANIM.atBell = new Map(order.map((s, i) => [s.num, i]));
+    if(st) st.textContent = '🔔 打鐘！ 残り1周半';
+    ringBell();
+    speak('打鐘が入りました。残り1周半です', true);
+  } else if(st){
+    st.textContent = (ANIM.bellRang && leader.dist < 2 * L) ? '🔔 打鐘！ 残り1周半' : '残り' + lapsLeft + '周';
+  }
+  drawAnim(now);
+  updateAnimOrder();
+  if(ANIM.playing) ANIM.raf = requestAnimationFrame(animFrame);
+}
+
+function drawAnim(now){
+  if(!ANIM) return;
+  const { ctx } = ANIM;
+  ctx.clearRect(0, 0, 720, 440);
+  const drawPath = (R, style, width) => {
+    const pts = stadiumPts(R);
+    ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath();
+    if(width){ ctx.strokeStyle = style; ctx.lineWidth = width; ctx.stroke(); } else { ctx.fillStyle = style; ctx.fill(); }
+  };
+  drawPath(125, '#1d3a24', 64);           // 外周 (バンク外側)
+  drawPath(125, '#35704a', 46);           // 走路
+  drawPath(103, '#224d2f', 0);            // 内側 (インフィールド)
+  ctx.fillStyle = '#1d3a24'; ctx.beginPath(); ctx.ellipse(360, 220, 258, 96, 0, 0, Math.PI * 2); ctx.fill();
+  const drawLine = (sPos, color, width, label, labelDy) => {
+    const p = trackPos(sPos, 0);
+    ctx.strokeStyle = color; ctx.lineWidth = width;
+    ctx.beginPath(); ctx.moveTo(p.x - p.ty * 25, p.y + p.tx * 25); ctx.lineTo(p.x + p.ty * 25, p.y - p.tx * 25); ctx.stroke();
+    ctx.fillStyle = color; ctx.font = '800 13px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(label, p.x, p.y + labelDy);
+  };
+  drawLine(ANIM_TRACK.goal, '#ffffff', 3.5, 'GOAL', 42);   // ホーム直線中心
+  drawLine(ANIM_TRACK.back, 'rgba(255,255,255,.75)', 2.5, 'BACK', -34); // バック直線中心
+  ctx.fillStyle = 'rgba(255,255,255,.55)'; ctx.font = '700 15px sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText('GAUDICODE 展開シミュレーション', 360, 226);
+  const leaderDistNow = Math.max(...ANIM.state.map(s => s.dist));
+  if(ANIM.bellRang && !ANIM.done && leaderDistNow < 2 * ANIM.L){
+    ctx.fillStyle = 'rgba(255,210,60,.92)'; ctx.font = '900 44px sans-serif';
+    ctx.fillText('🔔 打鐘', 360, 130);
+  }
+  const sorted = [...ANIM.state].sort((a, b) => a.dist - b.dist); // 後方から描く
+  for(const s of sorted){
+    const p = trackPos(s.dist + ANIM_TRACK.goal, s.lane * 10);
+    const [bg, fg] = CAR_COLORS[s.num] || ['#999', '#111'];
+    ctx.beginPath(); ctx.ellipse(p.x, p.y + 4, 12, 5, 0, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0,0,0,.35)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(p.x, p.y, 11.5, 0, Math.PI * 2); ctx.fillStyle = bg; ctx.fill();
+    ctx.lineWidth = 1.6; ctx.strokeStyle = 'rgba(0,0,0,.5)'; ctx.stroke();
+    ctx.fillStyle = fg; ctx.font = '800 12px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(String(s.num), p.x, p.y + 0.5);
+    if(s.mark === '◎' || s.mark === '○' || s.mark === '▲'){
+      ctx.fillStyle = '#ffd23e'; ctx.font = '900 11px sans-serif'; ctx.fillText(s.mark, p.x + 11, p.y - 11);
+    }
+    ctx.textBaseline = 'alphabetic';
+  }
+}
+
+function updateAnimOrder(){
+  const ol = document.getElementById('animOrder');
+  if(!ol || !ANIM) return;
+  const order = [...ANIM.state].sort((a, b) => b.dist - a.dist);
+  ol.innerHTML = order.map(s => {
+    const [bg, fg] = CAR_COLORS[s.num] || ['#999', '#111'];
+    return '<li><span class="anim-chip" style="background:' + bg + ';color:' + fg + '">' + s.num + '</span> ' + esc(s.name) + (s.mark ? ' ' + s.mark : '') + (s.done ? ' 🏁' : '') + '</li>';
+  }).join('');
+}
+
+async function fetchData(){
+  const btn = $('fetchBtn');
+  const dateStr = $('dateInput').value || todayStr();
+  btn.disabled = true;
+  const old = btn.textContent;
+  btn.textContent = '取得中…（数分かかります）';
+  $('metaLine').textContent = dateStr + ' の出走表を取得しています。そのまま待ってください…';
+  try{
+    const res = await fetch('/api/fetch', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({date: dateStr})});
+    const j = await res.json().catch(()=>({ok:false,error:'応答を読み取れませんでした'}));
+    if(j.ok){
+      $('metaLine').textContent = '取得が完了しました。表示を更新します。';
+      await load(dateStr);
+    }else{
+      $('metaLine').textContent = '取得できませんでした: ' + (j.error || '不明なエラー') +
+        ' ／ このボタンはサーバー版（node server.mjs）で開いたときだけ動きます。静的サイト表示では自動更新済みのデータだけが見られます。';
+    }
+  }catch(e){
+    $('metaLine').textContent = '取得できませんでした: サーバーに接続できません。このボタンはサーバー版（node server.mjs）で開いたときだけ動きます。';
+  }finally{
+    btn.disabled = false;
+    btn.textContent = old;
+  }
+}
+$('fetchBtn').addEventListener('click', fetchData);
+$('resultsBtn').addEventListener('click', ()=>updateResults($('dateInput').value || todayStr(), false));
+$('dateInput').addEventListener('change', e=>{ if(e.target.value) load(e.target.value); });
+$('todayBtn').addEventListener('click', ()=>{ const t=todayStr(); $('dateInput').value=t; load(t); });
+$('dateInput').value = todayStr();
+load(todayStr());
+</script>
+</body>
+</html>

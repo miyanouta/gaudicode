@@ -1,0 +1,1 @@
+{"dependencies":{"jsdom":"^24.1.0"},"description":"競輪出走表＋GAUDICODE予想サイト（自動取得・毎日更新）","name":"keirin-gaudi-site","private":true,"scripts":{"build-data":"node scripts/fetch-and-build.mjs","build-data:today":"node scripts/fetch-and-build.mjs"},"version":"1.0.0"}
