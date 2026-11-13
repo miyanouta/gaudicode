@@ -167,6 +167,59 @@ function todayStr(){
 function jstNow(){
   return new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
 }
+// ライブ映像のリンク先: 場の公式YouTubeチャンネル (全画面で見やすい) を優先し、
+// 無い場は公式配信ページ、それも無い場はKドリームスの場別プレイヤーにする。
+const LIVE_MAP = {
+  '函館': ['UC7Ehq9agmTeznt6XjZ5faLw', 'https://ch.nicovideo.jp/hakodatekeirin'],
+  '青森': ['UCosOaqq60s3QAenTONNxUuQ', 'https://ch.nicovideo.jp/aomorikeirin'],
+  '弥彦': ['', 'http://www.yahikokeirin.com/live/'],
+  '前橋': ['UCtn0XkksabeXWF2Omyg6JEQ', 'https://ch.nicovideo.jp/maebashi-keirin'],
+  '取手': ['', 'https://ch.nicovideo.jp/toride-keirin'],
+  '宇都宮': ['', 'https://ch.nicovideo.jp/utsunomiya-keirin'],
+  '大宮': ['', 'https://ch.nicovideo.jp/omiyakeirin'],
+  '西武園': ['UCPqtPpQwwWArIS_zTl7A9XQ', 'https://ch.nicovideo.jp/seibuenkeirin'],
+  '松戸': ['UCEYoRewzhZWzP9OHaAFE8gA', ''],
+  '千葉': ['UCxehdZntrAfpHnaNGlg_WJQ', 'https://freshlive.tv/chibakeirin'],
+  '川崎': ['UCtU7gR5VCpvQjtVPykL4EUA', ''],
+  '平塚': ['UCvfTQBD1nQ8kAqwdrnTN-_g', 'https://www.shonanbank.com/live/'],
+  '小田原': ['UCNgccovrnvwUqSBaqoqrtfA', 'https://ch.nicovideo.jp/odawarakeirin'],
+  '伊東': ['UC3CT-xL9H2UW4PMA2Hg1FjA', 'https://ch.nicovideo.jp/itokeirin37'],
+  '静岡': ['', 'https://ch.nicovideo.jp/shizuoka38'],
+  '名古屋': ['UCgf3cKAiLdTAset5YVGN4Rw', ''],
+  '岐阜': ['', 'https://ch.nicovideo.jp/gifukeirin'],
+  '大垣': ['', 'https://ch.nicovideo.jp/ogakikeirin'],
+  '豊橋': ['UC8mS4Ao44gjBbi8nFrP4fNg', 'https://ch.nicovideo.jp/toyohashikeirin'],
+  '富山': ['UCvVIZOHj843xo_QSnjY62Lg', 'https://ch.nicovideo.jp/toyama-keirin'],
+  '松阪': ['UCOZRGa_L_saD0ObvDtzG22Q', 'https://ch.nicovideo.jp/niconicomatsusaka'],
+  '四日市': ['UCPibXjT_mINGifM1gi7ja0g', 'https://ch.nicovideo.jp/yokkaichikeirin'],
+  '福井': ['UCypKxtT2sGParvK54JMeWfw', ''],
+  '奈良': ['', 'https://ch.nicovideo.jp/narakeirin'],
+  '向日町': ['UCdBuL72WRnKDIvAekxS2NxQ', 'https://ch.nicovideo.jp/kyotokeirin'],
+  '和歌山': ['UCu_WLHra6mfVBHj5qVz5Rbw', 'https://ch.nicovideo.jp/keirinwa'],
+  '岸和田': ['', 'https://ch.nicovideo.jp/kishiwadachalionkun'],
+  '玉野': ['UCiKs6agRQVxz1RRPHSX-Oaw', 'https://ch.nicovideo.jp/tamanokeirin'],
+  '広島': ['UCC-MHu8wH3xWu8M93nzszBQ', 'https://ch.nicovideo.jp/jpfh'],
+  '防府': ['UC42l0MgmrF_tIfaMAPVvUKA', 'https://ch.nicovideo.jp/gogo-hope'],
+  '高松': ['UCWFvocB4sfX4wVXWaB4-SBg', ''],
+  '小松島': ['UCnfVl6Q_xov3Wf45NdWE1Eg', ''],
+  '高知': ['UCcnE1XfjoFEDL5GeWRk2DgQ', 'https://ch.nicovideo.jp/kochikeirin'],
+  '松山': ['UCX3xb9FwC7jL_ZnVmoyzgDg', 'https://ch.nicovideo.jp/matsuyama'],
+  '小倉': ['', 'https://ch.nicovideo.jp/kokurakeirin'],
+  '久留米': ['UCh7mcNayAkEXneLmnFZwzbQ', ''],
+  '武雄': ['UClqmxHvzzOOWnpNdznfM28A', 'https://ch.nicovideo.jp/takeokeirin84'],
+  '佐世保': ['UCHsrH9sBqz9uDKggEKGsOFw', 'https://freshlive.tv/sasebokeirin']
+};
+function liveUrl(v){
+  const m = LIVE_MAP[v.name];
+  if(m){
+    if(m[0]) return 'https://www.youtube.com/channel/' + m[0] + '/live';
+    if(m[1]) return m[1];
+  }
+  return v.cd ? 'https://keirin.kdreams.jp/stadium/live/?kyogijoCd=' + v.cd : '';
+}
+function saveSel(){
+  try{ sessionStorage.setItem('gaudi-sel', JSON.stringify({ date: state.data ? state.data.date : '', venueIdx: state.venueIdx, raceIdx: state.raceIdx })); }catch(_){ }
+}
 function todayStrJST(){
   const d = jstNow();
   const p = (n)=>String(n).padStart(2,'0');
@@ -211,7 +264,18 @@ async function load(dateStr, keepSelection){
     const res = await fetch('data/'+dateStr+'.json', {cache:'no-store'});
     if(!res.ok) throw new Error('not found');
     state.data = await res.json();
-    if(!keepSelection){ state.venueIdx = 0; state.raceIdx = 0; }
+    if(!keepSelection){
+      state.venueIdx = 0; state.raceIdx = 0;
+      // ライブ映像など別タブから戻って再読み込みされても、元のレース位置に戻る
+      try{
+        const sv = JSON.parse(sessionStorage.getItem('gaudi-sel') || 'null');
+        if(sv && sv.date === dateStr && sv.venueIdx < state.data.venues.length){
+          state.venueIdx = sv.venueIdx;
+          const vv = state.data.venues[state.venueIdx];
+          if(vv && sv.raceIdx < vv.races.length) state.raceIdx = sv.raceIdx;
+        }
+      }catch(_){ }
+    }
     if(state.venueIdx >= state.data.venues.length) state.venueIdx = 0;
     const gen = state.data.generatedAt ? new Date(state.data.generatedAt).toLocaleString('ja-JP') : '-';
     const resUpd = state.data.resultsUpdatedAt ? ' ／ 結果更新: ' + new Date(state.data.resultsUpdatedAt).toLocaleTimeString('ja-JP') : '';
@@ -291,6 +355,7 @@ async function updateResults(dateStr, silent){
 }
 
 function renderVenues(){
+  saveSel();
   const el = $('venueList'); el.innerHTML='';
   state.data.venues.forEach((v,i)=>{
     const ready = v.races.filter(r=>r.status==='ready').length;
@@ -320,6 +385,7 @@ function renderRaces(){
     b.onclick = ()=>{ state.raceIdx=i; renderRaces(); renderContent(); };
     el.appendChild(b);
   });
+  saveSel();
 }
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
@@ -339,7 +405,8 @@ function renderContent(){
     '<small>'+esc(r.name||'')+'</small></h3>';
   const ymd = (state.data.date || '').replace(/-/g, '');
   let vid = '';
-  if(v.cd && state.data.date === todayStrJST()) vid += '<a class="vid-btn live" target="_blank" rel="noopener" href="https://keirin.kdreams.jp/stadium/live/?kyogijoCd=' + v.cd + '">📺 ライブ映像</a>';
+  const lu = liveUrl(v);
+  if(lu && state.data.date === todayStrJST()) vid += '<a class="vid-btn live" target="_blank" rel="noopener" href="' + lu + '">📺 ライブ映像</a>';
   if(v.cd && v.gradeCd && r.result) vid += '<a class="vid-btn" target="_blank" rel="noopener" href="https://keirin.kdreams.jp/stadium/digest/?kyogijoCd=' + v.cd + '&kaisaiDate=' + ymd + '&gradeCd=' + v.gradeCd + '&raceNo=' + r.no + '">🎬 ダイジェスト</a>';
   if(vid) html += '<div class="vid-row">' + vid + '</div>';
 
