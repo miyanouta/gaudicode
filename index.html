@@ -76,6 +76,8 @@
   .plan-panel.active{display:block}
   .plan-panel .combos{font-size:17px;font-weight:700;line-height:1.6}
   .plan-panel .combos .odds{font-size:12.5px;color:var(--accent2);font-weight:700;margin-left:3px}
+  .combo-hit{background:var(--gold-grad);color:#191102;border-radius:6px;padding:1px 8px;font-weight:800;box-shadow:0 2px 8px rgba(255,157,0,.4);white-space:nowrap}
+  .combo-hit .odds{color:#191102}
   .plan-panel .ana{margin-top:8px;font-size:13.5px;color:var(--accent)}
   .rec-chip{display:inline-block;margin:2px 0 8px;padding:3px 11px;border-radius:999px;font-size:13px;font-weight:700}
   .rec-buy{background:#e3f4e5;color:#1c6b2a;border:1px solid #9ed3a6}
@@ -299,6 +301,7 @@ function renderContent(){
         (z.hits.tanBalance===undefined && z.hits.sanrentan!==undefined ? hb('三連単', z.hits.sanrentan) : '') +
         '</div>';
     }
+    html += '<div style="margin-top:6px;font-size:12.5px;color:var(--sub)">予想の中で的中した買い目は<span class="combo-hit" style="margin:0 2px">金色 🎯</span>で表示しています。</div>';
     html += '</div>';
   }
 
@@ -319,9 +322,15 @@ function renderContent(){
   if(p){
     html += '<div class="card"><h4>GAUDICODE予想</h4><div class="pred-grid">';
     if(p.honmei) html += '<div class="pred-box"><div class="k">本命</div><div class="v">◎ '+p.honmei.num+'番 '+esc(p.honmei.name)+'</div></div>';
-    if(!p.plans && p.sanrenpuku) html += '<div class="pred-box"><div class="k">三連複</div><div class="v">'+p.sanrenpuku.map(esc).join(' ／ ')+'</div></div>';
-    if(p.sanrentan) html += '<div class="pred-box"><div class="k">三連単</div><div class="v">'+p.sanrentan.map(esc).join(' ／ ')+'</div></div>';
-    if(p.wide) html += '<div class="pred-box"><div class="k">ワイド</div><div class="v">'+p.wide.map(esc).join(' ／ ')+'</div></div>';
+    const winPukuKey = r.result ? (r.result.sanrenpuku ? r.result.sanrenpuku.combo.split('-').map(Number).sort((a,b)=>a-b).join('-') : (r.result.top3 ? [...r.result.top3].sort((a,b)=>a-b).join('-') : null)) : null;
+    const winTanKey = r.result ? (r.result.sanrentan ? r.result.sanrentan.combo.split('-').map(Number).join('-') : (r.result.top3 ? r.result.top3.join('-') : null)) : null;
+    const hitPuku = c => !!winPukuKey && c.split('-').map(Number).sort((a,b)=>a-b).join('-') === winPukuKey;
+    const hitTan = c => !!winTanKey && c.replace(/→/g,'-').split('-').map(Number).join('-') === winTanKey;
+    const hitWide = c => !!(r.result && r.result.top3) && c.split('-').every(n=>r.result.top3.includes(Number(n)));
+    const wrapHit = (inner, hit) => hit ? '<span class="combo-hit">' + inner + ' 🎯</span>' : inner;
+    if(!p.plans && p.sanrenpuku) html += '<div class="pred-box"><div class="k">三連複</div><div class="v">'+p.sanrenpuku.map(c=>wrapHit(esc(c), hitPuku(c))).join(' ／ ')+'</div></div>';
+    if(p.sanrentan) html += '<div class="pred-box"><div class="k">三連単</div><div class="v">'+p.sanrentan.map(c=>wrapHit(esc(c), hitTan(c))).join(' ／ ')+'</div></div>';
+    if(p.wide) html += '<div class="pred-box"><div class="k">ワイド</div><div class="v">'+p.wide.map(c=>wrapHit(esc(c), hitWide(c))).join(' ／ ')+'</div></div>';
     if(p.balance) html += '<div class="pred-box"><div class="k">均衡指数</div><div class="v">'+esc(p.balance)+'</div></div>';
     if(p.confidence) html += '<div class="pred-box"><div class="k">信頼度</div><div class="v">'+esc(p.confidence)+'</div></div>';
     html += '</div>';
@@ -334,8 +343,8 @@ function renderContent(){
       html += '<div class="plan-tabs">' + tiers.map(([k,label])=>
         '<button class="plan-tab'+(k===defaultTier?' active':'')+'" onclick="switchPlan(this,\''+k+'\')">'+label+'（'+p.plans[k].length+'点）</button>').join('') + '</div>';
       html += tiers.map(([k])=>
-        '<div class="plan-panel'+(k===defaultTier?' active':'')+'" data-plan="'+k+'"><div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">三連複</div><div class="combos">'+p.plans[k].map(c=>{ const o = r.odds && r.odds[c.split('-').map(Number).sort((a,b)=>a-b).join('-')]; return esc(c) + (o ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''); }).join(' ／ ')+'</div>' +
-        (p.plansTan && p.plansTan[k] ? '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">三連単</div><div class="combos" style="font-size:15px">'+p.plansTan[k].map(esc).join(' ／ ')+'</div>' : '') +
+        '<div class="plan-panel'+(k===defaultTier?' active':'')+'" data-plan="'+k+'"><div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">三連複</div><div class="combos">'+p.plans[k].map(c=>{ const o = r.odds && r.odds[c.split('-').map(Number).sort((a,b)=>a-b).join('-')]; return wrapHit(esc(c) + (o ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(c)); }).join(' ／ ')+'</div>' +
+        (p.plansTan && p.plansTan[k] ? '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">三連単</div><div class="combos" style="font-size:15px">'+p.plansTan[k].map(c=>wrapHit(esc(c), hitTan(c))).join(' ／ ')+'</div>' : '') +
         (k==='shoubu' && p.recommend ? '<div class="rec-chip '+(p.recommend.verdict==='buy'?'rec-buy':'rec-skip')+'">判定：'+esc(p.recommend.label)+'（'+esc(p.recommend.reason)+'）</div>' : '') +
         (k==='shoubu' && p.ana ? '<div class="ana">穴候補: '+p.ana.num+'番 '+esc(p.ana.name)+'（'+esc(p.ana.reason)+'）</div>' : '') +
         '</div>').join('');
