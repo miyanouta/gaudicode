@@ -378,7 +378,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "11:17"
         },
         {
           "no": 2,
@@ -750,7 +751,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "11:41"
         },
         {
           "no": 3,
@@ -1116,7 +1118,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "12:07"
         },
         {
           "no": 4,
@@ -1541,7 +1544,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "12:33"
         },
         {
           "no": 5,
@@ -1967,7 +1971,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "12:59"
         },
         {
           "no": 6,
@@ -2358,7 +2363,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "13:25"
         },
         {
           "no": 7,
@@ -2790,7 +2796,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "13:51"
         },
         {
           "no": 8,
@@ -3218,7 +3225,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "14:19"
         },
         {
           "no": 9,
@@ -3649,7 +3657,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "14:47"
         },
         {
           "no": 10,
@@ -4080,7 +4089,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "15:15"
         },
         {
           "no": 11,
@@ -4503,7 +4513,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "15:47"
         },
         {
           "no": 12,
@@ -4936,7 +4947,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:25"
         }
       ]
     },
@@ -5272,7 +5284,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "08:50"
         },
         {
           "no": 2,
@@ -5602,7 +5615,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "09:10"
         },
         {
           "no": 3,
@@ -5934,7 +5948,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "09:31"
         },
         {
           "no": 4,
@@ -6257,7 +6272,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "09:52"
         },
         {
           "no": 5,
@@ -6582,7 +6598,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "10:13"
         },
         {
           "no": 6,
@@ -6913,7 +6930,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "10:34"
         },
         {
           "no": 7,
@@ -7253,9 +7271,11 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "10:55"
         }
-      ]
+      ],
+      "category": "モーニング"
     },
     {
       "id": "matsusaka",
@@ -7522,7 +7542,8 @@
             "3-5-6": 69.4,
             "4-5-6": 47.3
           },
-          "oddsAt": "2026-11-13T10:49:05.208Z"
+          "oddsAt": "2026-11-13T10:49:05.208Z",
+          "startTime": "20:50"
         },
         {
           "no": 2,
@@ -7773,7 +7794,8 @@
             "3-5-6": 50.1,
             "4-5-6": 62.6
           },
-          "oddsAt": "2026-11-13T10:49:06.464Z"
+          "oddsAt": "2026-11-13T10:49:06.464Z",
+          "startTime": "21:10"
         },
         {
           "no": 3,
@@ -8024,7 +8046,8 @@
             "3-5-6": 24.6,
             "4-5-6": 32.8
           },
-          "oddsAt": "2026-11-13T10:49:07.690Z"
+          "oddsAt": "2026-11-13T10:49:07.690Z",
+          "startTime": "21:30"
         },
         {
           "no": 4,
@@ -8294,7 +8317,8 @@
             "4-6-7": 376.5,
             "5-6-7": 753
           },
-          "oddsAt": "2026-11-13T10:49:09.504Z"
+          "oddsAt": "2026-11-13T10:49:09.504Z",
+          "startTime": "21:50"
         },
         {
           "no": 5,
@@ -8567,7 +8591,8 @@
             "4-6-7": 51.1,
             "5-6-7": 17
           },
-          "oddsAt": "2026-11-13T10:49:10.803Z"
+          "oddsAt": "2026-11-13T10:49:10.803Z",
+          "startTime": "22:10"
         },
         {
           "no": 6,
@@ -8835,7 +8860,8 @@
             "4-6-7": 21,
             "5-6-7": 210.7
           },
-          "oddsAt": "2026-11-13T10:49:12.128Z"
+          "oddsAt": "2026-11-13T10:49:12.128Z",
+          "startTime": "22:30"
         },
         {
           "no": 7,
@@ -9105,7 +9131,8 @@
             "4-6-7": 89.2,
             "5-6-7": 89.2
           },
-          "oddsAt": "2026-11-13T10:49:13.570Z"
+          "oddsAt": "2026-11-13T10:49:13.570Z",
+          "startTime": "22:50"
         },
         {
           "no": 8,
@@ -9379,7 +9406,8 @@
             "4-6-7": 296.2,
             "5-6-7": 1185
           },
-          "oddsAt": "2026-11-13T10:49:14.848Z"
+          "oddsAt": "2026-11-13T10:49:14.848Z",
+          "startTime": "23:10"
         },
         {
           "no": 9,
@@ -9644,9 +9672,11 @@
             "4-6-7": 150.9,
             "5-6-7": 172.5
           },
-          "oddsAt": "2026-11-13T10:49:16.445Z"
+          "oddsAt": "2026-11-13T10:49:16.445Z",
+          "startTime": "23:30"
         }
-      ]
+      ],
+      "category": "ミッドナイト"
     },
     {
       "id": "yokkaichi",
@@ -9982,7 +10012,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "15:54"
         },
         {
           "no": 2,
@@ -10306,7 +10337,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:17"
         },
         {
           "no": 3,
@@ -10628,7 +10660,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:42"
         },
         {
           "no": 4,
@@ -10948,7 +10981,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "17:07"
         },
         {
           "no": 5,
@@ -11284,7 +11318,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "17:31"
         },
         {
           "no": 6,
@@ -11574,7 +11609,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "17:55"
         },
         {
           "no": 7,
@@ -11862,7 +11898,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "18:19"
         },
         {
           "no": 8,
@@ -12184,7 +12221,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "18:43"
         },
         {
           "no": 9,
@@ -12507,7 +12545,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "19:08"
         },
         {
           "no": 10,
@@ -12839,7 +12878,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "19:34"
         },
         {
           "no": 11,
@@ -13138,7 +13178,8 @@
             "4-6-7": 97.5,
             "5-6-7": 174.2
           },
-          "oddsAt": "2026-11-13T10:49:28.636Z"
+          "oddsAt": "2026-11-13T10:49:28.636Z",
+          "startTime": "20:01"
         },
         {
           "no": 12,
@@ -13440,9 +13481,11 @@
             "4-6-7": 105.8,
             "5-6-7": 17.4
           },
-          "oddsAt": "2026-11-13T10:49:29.942Z"
+          "oddsAt": "2026-11-13T10:49:29.942Z",
+          "startTime": "20:30"
         }
-      ]
+      ],
+      "category": "ナイター"
     },
     {
       "id": "fukui",
@@ -13707,7 +13750,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "11:05"
         },
         {
           "no": 2,
@@ -13964,7 +14008,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "11:29"
         },
         {
           "no": 3,
@@ -14292,7 +14337,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "11:54"
         },
         {
           "no": 4,
@@ -14614,7 +14660,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "12:20"
         },
         {
           "no": 5,
@@ -14904,7 +14951,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "12:46"
         },
         {
           "no": 6,
@@ -15191,7 +15239,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "13:12"
         },
         {
           "no": 7,
@@ -15523,7 +15572,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "13:38"
         },
         {
           "no": 8,
@@ -15854,7 +15904,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "14:05"
         },
         {
           "no": 9,
@@ -16178,7 +16229,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "14:33"
         },
         {
           "no": 10,
@@ -16501,7 +16553,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "15:01"
         },
         {
           "no": 11,
@@ -16823,7 +16876,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "15:31"
         },
         {
           "no": 12,
@@ -17150,7 +17204,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:02"
         }
       ]
     },
@@ -17477,7 +17532,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:09"
         },
         {
           "no": 2,
@@ -17805,7 +17861,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:32"
         },
         {
           "no": 3,
@@ -18131,7 +18188,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:55"
         },
         {
           "no": 4,
@@ -18456,7 +18514,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "17:19"
         },
         {
           "no": 5,
@@ -18786,7 +18845,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "17:43"
         },
         {
           "no": 6,
@@ -19073,7 +19133,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "18:07"
         },
         {
           "no": 7,
@@ -19402,7 +19463,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "18:31"
         },
         {
           "no": 8,
@@ -19731,7 +19793,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "18:55"
         },
         {
           "no": 9,
@@ -20056,7 +20119,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "19:21"
         },
         {
           "no": 10,
@@ -20363,7 +20427,8 @@
             "4-6-7": 484.1,
             "5-6-7": 152.9
           },
-          "oddsAt": "2026-11-13T10:49:52.769Z"
+          "oddsAt": "2026-11-13T10:49:52.769Z",
+          "startTime": "19:47"
         },
         {
           "no": 11,
@@ -20665,9 +20730,11 @@
             "4-6-7": 200.8,
             "5-6-7": 55.7
           },
-          "oddsAt": "2026-11-13T10:49:54.075Z"
+          "oddsAt": "2026-11-13T10:49:54.075Z",
+          "startTime": "20:15"
         }
-      ]
+      ],
+      "category": "ナイター"
     },
     {
       "id": "sasebo",
@@ -20897,7 +20964,8 @@
             "2-4-5": 27,
             "3-4-5": 21.6
           },
-          "oddsAt": "2026-11-13T10:49:55.339Z"
+          "oddsAt": "2026-11-13T10:49:55.339Z",
+          "startTime": "20:40"
         },
         {
           "no": 2,
@@ -21125,7 +21193,8 @@
             "2-4-5": 17.6,
             "3-4-5": 14.8
           },
-          "oddsAt": "2026-11-13T10:49:56.728Z"
+          "oddsAt": "2026-11-13T10:49:56.728Z",
+          "startTime": "21:00"
         },
         {
           "no": 3,
@@ -21391,7 +21460,8 @@
             "4-6-7": 63.3,
             "5-6-7": 158.2
           },
-          "oddsAt": "2026-11-13T10:49:58.118Z"
+          "oddsAt": "2026-11-13T10:49:58.118Z",
+          "startTime": "21:20"
         },
         {
           "no": 4,
@@ -21659,7 +21729,8 @@
             "4-6-7": 120.7,
             "5-6-7": 120.7
           },
-          "oddsAt": "2026-11-13T10:50:00.545Z"
+          "oddsAt": "2026-11-13T10:50:00.545Z",
+          "startTime": "21:40"
         },
         {
           "no": 5,
@@ -21925,7 +21996,8 @@
             "4-6-7": 69,
             "5-6-7": 55.2
           },
-          "oddsAt": "2026-11-13T10:50:02.200Z"
+          "oddsAt": "2026-11-13T10:50:02.200Z",
+          "startTime": "22:00"
         },
         {
           "no": 6,
@@ -22195,7 +22267,8 @@
             "4-6-7": 150.7,
             "5-6-7": 13.7
           },
-          "oddsAt": "2026-11-13T10:50:03.561Z"
+          "oddsAt": "2026-11-13T10:50:03.561Z",
+          "startTime": "22:20"
         },
         {
           "no": 7,
@@ -22461,7 +22534,8 @@
             "4-6-7": 105,
             "5-6-7": 210
           },
-          "oddsAt": "2026-11-13T10:50:04.877Z"
+          "oddsAt": "2026-11-13T10:50:04.877Z",
+          "startTime": "22:40"
         },
         {
           "no": 8,
@@ -22731,7 +22805,8 @@
             "4-6-7": 127.6,
             "5-6-7": 170.2
           },
-          "oddsAt": "2026-11-13T10:50:06.124Z"
+          "oddsAt": "2026-11-13T10:50:06.124Z",
+          "startTime": "23:00"
         },
         {
           "no": 9,
@@ -22997,9 +23072,11 @@
             "4-6-7": 71.6,
             "5-6-7": 77.6
           },
-          "oddsAt": "2026-11-13T10:50:07.448Z"
+          "oddsAt": "2026-11-13T10:50:07.448Z",
+          "startTime": "23:20"
         }
-      ]
+      ],
+      "category": "ミッドナイト"
     }
   ],
   "quality": {

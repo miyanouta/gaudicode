@@ -112,6 +112,16 @@
   .anim-controls button.off{background:var(--panel2);color:var(--sub);border:1px solid var(--line);box-shadow:none}
   .anim-controls select{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:5px 8px;font-size:14px}
   .anim-note{font-size:12px;color:var(--sub)}
+  .cat-chip{display:inline-block;border-radius:999px;padding:1px 9px;font-size:11.5px;font-weight:800;margin-left:6px;vertical-align:2px}
+  .cat-morning{background:#ffe9a8;color:#6b5316}
+  .cat-nighter{background:#cdd8ff;color:#26337a}
+  .cat-midnight{background:#3b2d5e;color:#d9c8ff}
+  .live-chip{display:inline-block;border-radius:999px;padding:1px 9px;font-size:11.5px;font-weight:800;margin-left:6px;background:#c2261b;color:#fff;vertical-align:2px;animation:livepulse 1.6s infinite}
+  @keyframes livepulse{0%,100%{opacity:1}50%{opacity:.5}}
+  .race .rt{display:block;font-size:10.5px;font-weight:700;color:var(--sub);line-height:1.15}
+  .race.hit .rt{color:#191102}
+  .race.next{box-shadow:0 0 0 2px var(--accent)}
+  .race.next::after{content:'次のレース';display:block;font-size:9.5px;font-weight:800;color:var(--accent);line-height:1.1}
 </style>
 <style>#fetchBtn,#resultsBtn{display:none!important}</style></head>
 <body>
@@ -151,6 +161,43 @@ function todayStr(){
   return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
 }
 
+function jstNow(){
+  return new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
+}
+function todayStrJST(){
+  const d = jstNow();
+  const p = (n)=>String(n).padStart(2,'0');
+  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+}
+function catClass(cat){
+  return cat==='モーニング' ? 'morning' : cat==='ナイター' ? 'nighter' : cat==='ミッドナイト' ? 'midnight' : '';
+}
+// 今日のデータを見ているときだけ、開催中かどうかと次のレースを返す
+function venueLiveState(v){
+  const none = { live:false, nextIdx:-1 };
+  if(!state.data || state.data.date !== todayStrJST()) return none;
+  const now = jstNow();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const times = v.races.map(r=>{
+    if(!r.startTime) return null;
+    const p = r.startTime.split(':');
+    return Number(p[0])*60 + Number(p[1]);
+  });
+  const valid = times.filter(t=>t!=null);
+  if(!valid.length) return none;
+  const first = Math.min.apply(null, valid), last = Math.max.apply(null, valid);
+  const live = nowMin >= first-30 && nowMin <= last+30;
+  let nextIdx = -1;
+  for(let i=0;i<times.length;i++){ if(times[i]!=null && times[i]>nowMin){ nextIdx = i; break; } }
+  return { live, nextIdx };
+}
+let liveTimer = null;
+function setupLiveRefresh(dateStr){
+  if(liveTimer){ clearInterval(liveTimer); liveTimer = null; }
+  if(dateStr !== todayStrJST()) return;
+  liveTimer = setInterval(()=>{ if(state.data && state.data.date===dateStr){ renderVenues(); renderRaces(); } }, 60000);
+}
+
 let resultsTimer = null;
 let ensurePollingFor = null;
 
@@ -168,6 +215,7 @@ async function load(dateStr, keepSelection){
     $('metaLine').textContent = state.data.date + ' の開催 ' + state.data.venues.length + '場 ／ データ生成: ' + gen + resUpd + (state.data.note ? ' ／ ' + state.data.note : '');
     renderVenues(); renderRaces(); renderContent();
     setupResultsAutoRefresh(dateStr);
+    setupLiveRefresh(dateStr);
   }catch(e){
     state.data = null;
     if(resultsTimer){ clearInterval(resultsTimer); resultsTimer = null; }
@@ -243,9 +291,13 @@ function renderVenues(){
   const el = $('venueList'); el.innerHTML='';
   state.data.venues.forEach((v,i)=>{
     const ready = v.races.filter(r=>r.status==='ready').length;
+    const lv = venueLiveState(v);
     const b = document.createElement('button');
     b.className = 'venue' + (i===state.venueIdx?' active':'');
-    b.innerHTML = '<span class="vn">'+v.name+'</span><span class="badge">'+v.grade+'</span>' +
+    b.innerHTML = '<span class="vn">'+v.name +
+      (v.category? '<span class="cat-chip cat-'+catClass(v.category)+'">'+v.category+'</span>' : '') +
+      (lv.live? '<span class="live-chip">開催中</span>' : '') +
+      '</span><span class="badge">'+v.grade+'</span>' +
       '<span class="vt">'+(v.title||'')+'<br>'+v.races.length+'R' + (ready? ' ／ '+ready+'R表示可':'') + '</span>';
     b.onclick = ()=>{ state.venueIdx=i; state.raceIdx=0; renderVenues(); renderRaces(); renderContent(); };
     el.appendChild(b);
@@ -255,12 +307,13 @@ function renderVenues(){
 function renderRaces(){
   const el = $('raceList'); el.innerHTML='';
   const v = state.data.venues[state.venueIdx];
+  const lv = venueLiveState(v);
   v.races.forEach((r,i)=>{
     const b = document.createElement('button');
     const h = r.result && r.result.hits;
     const anyHit = !!(h && (h.teppan||h.balance||h.shoubu||h.tanTeppan||h.tanBalance||h.tanShoubu));
-    b.className = 'race' + (i===state.raceIdx?' active':'') + (r.status!=='ready'?' pending':'') + (r.result?(anyHit?' hit':' miss'):'');
-    b.textContent = r.no + 'R' + (anyHit?'🎯':'');
+    b.className = 'race' + (i===state.raceIdx?' active':'') + (r.status!=='ready'?' pending':'') + (r.result?(anyHit?' hit':' miss'):'') + (i===lv.nextIdx?' next':'');
+    b.innerHTML = r.no + 'R' + (anyHit?'🎯':'') + (r.startTime? '<span class="rt">'+r.startTime+'</span>' : '');
     b.onclick = ()=>{ state.raceIdx=i; renderRaces(); renderContent(); };
     el.appendChild(b);
   });
@@ -277,7 +330,10 @@ function renderContent(){
       '<div class="empty">このレースの出走表はまだ取得されていません。<br>自動取得が完了すると、出走表とGAUDICODE予想が表示されます。</div>';
     return;
   }
-  let html = '<h3 class="race-title">'+v.name+' '+r.no+'R<small>'+esc(r.name||'')+'</small></h3>';
+  let html = '<h3 class="race-title">'+v.name+' '+r.no+'R' +
+    (v.category? '<span class="cat-chip cat-'+catClass(v.category)+'">'+v.category+'</span>' : '') +
+    (r.startTime? '<small>発走 '+r.startTime+'</small>' : '') +
+    '<small>'+esc(r.name||'')+'</small></h3>';
 
   // 結果 (確定していれば)
   if(r.result){

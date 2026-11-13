@@ -306,7 +306,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "08:50"
         },
         {
           "no": 2,
@@ -640,7 +641,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "09:10"
         },
         {
           "no": 3,
@@ -969,7 +971,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "09:30"
         },
         {
           "no": 4,
@@ -1291,7 +1294,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "09:50"
         },
         {
           "no": 5,
@@ -1614,7 +1618,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "10:10"
         },
         {
           "no": 6,
@@ -1955,7 +1960,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "10:30"
         },
         {
           "no": 7,
@@ -2276,9 +2282,11 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "10:50"
         }
-      ]
+      ],
+      "category": "モーニング"
     },
     {
       "id": "utsunomiya",
@@ -2615,7 +2623,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "15:59"
         },
         {
           "no": 2,
@@ -2945,7 +2954,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:22"
         },
         {
           "no": 3,
@@ -3277,7 +3287,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:45"
         },
         {
           "no": 4,
@@ -3537,7 +3548,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "17:11"
         },
         {
           "no": 5,
@@ -3867,7 +3879,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "17:37"
         },
         {
           "no": 6,
@@ -4151,7 +4164,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "18:03"
         },
         {
           "no": 7,
@@ -4475,7 +4489,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "18:29"
         },
         {
           "no": 8,
@@ -4807,7 +4822,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "18:55"
         },
         {
           "no": 9,
@@ -5131,7 +5147,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "19:21"
         },
         {
           "no": 10,
@@ -5463,7 +5480,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "19:47"
         },
         {
           "no": 11,
@@ -5795,9 +5813,11 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "20:15"
         }
-      ]
+      ],
+      "category": "ナイター"
     },
     {
       "id": "omiya",
@@ -6135,7 +6155,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "09:00"
         },
         {
           "no": 2,
@@ -6465,7 +6486,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "09:20"
         },
         {
           "no": 3,
@@ -6796,7 +6818,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "09:40"
         },
         {
           "no": 4,
@@ -7119,7 +7142,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "10:00"
         },
         {
           "no": 5,
@@ -7448,7 +7472,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "10:20"
         },
         {
           "no": 6,
@@ -7781,7 +7806,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "10:40"
         },
         {
           "no": 7,
@@ -8109,9 +8135,11 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "11:00"
         }
-      ]
+      ],
+      "category": "モーニング"
     },
     {
       "id": "matsudo",
@@ -8455,7 +8483,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "15:45"
         },
         {
           "no": 2,
@@ -8782,7 +8811,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:08"
         },
         {
           "no": 3,
@@ -9108,7 +9138,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:33"
         },
         {
           "no": 4,
@@ -9432,7 +9463,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:58"
         },
         {
           "no": 5,
@@ -9755,7 +9787,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "17:24"
         },
         {
           "no": 6,
@@ -10079,7 +10112,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "17:50"
         },
         {
           "no": 7,
@@ -10405,7 +10439,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "18:16"
         },
         {
           "no": 8,
@@ -10733,7 +10768,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "18:42"
         },
         {
           "no": 9,
@@ -11057,7 +11093,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "19:08"
         },
         {
           "no": 10,
@@ -11382,7 +11419,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "19:34"
         },
         {
           "no": 11,
@@ -11705,7 +11743,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "20:01"
         },
         {
           "no": 12,
@@ -12029,9 +12068,11 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "20:30"
         }
-      ]
+      ],
+      "category": "ナイター"
     },
     {
       "id": "toyama",
@@ -12368,7 +12409,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "11:17"
         },
         {
           "no": 2,
@@ -12698,7 +12740,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "11:41"
         },
         {
           "no": 3,
@@ -13022,7 +13065,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "12:07"
         },
         {
           "no": 4,
@@ -13351,7 +13395,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "12:33"
         },
         {
           "no": 5,
@@ -13683,7 +13728,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "13:01"
         },
         {
           "no": 6,
@@ -14022,7 +14068,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "13:29"
         },
         {
           "no": 7,
@@ -14347,7 +14394,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "13:57"
         },
         {
           "no": 8,
@@ -14669,7 +14717,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "14:25"
         },
         {
           "no": 9,
@@ -14999,7 +15048,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "14:53"
         },
         {
           "no": 10,
@@ -15329,7 +15379,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "15:21"
         },
         {
           "no": 11,
@@ -15658,7 +15709,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "15:52"
         }
       ]
     },
@@ -15953,7 +16005,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "20:50"
         },
         {
           "no": 2,
@@ -16288,7 +16341,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "21:10"
         },
         {
           "no": 3,
@@ -16620,7 +16674,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "21:30"
         },
         {
           "no": 4,
@@ -16947,7 +17002,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "21:50"
         },
         {
           "no": 5,
@@ -17268,7 +17324,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "22:10"
         },
         {
           "no": 6,
@@ -17589,7 +17646,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "22:30"
         },
         {
           "no": 7,
@@ -17911,7 +17969,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "22:50"
         },
         {
           "no": 8,
@@ -18234,7 +18293,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "23:10"
         },
         {
           "no": 9,
@@ -18564,9 +18624,11 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "23:30"
         }
-      ]
+      ],
+      "category": "ミッドナイト"
     },
     {
       "id": "matsuyama",
@@ -18902,7 +18964,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "20:40"
         },
         {
           "no": 2,
@@ -19234,7 +19297,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "21:00"
         },
         {
           "no": 3,
@@ -19565,7 +19629,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "21:20"
         },
         {
           "no": 4,
@@ -19890,7 +19955,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "21:40"
         },
         {
           "no": 5,
@@ -20218,7 +20284,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "22:00"
         },
         {
           "no": 6,
@@ -20542,7 +20609,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "22:20"
         },
         {
           "no": 7,
@@ -20869,7 +20937,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "22:40"
         },
         {
           "no": 8,
@@ -21191,7 +21260,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "23:00"
         },
         {
           "no": 9,
@@ -21519,9 +21589,11 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "23:20"
         }
-      ]
+      ],
+      "category": "ミッドナイト"
     },
     {
       "id": "takeo",
@@ -21849,7 +21921,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "11:05"
         },
         {
           "no": 2,
@@ -22172,7 +22245,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "11:29"
         },
         {
           "no": 3,
@@ -22500,7 +22574,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "11:54"
         },
         {
           "no": 4,
@@ -22822,7 +22897,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "12:20"
         },
         {
           "no": 5,
@@ -23146,7 +23222,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "12:47"
         },
         {
           "no": 6,
@@ -23471,7 +23548,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "13:15"
         },
         {
           "no": 7,
@@ -23793,7 +23871,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "13:43"
         },
         {
           "no": 8,
@@ -24121,7 +24200,8 @@
               "tanShoubu": true,
               "sanrentan": true
             }
-          }
+          },
+          "startTime": "14:11"
         },
         {
           "no": 9,
@@ -24445,7 +24525,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "14:39"
         },
         {
           "no": 10,
@@ -24779,7 +24860,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "15:07"
         },
         {
           "no": 11,
@@ -25107,7 +25189,8 @@
               "tanShoubu": true,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "15:37"
         },
         {
           "no": 12,
@@ -25437,7 +25520,8 @@
               "tanShoubu": false,
               "sanrentan": false
             }
-          }
+          },
+          "startTime": "16:15"
         }
       ]
     }
