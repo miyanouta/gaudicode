@@ -131,6 +131,9 @@
   .vid-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
   .vid-btn{display:inline-block;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--text);text-decoration:none;font-size:13.5px;font-weight:700}
   .vid-btn.live{border-color:#c2261b;color:#ff9d94}
+  .ticker{flex:none;overflow:hidden;background:linear-gradient(90deg,rgba(255,176,32,.16),rgba(255,176,32,.04));border-bottom:1px solid var(--line);white-space:nowrap}
+  .ticker-inner{display:inline-block;padding:7px 0;font-size:13.5px;font-weight:700;animation:tickmove 40s linear infinite;will-change:transform}
+  @keyframes tickmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 </style>
 <style>#fetchBtn,#resultsBtn{display:none!important}</style></head>
 <body>
@@ -144,6 +147,7 @@
   </div>
   <div class="meta" id="metaLine">データを読み込んでいます…</div>
 </header>
+<div class="ticker" id="ticker" style="display:none"><div class="ticker-inner" id="tickerInner"></div></div>
 
 <div class="layout">
   <aside class="venues">
@@ -288,6 +292,7 @@ async function load(dateStr, keepSelection){
     const resUpd = state.data.resultsUpdatedAt ? ' ／ 結果更新: ' + new Date(state.data.resultsUpdatedAt).toLocaleTimeString('ja-JP') : '';
     $('metaLine').textContent = state.data.date + ' の開催 ' + state.data.venues.length + '場 ／ データ生成: ' + gen + resUpd + (state.data.note ? ' ／ ' + state.data.note : '');
     renderVenues(); renderRaces(); renderContent();
+    buildTicker();
     setupResultsAutoRefresh(dateStr);
     setupLiveRefresh(dateStr);
   }catch(e){
@@ -362,6 +367,35 @@ async function updateResults(dateStr, silent){
 }
 
 // ドラム式ピッカー (スマホ): 回して中央に来た会場をそのまま選択する
+// その日の的中率と万車券TOPを、上部に流れるテロップで表示する
+function buildTicker(){
+  const tk = $('ticker'), inner = $('tickerInner');
+  if(!tk || !inner) return;
+  const d = state.data;
+  const fin = [];
+  if(d) for(const v of d.venues) for(const r of v.races) if(r.result) fin.push({ v, r });
+  if(!fin.length){ tk.style.display = 'none'; inner.innerHTML = ''; return; }
+  const rate = (key) => Math.round(fin.filter(x => (x.r.result.hits || {})[key]).length / fin.length * 100);
+  let text = '📊 ' + (d.date === todayStrJST() ? '本日' : d.date) + 'の的中率（終了' + fin.length + 'R） 三連複：鉄板' + rate('teppan') + '%・バランス' + rate('balance') + '%・勝負' + rate('shoubu') + '% ／ 三連単：鉄板' + rate('tanTeppan') + '%・バランス' + rate('tanBalance') + '%・勝負' + rate('tanShoubu') + '%';
+  const mans = [];
+  for(const { v, r } of fin){
+    const h = r.result.hits || {};
+    const pk = r.result.sanrenpuku, tn = r.result.sanrentan;
+    if(pk && pk.payout >= 10000) mans.push({ vn: v.name, no: r.no, kind: '三連複', combo: pk.combo, pay: pk.payout, hit: !!(h.teppan || h.balance || h.shoubu) });
+    if(tn && tn.payout >= 10000) mans.push({ vn: v.name, no: r.no, kind: '三連単', combo: tn.combo, pay: tn.payout, hit: !!(h.tanTeppan || h.tanBalance || h.tanShoubu) });
+  }
+  mans.sort((a, b) => b.pay - a.pay);
+  if(mans.length){
+    text += '　　💴 万車券TOP' + Math.min(5, mans.length) + '：' + mans.slice(0, 5).map(m => (m.hit ? '🎯的中 ' : '') + m.vn + m.no + 'R ' + m.kind + ' ' + m.combo + ' ¥' + m.pay.toLocaleString()).join(' ／ ');
+  } else {
+    text += '　　💴 万車券はまだ出ていません';
+  }
+  const seg = '<span>' + esc(text) + '</span><span>　　◆　　</span>';
+  inner.innerHTML = seg + seg;
+  inner.style.animationDuration = Math.max(18, Math.round(text.length * 0.42)) + 's';
+  tk.style.display = '';
+}
+
 function drumSelect(){
   const el = $('venueList');
   if(!el || !el.children.length) return;
