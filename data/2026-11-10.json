@@ -2286,7 +2286,9 @@
           "startTime": "10:50"
         }
       ],
-      "category": "モーニング"
+      "category": "モーニング",
+      "cd": "12",
+      "gradeCd": 1
     },
     {
       "id": "utsunomiya",
@@ -5817,7 +5819,9 @@
           "startTime": "20:15"
         }
       ],
-      "category": "ナイター"
+      "category": "ナイター",
+      "cd": "24",
+      "gradeCd": 1
     },
     {
       "id": "omiya",
@@ -8139,7 +8143,9 @@
           "startTime": "11:00"
         }
       ],
-      "category": "モーニング"
+      "category": "モーニング",
+      "cd": "25",
+      "gradeCd": 1
     },
     {
       "id": "matsudo",
@@ -12072,7 +12078,9 @@
           "startTime": "20:30"
         }
       ],
-      "category": "ナイター"
+      "category": "ナイター",
+      "cd": "31",
+      "gradeCd": 2
     },
     {
       "id": "toyama",
@@ -15712,7 +15720,9 @@
           },
           "startTime": "15:52"
         }
-      ]
+      ],
+      "cd": "46",
+      "gradeCd": 1
     },
     {
       "id": "nara",
@@ -18628,7 +18638,9 @@
           "startTime": "23:30"
         }
       ],
-      "category": "ミッドナイト"
+      "category": "ミッドナイト",
+      "cd": "53",
+      "gradeCd": 1
     },
     {
       "id": "matsuyama",
@@ -21593,7 +21605,9 @@
           "startTime": "23:20"
         }
       ],
-      "category": "ミッドナイト"
+      "category": "ミッドナイト",
+      "cd": "75",
+      "gradeCd": 1
     },
     {
       "id": "takeo",
@@ -25523,7 +25537,9 @@
           },
           "startTime": "16:15"
         }
-      ]
+      ],
+      "cd": "84",
+      "gradeCd": 2
     }
   ],
   "quality": {

@@ -122,6 +122,9 @@
   .race.hit .rt{color:#191102}
   .race.next{box-shadow:0 0 0 2px var(--accent)}
   .race.next::after{content:'次のレース';display:block;font-size:9.5px;font-weight:800;color:var(--accent);line-height:1.1}
+  .vid-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+  .vid-btn{display:inline-block;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--text);text-decoration:none;font-size:13.5px;font-weight:700}
+  .vid-btn.live{border-color:#c2261b;color:#ff9d94}
 </style>
 <style>#fetchBtn,#resultsBtn{display:none!important}</style></head>
 <body>
@@ -334,6 +337,11 @@ function renderContent(){
     (v.category? '<span class="cat-chip cat-'+catClass(v.category)+'">'+v.category+'</span>' : '') +
     (r.startTime? '<small>発走 '+r.startTime+'</small>' : '') +
     '<small>'+esc(r.name||'')+'</small></h3>';
+  const ymd = (state.data.date || '').replace(/-/g, '');
+  let vid = '';
+  if(v.cd && state.data.date === todayStrJST()) vid += '<a class="vid-btn live" target="_blank" rel="noopener" href="https://keirin.kdreams.jp/stadium/live/?kyogijoCd=' + v.cd + '">📺 ライブ映像</a>';
+  if(v.cd && v.gradeCd && r.result) vid += '<a class="vid-btn" target="_blank" rel="noopener" href="https://keirin.kdreams.jp/stadium/digest/?kyogijoCd=' + v.cd + '&kaisaiDate=' + ymd + '&gradeCd=' + v.gradeCd + '&raceNo=' + r.no + '">🎬 ダイジェスト</a>';
+  if(vid) html += '<div class="vid-row">' + vid + '</div>';
 
   // 結果 (確定していれば)
   if(r.result){

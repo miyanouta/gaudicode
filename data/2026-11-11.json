@@ -2323,7 +2323,9 @@
           "startTime": "10:55"
         }
       ],
-      "category": "モーニング"
+      "category": "モーニング",
+      "cd": "25",
+      "gradeCd": 1
     },
     {
       "id": "matsudo",
@@ -6262,7 +6264,9 @@
           "startTime": "20:30"
         }
       ],
-      "category": "ナイター"
+      "category": "ナイター",
+      "cd": "31",
+      "gradeCd": 2
     },
     {
       "id": "toyama",
@@ -9917,7 +9921,9 @@
           },
           "startTime": "15:56"
         }
-      ]
+      ],
+      "cd": "46",
+      "gradeCd": 1
     },
     {
       "id": "matsusaka",
@@ -12877,7 +12883,9 @@
           "startTime": "23:30"
         }
       ],
-      "category": "ミッドナイト"
+      "category": "ミッドナイト",
+      "cd": "47",
+      "gradeCd": 1
     },
     {
       "id": "yokkaichi",
@@ -16837,7 +16845,9 @@
           "startTime": "20:17"
         }
       ],
-      "category": "ナイター"
+      "category": "ナイター",
+      "cd": "48",
+      "gradeCd": 2
     },
     {
       "id": "fukui",
@@ -20769,7 +20779,9 @@
           },
           "startTime": "16:08"
         }
-      ]
+      ],
+      "cd": "51",
+      "gradeCd": 2
     },
     {
       "id": "takeo",
@@ -24655,7 +24667,9 @@
           },
           "startTime": "16:20"
         }
-      ]
+      ],
+      "cd": "84",
+      "gradeCd": 2
     },
     {
       "id": "sasebo",
@@ -27596,7 +27610,9 @@
           "startTime": "23:20"
         }
       ],
-      "category": "ミッドナイト"
+      "category": "ミッドナイト",
+      "cd": "85",
+      "gradeCd": 1
     }
   ],
   "quality": {
