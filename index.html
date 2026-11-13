@@ -381,14 +381,14 @@ function buildTicker(){
   for(const { v, r } of fin){
     const h = r.result.hits || {};
     const pk = r.result.sanrenpuku, tn = r.result.sanrentan;
-    if(pk && pk.payout >= 10000) mans.push({ vn: v.name, no: r.no, kind: '三連複', combo: pk.combo, pay: pk.payout, hit: !!(h.teppan || h.balance || h.shoubu) });
-    if(tn && tn.payout >= 10000) mans.push({ vn: v.name, no: r.no, kind: '三連単', combo: tn.combo, pay: tn.payout, hit: !!(h.tanTeppan || h.tanBalance || h.tanShoubu) });
+    if(pk && pk.payout >= 10000 && (h.teppan || h.balance || h.shoubu)) mans.push({ vn: v.name, no: r.no, kind: '三連複', combo: pk.combo, pay: pk.payout });
+    if(tn && tn.payout >= 10000 && (h.tanTeppan || h.tanBalance || h.tanShoubu)) mans.push({ vn: v.name, no: r.no, kind: '三連単', combo: tn.combo, pay: tn.payout });
   }
   mans.sort((a, b) => b.pay - a.pay);
   if(mans.length){
-    text += '　　💴 万車券TOP' + Math.min(5, mans.length) + '：' + mans.slice(0, 5).map(m => (m.hit ? '🎯的中 ' : '') + m.vn + m.no + 'R ' + m.kind + ' ' + m.combo + ' ¥' + m.pay.toLocaleString()).join(' ／ ');
+    text += '　　💴 的中万車券TOP' + Math.min(5, mans.length) + '：' + mans.slice(0, 5).map(m => m.vn + m.no + 'R ' + m.kind + ' ' + m.combo + ' ¥' + m.pay.toLocaleString()).join(' ／ ');
   } else {
-    text += '　　💴 万車券はまだ出ていません';
+    text += '　　💴 的中万車券はまだありません';
   }
   const seg = '<span>' + esc(text) + '</span><span>　　◆　　</span>';
   inner.innerHTML = seg + seg;
