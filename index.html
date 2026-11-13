@@ -564,7 +564,7 @@ function renderContent(){
         (k==='shoubu' && p.recommend ? '<div class="rec-chip '+(p.recommend.verdict==='buy'?'rec-buy':'rec-skip')+'">判定：'+esc(p.recommend.label)+'（'+esc(p.recommend.reason)+'）</div>' : '') +
         (k==='shoubu' && p.ana ? '<div class="ana">穴候補: '+p.ana.num+'番 '+esc(p.ana.name)+'（'+esc(p.ana.reason)+'）</div>' : '') +
         '</div>').join('');
-      html += '<div style="font-size:12px;color:var(--sub);margin-top:6px">鉄板は穴候補を中心にした買い目（全点に穴候補入り、9車立ては6点）。バランスは補助層とGAUDI純正を足したもの、勝負は中核5人（9車立ては6人）のボックスと併合したものです。三連単も穴候補を3着内に入れています。' + (r.odds ? '買い目横の数字は三連複オッズ（取得時点）です。' : '') + '</div>';
+      html += '<div style="font-size:12px;color:var(--sub);margin-top:6px">鉄板は穴候補を中心にした買い目（全点に穴候補入り、9車立ては6点）。バランスは補助層とGAUDI純正を足したもの、勝負は中核5人（9車立ては6人）のボックスと併合したものです。三連単も穴候補を3着内に入れています。三連単・勝負は本命を1着に固定したフォーメーションです。' + (r.odds ? '買い目横の数字は三連複オッズ（取得時点）です。' : '') + '</div>';
     }
 
     if(p.comment) html += '<details class="comment-fold"><summary>コメント・展開を読む</summary><div class="comment" style="margin-top:8px">'+esc(p.comment)+'</div></details>';
