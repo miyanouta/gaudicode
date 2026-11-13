@@ -103,7 +103,7 @@
     .venues{border-right:0;border-bottom:1px solid var(--line)}
     .venues h2{display:none}
     .venue-list{display:none}
-    .venue-select{display:block;width:calc(100% - 20px);margin:9px 10px;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:15px;font-weight:700}
+    .venue-select{display:block;width:calc(100% - 20px);margin:9px 10px;background:var(--panel2);color:var(--accent);border:1px solid var(--accent);border-radius:9px;padding:10px 12px;font-size:19px;font-weight:900;letter-spacing:.06em}
     .venue.centered{opacity:1;background:linear-gradient(90deg,rgba(255,176,32,.16),rgba(255,176,32,.03));border-color:rgba(255,176,32,.45);border-left:3px solid var(--accent)}
   }
   .anim-wrap{display:flex;gap:12px;flex-wrap:wrap}
@@ -392,7 +392,7 @@ function buildTicker(){
   }
   const seg = '<span>' + esc(text) + '</span><span>　　◆　　</span>';
   inner.innerHTML = seg + seg;
-  inner.style.animationDuration = Math.max(18, Math.round(text.length * 0.42)) + 's';
+  inner.style.animationDuration = Math.max(12, Math.round(text.length * 0.26)) + 's';
   tk.style.display = '';
 }
 
