@@ -100,8 +100,9 @@
   @media (max-width:760px){
     .layout{grid-template-columns:1fr;grid-template-rows:auto 1fr}
     .venues{border-right:0;border-bottom:1px solid var(--line)}
-    .venue-list{height:84px;max-height:none;scroll-snap-type:y mandatory;padding-bottom:0}
-    .venue{scroll-snap-align:start}
+    .venue-list{height:140px;max-height:none;scroll-snap-type:y mandatory;padding:32px 8px;-webkit-mask-image:linear-gradient(180deg,transparent,#000 24%,#000 76%,transparent);mask-image:linear-gradient(180deg,transparent,#000 24%,#000 76%,transparent)}
+    .venue{scroll-snap-align:center;opacity:.45}
+    .venue.centered{opacity:1;background:linear-gradient(90deg,rgba(255,176,32,.16),rgba(255,176,32,.03));border-color:rgba(255,176,32,.45);border-left:3px solid var(--accent)}
   }
   .anim-wrap{display:flex;gap:12px;flex-wrap:wrap}
   .anim-wrap canvas{background:#17301d;border-radius:12px;max-width:100%;height:auto;flex:1 1 340px;border:1px solid rgba(255,176,32,.35);box-shadow:inset 0 0 40px rgba(0,0,0,.45)}
@@ -144,7 +145,7 @@
 
 <div class="layout">
   <aside class="venues">
-    <h2>競輪場（縦スクロールで選択）</h2>
+    <h2>競輪場（ドラムを回して選択）</h2>
     <div class="venue-list" id="venueList"></div>
   </aside>
   <main>
@@ -357,6 +358,28 @@ async function updateResults(dateStr, silent){
   }
 }
 
+// ドラム式ピッカー (スマホ): 回して中央に来た会場をそのまま選択する
+function drumSelect(){
+  const el = $('venueList');
+  if(!el || !el.children.length) return;
+  const mid = el.getBoundingClientRect().top + el.clientHeight / 2;
+  let best = -1, bd = 1e9;
+  [...el.children].forEach((b, i) => {
+    const r = b.getBoundingClientRect();
+    const d = Math.abs(r.top + r.height / 2 - mid);
+    if(d < bd){ bd = d; best = i; }
+  });
+  if(best < 0) return;
+  [...el.children].forEach((b, i) => {
+    b.classList.toggle('centered', i === best);
+    b.classList.toggle('active', i === best);
+  });
+  if(best !== state.venueIdx){
+    state.venueIdx = best; state.raceIdx = 0;
+    renderRaces(); renderContent(); saveSel();
+  }
+}
+
 function renderVenues(){
   saveSel();
   const el = $('venueList'); el.innerHTML='';
@@ -374,7 +397,12 @@ function renderVenues(){
     el.appendChild(b);
   });
   const act = el.querySelector('.venue.active');
-  if(act) act.scrollIntoView({ block: 'nearest' });
+  if(act){ act.classList.add('centered'); act.scrollIntoView({ block: 'center' }); }
+  if(window.matchMedia && matchMedia('(max-width:760px)').matches && !el._drum){
+    el._drum = true;
+    let t = null;
+    el.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(drumSelect, 120); }, { passive: true });
+  }
 }
 
 function renderRaces(){
