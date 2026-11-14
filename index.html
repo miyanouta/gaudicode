@@ -612,7 +612,61 @@ function renderContent(){
         (k==='shoubu' && p.recommend ? '<div class="rec-chip '+(p.recommend.verdict==='buy'?'rec-buy':'rec-skip')+'">判定：'+esc(p.recommend.label)+'（'+esc(p.recommend.reason)+'）</div>' : '') +
         (k==='shoubu' && p.ana ? '<div class="ana">穴候補: '+p.ana.num+'番 '+esc(p.ana.name)+'（'+esc(p.ana.reason)+'）</div>' : '') +
         '</div>').join('');
-      html += '<div style="font-size:12px;color:var(--sub);margin-top:6px">鉄板は穴候補を中心にした買い目（全点に穴候補入り、9車立ては6点）。バランスは補助層とGAUDI純正を足したもの、勝負は中核5人（9車立ては6人）のボックスと併合したものです。三連単も穴候補を3着内に入れています。三連単・勝負は「厳選セット版」：三連複の鉄板とバランス追加分からオッズ最小の2組を選び、その全ての並び（12点）です（オッズ未取得のレースは本命頭フォーメーションで代用）。' + (r.odds ? '買い目横の数字は三連複オッズ（取得時点）です。' : '') + '</div>';
+      // 厳選セット（三連単・勝負が実際に使った組。非gensenレースは保存オッズから算出して併記）
+      {
+        const validOdds = o => typeof o === 'number' && Number.isFinite(o) && o < 9999;
+        const permsOf = s => { const pt = s.split('-').map(Number); return [[pt[0],pt[1],pt[2]],[pt[0],pt[2],pt[1]],[pt[1],pt[0],pt[2]],[pt[1],pt[2],pt[0]],[pt[2],pt[0],pt[1]],[pt[2],pt[1],pt[0]]].map(x=>x.join('→')); };
+        let gsSets = null, gsOrders = null, gsComputed = false;
+        if(p.tanBasis === 'gensen' && p.plansTan && p.plansTan.shoubu && p.plansTan.shoubu.length){
+          const seen = new Set(); gsSets = [];
+          p.plansTan.shoubu.forEach(o=>{ const s = normC(o.replace(/→/g,'-')); if(!seen.has(s)){ seen.add(s); gsSets.push(s); } });
+          if(p.gensenPicks && p.gensenPicks.set1){
+            const want = [p.gensenPicks.set1, p.gensenPicks.set2, p.gensenPicks.set3].filter(Boolean).map(normC);
+            if(want.length >= 2 && want.every(s=>seen.has(s))) gsSets = want;
+          }
+          gsOrders = p.plansTan.shoubu.slice();
+        } else if(r.odds && p.plans.teppan && p.plans.balance){
+          const STYLE_RANK = { '逃':3, '両':2, '捲':1, '追':0 };
+          const riderByNum = {}; (r.riders||[]).forEach(x=>{ riderByNum[x.num]=x; });
+          const honR = (r.riders||[]).find(x=>x.gaudiMark==='◎');
+          let ax = null;
+          (r.lineup||[]).forEach(line=>{
+            const front = riderByNum[line[0]]; if(!front) return;
+            const cand = { front: front.num, second: line.length>=2 ? line[1] : null, styleRank: STYLE_RANK[front.style]||0, nige: front.nige||0, tokuten: front.tokuten||0, hasHon: honR ? line.includes(honR.num) : false };
+            if(!ax){ ax = cand; return; }
+            if(cand.styleRank>ax.styleRank || (cand.styleRank===ax.styleRank && cand.nige>ax.nige) || (cand.styleRank===ax.styleRank && cand.nige===ax.nige && cand.tokuten>ax.tokuten) || (cand.styleRank===ax.styleRank && cand.nige===ax.nige && cand.tokuten===ax.tokuten && cand.hasHon && !ax.hasHon)) ax = cand;
+          });
+          const pickE2 = (combos)=>{
+            if(!ax) return null;
+            const usable = combos.filter(c=>validOdds(r.odds[c]));
+            if(!usable.length) return null;
+            const byO = (a,b)=>r.odds[a]-r.odds[b];
+            const hasNums = (c,nums)=>{ const pp = c.split('-').map(Number); return nums.every(n=>pp.includes(n)); };
+            const pairNums = ax.second!=null ? [ax.front, ax.second] : [ax.front];
+            const top3 = usable.slice().sort(byO).slice(0,3);
+            let cand = top3.filter(c=>hasNums(c,pairNums));
+            if(cand.length) return cand.sort(byO)[0];
+            cand = top3.filter(c=>hasNums(c,[ax.front]));
+            if(cand.length) return cand.sort(byO)[0];
+            return usable.slice().sort(byO)[0];
+          };
+          const s1 = pickE2(portionCombos('teppan'));
+          const s2 = pickE2(portionCombos('balance'));
+          if(s1 && s2){ gsSets = [s1, s2]; gsOrders = permsOf(s1).concat(permsOf(s2)); gsComputed = true; }
+        }
+        if(gsSets && gsSets.length >= 2 && gsOrders){
+          const setLabels = ['鉄板','バランス追加','勝負追加（選定）'];
+          const tanHit = gsOrders.some(o=>hitTan(o));
+          html += '<div style="margin-top:12px;border-top:1px dashed #2a3350;padding-top:10px">' +
+            '<div style="font-size:13px;color:var(--gold);font-weight:700">厳選セット' + (tanHit ? ' <span class="hit-badge hit">🎯 三連単的中</span>' : '') + '</div>' +
+            (gsComputed ? '<div style="font-size:12px;color:var(--sub);margin:2px 0 4px">このレースの三連単・勝負は本命頭フォーメーションで作られているため、厳選セットの並びを併記します。</div>' : '') +
+            gsSets.map((s,i)=>'<div style="font-size:14.5px;margin:3px 0">' + (setLabels[i] || '追加') + '　' + wrapHit(esc(s) + ((r.odds && validOdds(r.odds[s])) ? '<span class="odds">' + r.odds[s].toFixed(1) + '倍</span>' : '<span class="odds">オッズ無し</span>'), hitPuku(s)) + '</div>').join('') +
+            '<div style="font-size:12px;color:var(--sub);margin:8px 0 4px">厳選セットの並び（三連単）</div>' +
+            '<div class="combos" style="font-size:15px">' + gsOrders.map(o=>wrapHit(esc(o), hitTan(o))).join(' ／ ') + '</div>' +
+            '</div>';
+        }
+      }
+      html += '<div style="font-size:12px;color:var(--sub);margin-top:6px">鉄板は穴候補を中心にした買い目（全点に穴候補入り、9車立ては6点）。バランスは補助層とGAUDI純正を足したもの、勝負は中核5人（9車立ては6人）のボックスと併合したものです。三連単も穴候補を3着内に入れています。三連単・勝負は「厳選セット版」：鉄板とバランス追加分から、展開の軸（本線ラインの先頭車と番手）を含む組を低オッズの中で優先して2組を選び、その全ての並び（12点）です。勝負追加分が「選定」（3区分で平均オッズ最小）のレースでは3組目が追加されます（18点）。オッズ未取得のレースは本命頭フォーメーションで代用し、厳選セットの並びを併記します。' + (r.odds ? '買い目横の数字は三連複オッズ（取得時点）です。' : '') + '</div>';
     }
 
     if(p.comment) html += '<details class="comment-fold"><summary>コメント・展開を読む</summary><div class="comment" style="margin-top:8px">'+esc(p.comment)+'</div></details>';
