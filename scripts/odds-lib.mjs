@@ -82,3 +82,54 @@ export function computeEV(race) {
     shoubu: planEV(combos, race.odds, pl.shoubu),
   };
 }
+
+// ---- 三連単・勝負「厳選セット版」(ユーザー決定 2026-11-14) ----
+// 厳選セット1 = 三連複・鉄板プラン内の最小オッズの組み合わせ、
+// 厳選セット2 = バランス追加分 (バランスにあって鉄板に無い組み合わせ) の最小オッズ。
+// 三連単・勝負 = セット1・セット2 それぞれの全6順序 (ソート済みセットに対する
+// [abc, acb, bac, bca, cab, cba] の生成順、重複除き、計12点)。
+// 片方の層にオッズ付き買い目が無い場合は、ある方だけの6点になる。
+// 検証 (2026-11-09〜13 の392レース、保存された確定オッズで構築):
+// 的中31.9% (125件)・回収79.7%・的中万車券7件・平均12.0点。
+// 実運用ではレース前に取得したオッズで構築し、発走後は凍結する
+// (結果が出た後に作り直さない) ため、確定オッズの検証値とは多少ずれる。
+export function minOddsCombo(oddsMap, planList) {
+  if (!oddsMap || !Array.isArray(planList) || !planList.length) return null;
+  let best = null, bestOdds = Infinity;
+  for (const c of planList) {
+    const k = norm(c);
+    const o = oddsMap[k];
+    if (o != null && o < bestOdds) { bestOdds = o; best = k; }
+  }
+  return best;
+}
+export function buildGensenTanShoubu(plans, oddsMap) {
+  if (!plans || !oddsMap) return null;
+  const tep = (plans.teppan || []).map(norm);
+  const bal = (plans.balance || []).map(norm);
+  const tepSet = new Set(tep);
+  const set1 = minOddsCombo(oddsMap, tep);
+  const set2 = minOddsCombo(oddsMap, bal.filter((c) => !tepSet.has(c)));
+  const out = [];
+  for (const s of [set1, set2]) {
+    if (!s) continue;
+    const [a, b, c] = s.split('-').map(Number);
+    for (const p of [[a, b, c], [a, c, b], [b, a, c], [b, c, a], [c, a, b], [c, b, a]]) {
+      const t = p.join('→');
+      if (!out.includes(t)) out.push(t);
+    }
+  }
+  return out.length ? out : null;
+}
+// レースに保存されたオッズから厳選版の三連単・勝負を構築し prediction に反映する。
+// 反映できたら true を返し prediction.tanBasis='gensen' を立てる。
+// オッズやプランが無く構築できない場合は何もせず false (勝負はA案のまま)。
+export function applyGensenTan(race) {
+  const p = race && race.prediction;
+  if (!p || !p.plans || !p.plansTan || !race.odds) return false;
+  const g = buildGensenTanShoubu(p.plans, race.odds);
+  if (!g) return false;
+  p.plansTan.shoubu = g;
+  p.tanBasis = 'gensen';
+  return true;
+}

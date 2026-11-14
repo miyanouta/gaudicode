@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JSDOM } from 'jsdom';
-import { parseSanrenpukuOdds } from './odds-lib.mjs';
+import { parseSanrenpukuOdds, applyGensenTan } from './odds-lib.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
@@ -90,6 +90,17 @@ function parseResult(html) {
 
 const norm = (s) => s.split('-').map(Number).sort((a, b) => a - b).join('-');
 
+// 発走済みかどうか (startTime は JST の "H:MM" 表記)。発走後はオッズも
+// 三連単・勝負 (厳選版) も凍結し、レース後のオッズで予想を作り直さない。
+// startTime が取れていないレースは未発走扱い (従来どおり結果が出るまで更新)。
+function raceStarted(r) {
+  if (!r.startTime) return false;
+  const m = String(r.startTime).match(/(\d{1,2}):(\d{2})/);
+  if (!m) return false;
+  const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+  return now.getHours() * 60 + now.getMinutes() >= Number(m[1]) * 60 + Number(m[2]);
+}
+
 function evaluate(race, result) {
   const hits = {};
   const p = race.prediction;
@@ -146,14 +157,19 @@ async function main() {
         failed++;
         console.log(`[results] ${v.id} ${r.no}R 取得失敗: ${e.message || e}`);
       }
-      // 未確定レースはオッズを更新して期待値を再計算する
-      if (!r.result && r.prediction) {
+      // 未確定かつ未発走のレースはオッズを更新し、三連単・勝負 (厳選版) も
+      // 最新オッズで作り直す。発走を過ぎたらどちらも凍結する (的中判定は
+      // 発走時点で凍結された勝負に対して行われる)。過去日の再実行でも、
+      // 結果を取りこぼしたレースをレース後オッズで作り直さないよう凍結する。
+      const frozen = dateStr < jstToday() || raceStarted(r);
+      if (!r.result && r.prediction && !frozen) {
         try {
           const base = link.url.split('?')[0];
           const oh = await fetchHtml(base + '?pageType=odds&kakeshikiType=3renhuku');
           const odds = parseSanrenpukuOdds(oh);
           if (odds) {
             r.odds = odds; r.oddsAt = new Date().toISOString();
+            applyGensenTan(r);
           }
         } catch { /* オッズ更新失敗は無視 */ }
       }
