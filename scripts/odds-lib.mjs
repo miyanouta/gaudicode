@@ -182,7 +182,10 @@ export function pickGensenSet(oddsMap, planList, axis) {
   if (withKey.length) return minOf(withKey);
   return minOf(sets);
 }
-export function buildGensenTanShoubu(plans, oddsMap, axis = null) {
+// 厳選セットの構築本体: 三連単・勝負の順序リストと、選ばれたピック
+// (セット1・セット2・セット3・選定区分) を一緒に返す。
+// picks は prediction.gensenPicks として保存するためのもの (下記参照)。
+export function buildGensen(plans, oddsMap, axis = null) {
   if (!plans || !oddsMap) return null;
   const tep = (plans.teppan || []).map(norm);
   const bal = (plans.balance || []).map(norm);
@@ -200,11 +203,16 @@ export function buildGensenTanShoubu(plans, oddsMap, axis = null) {
     const vals = [...new Set(list)].filter((c) => oddsMap[c] != null).map((c) => oddsMap[c]);
     return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : Infinity;
   };
+  const aT = portionAvg(tep);
+  const aB = portionAvg(balAdd);
   const aS = portionAvg(shoAdd);
-  if (aS <= portionAvg(tep) && aS <= portionAvg(balAdd)) {
+  // 選定区分 = 3区分の平均オッズが最も低い区分 (B の発動判定と同じ並び順で決める)
+  const selectedPortion = (aS <= aT && aS <= aB) ? 'shoubu' : (aT <= aB ? 'teppan' : 'balance');
+  let set3 = null;
+  if (aS <= aT && aS <= aB) {
     // 3組目のピックは番兵値 9999.9 を「オッズ無し」として除外して選ぶ
     const shoValid = shoAdd.filter((c) => oddsMap[c] != null && oddsMap[c] !== 9999.9);
-    const set3 = pickGensenSet(oddsMap, shoValid, axis);
+    set3 = pickGensenSet(oddsMap, shoValid, axis);
     if (set3) sets.push(set3);
   }
   const out = [];
@@ -216,17 +224,32 @@ export function buildGensenTanShoubu(plans, oddsMap, axis = null) {
       if (!out.includes(t)) out.push(t);
     }
   }
-  return out.length ? out : null;
+  if (!out.length) return null;
+  return { orders: out, picks: { set1, set2, set3, selectedPortion } };
+}
+export function buildGensenTanShoubu(plans, oddsMap, axis = null) {
+  const g = buildGensen(plans, oddsMap, axis);
+  return g ? g.orders : null;
 }
 // レースに保存されたオッズから厳選版の三連単・勝負を構築し prediction に反映する。
 // 反映できたら true を返し prediction.tanBasis='gensen' を立てる。
 // オッズやプランが無く構築できない場合は何もせず false (勝負はA案のまま)。
+//
+// 厳選ピックの永続化 (2026-11-15 耐久性修正): 構築時に選んだセットを
+// prediction.gensenPicks = { set1, set2, set3, selectedPortion } として
+// レースデータ自体に保存する。アプリの厳選カードは従来、表示のたびに
+// race.odds から再計算していたため、結果取込で確定オッズに差し替わって
+// オッズ表が縮んだレースや、保存ジョブの途中状態が入ったレースでは
+// カードが消えてしまっていた。ピックを構築時点の値で保存しておけば、
+// その後のオッズ差し替えや再保存でカードが消えることはない。
+// gensenPicks は追加フィールドであり、plansTan の内容は従来と同一。
 export function applyGensenTan(race) {
   const p = race && race.prediction;
   if (!p || !p.plans || !p.plansTan || !race.odds) return false;
-  const g = buildGensenTanShoubu(p.plans, race.odds, axisPairOf(race));
+  const g = buildGensen(p.plans, race.odds, axisPairOf(race));
   if (!g) return false;
-  p.plansTan.shoubu = g;
+  p.plansTan.shoubu = g.orders;
   p.tanBasis = 'gensen';
+  p.gensenPicks = g.picks;
   return true;
 }
