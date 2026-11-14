@@ -558,8 +558,23 @@ function renderContent(){
       const defaultTier = p.plans.balance ? 'balance' : (tiers[0] && tiers[0][0]);
       html += '<div class="plan-tabs">' + tiers.map(([k,label])=>
         '<button class="plan-tab'+(k===defaultTier?' active':'')+'" onclick="switchPlan(this,\''+k+'\')">'+label+'（'+p.plans[k].length+'点）</button>').join('') + '</div>';
+      // 区分別平均オッズ（鉄板／バランス追加分／勝負追加分、除外なしの単純平均）
+      const normC = c => c.split('-').map(Number).sort((a,b)=>a-b).join('-');
+      const planSet = {};
+      ['teppan','balance','shoubu'].forEach(k=>{ planSet[k] = new Set((p.plans[k]||[]).map(normC)); });
+      const portionCombos = k => k==='teppan' ? [...planSet.teppan]
+        : k==='balance' ? [...planSet.balance].filter(c=>!planSet.teppan.has(c))
+        : [...planSet.shoubu].filter(c=>!planSet.balance.has(c));
+      const avgLabels = { teppan:'鉄板の平均オッズ', balance:'バランス追加分の平均オッズ', shoubu:'勝負追加分の平均オッズ' };
+      const avgText = {};
+      if(r.odds){
+        tiers.forEach(([k])=>{
+          const os = portionCombos(k).map(c=>r.odds[c]).filter(o=>typeof o==='number' && Number.isFinite(o));
+          if(os.length) avgText[k] = avgLabels[k] + ' ' + (os.reduce((a,b)=>a+b,0)/os.length).toFixed(1) + '倍';
+        });
+      }
       html += tiers.map(([k])=>
-        '<div class="plan-panel'+(k===defaultTier?' active':'')+'" data-plan="'+k+'"><div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">三連複</div><div class="combos">'+p.plans[k].map(c=>{ const o = r.odds && r.odds[c.split('-').map(Number).sort((a,b)=>a-b).join('-')]; return wrapHit(esc(c) + (o ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(c)); }).join(' ／ ')+'</div>' +
+        '<div class="plan-panel'+(k===defaultTier?' active':'')+'" data-plan="'+k+'"><div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">三連複</div>' + (avgText[k] ? '<div style="font-size:12px;color:var(--sub);margin-bottom:4px">'+avgText[k]+'</div>' : '') + '<div class="combos">'+p.plans[k].map(c=>{ const o = r.odds && r.odds[c.split('-').map(Number).sort((a,b)=>a-b).join('-')]; return wrapHit(esc(c) + (o ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(c)); }).join(' ／ ')+'</div>' +
         (p.plansTan && p.plansTan[k] ? '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">三連単</div><div class="combos" style="font-size:15px">'+p.plansTan[k].map(c=>wrapHit(esc(c), hitTan(c))).join(' ／ ')+'</div>' : '') +
         (k==='shoubu' && p.recommend ? '<div class="rec-chip '+(p.recommend.verdict==='buy'?'rec-buy':'rec-skip')+'">判定：'+esc(p.recommend.label)+'（'+esc(p.recommend.reason)+'）</div>' : '') +
         (k==='shoubu' && p.ana ? '<div class="ana">穴候補: '+p.ana.num+'番 '+esc(p.ana.name)+'（'+esc(p.ana.reason)+'）</div>' : '') +
