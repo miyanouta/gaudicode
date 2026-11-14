@@ -83,14 +83,30 @@ export function computeEV(race) {
   };
 }
 
-// ---- 三連単・勝負「厳選セット版」(ユーザー決定 2026-11-14) ----
-// 厳選セット1 = 三連複・鉄板プラン内の最小オッズの組み合わせ、
-// 厳選セット2 = バランス追加分 (バランスにあって鉄板に無い組み合わせ) の最小オッズ。
-// 三連単・勝負 = セット1・セット2 それぞれの全6順序 (ソート済みセットに対する
-// [abc, acb, bac, bca, cab, cba] の生成順、重複除き、計12点)。
-// 片方の層にオッズ付き買い目が無い場合は、ある方だけの6点になる。
-// 検証 (2026-11-09〜13 の392レース、保存された確定オッズで構築):
-// 的中31.9% (125件)・回収79.7%・的中万車券7件・平均12.0点。
+// ---- 三連単・勝負「厳選セット版」: 展開優先 E2 (ユーザー決定 2026-11-15) ----
+// 厳選セットは2つ: セット1 = 三連複・鉄板ポーションから、セット2 = バランス
+// 追加分 (バランスにあって鉄板に無い組み合わせ) から、それぞれ「展開優先 E2」
+// ルールで1組ずつ選ぶ。三連単・勝負 = セット1・セット2 それぞれの全6順序
+// (ソート済みセットに対する [abc, acb, bac, bca, cab, cba] の生成順、重複除き、
+// 計12点)。片方の層にオッズ付き買い目が無い場合は、ある方だけの6点になる。
+//
+// E2 ルール (ポーションごと): ポーションのオッズ付き組み合わせのうち
+// 低オッズ3組を候補とし、
+//   1. 展開の軸ペア (本線ラインの先頭車 + 番手) を両方含む組があれば、その中の最小オッズ
+//   2. 無ければ軸の先頭車を含む組の中の最小オッズ
+//   3. 無ければポーションの最小オッズ (従来ルール)
+// 本線ライン = 先頭車の先行プロフィールが最も強いライン。判定は
+// 脚質 style (逃>両>捲>追) → 決まり手の逃げ回数 nige → 競走得点 tokuten →
+// ◎を含むライン、の順。本線が単騎の場合は軸ペアは先頭車のみに縮退する。
+// 並び (lineup) が無いレースは軸が決められないため、従来の最小オッズ選択に
+// フォールバックする。
+//
+// 検証 (2026-11-09〜14 の421レース、保存された確定オッズ+並びで構築):
+// 従来の最小オッズ選択が 的中31.1%・回収76.5%・的中万車券7件 だったのに対し、
+// E2 は 的中27.8%・回収132.3%・的中万車券9件 (厳選2点の三連複でも
+// 的中27.8%・回収73.4%)。四日市10R (2-4-7、三連単¥310,950) のような
+// 大物車券を軸ペアで拾えるため、ユーザーが的中率の低下 (約-3.3pt) を
+// 受け入れて採用を決定した (2026-11-15)。
 // 実運用ではレース前に取得したオッズで構築し、発走後は凍結する
 // (結果が出た後に作り直さない) ため、確定オッズの検証値とは多少ずれる。
 export function minOddsCombo(oddsMap, planList) {
@@ -103,13 +119,61 @@ export function minOddsCombo(oddsMap, planList) {
   }
   return best;
 }
-export function buildGensenTanShoubu(plans, oddsMap) {
+const STYLE_RANK = { '逃': 3, '両': 2, '捲': 1, '追': 0 };
+// 展開の軸ペア: 本線ラインの先頭車と番手を { front, second } で返す。
+// 並びが無い・判定できない場合は null (呼び出し側で最小オッズ選択に落とす)。
+export function axisPairOf(race) {
+  if (!race || !Array.isArray(race.riders) || !Array.isArray(race.lineup) || !race.lineup.length) return null;
+  const rider = new Map(race.riders.map((x) => [x.num, x]));
+  const hon = race.riders.find((x) => x.gaudiMark === '◎');
+  let best = null;
+  for (const line of race.lineup) {
+    if (!Array.isArray(line) || !line.length) continue;
+    const front = rider.get(line[0]);
+    if (!front) continue;
+    const cand = {
+      front: front.num,
+      second: line.length >= 2 ? line[1] : null,
+      styleRank: STYLE_RANK[front.style] ?? 0,
+      nige: front.nige || 0,
+      tokuten: front.tokuten || 0,
+      hasHon: hon ? line.includes(hon.num) : false,
+    };
+    if (!best) { best = cand; continue; }
+    const better =
+      cand.styleRank > best.styleRank ||
+      (cand.styleRank === best.styleRank && cand.nige > best.nige) ||
+      (cand.styleRank === best.styleRank && cand.nige === best.nige && cand.tokuten > best.tokuten) ||
+      (cand.styleRank === best.styleRank && cand.nige === best.nige && cand.tokuten === best.tokuten && cand.hasHon && !best.hasHon);
+    if (better) best = cand;
+  }
+  return best ? { front: best.front, second: best.second } : null;
+}
+// ポーション (プランの組み合わせリスト) から厳選セットを1組選ぶ (E2)。
+// axis が null の場合は従来の最小オッズ選択と同一の結果になる。
+export function pickGensenSet(oddsMap, planList, axis) {
+  if (!oddsMap || !Array.isArray(planList) || !planList.length) return null;
+  const sets = [...new Set(planList.map(norm))].filter((c) => oddsMap[c] != null);
+  if (!sets.length) return null;
+  const byOdds = (a, b) => oddsMap[a] - oddsMap[b];
+  const minOf = (list) => [...list].sort(byOdds)[0];
+  if (!axis) return minOf(sets);
+  const pairNums = axis.second != null ? [axis.front, axis.second] : [axis.front];
+  const hasAll = (c, nums) => { const ns = c.split('-').map(Number); return nums.every((n) => ns.includes(n)); };
+  const top3 = [...sets].sort(byOdds).slice(0, 3);
+  const withPair = top3.filter((c) => hasAll(c, pairNums));
+  if (withPair.length) return minOf(withPair);
+  const withKey = top3.filter((c) => hasAll(c, [axis.front]));
+  if (withKey.length) return minOf(withKey);
+  return minOf(sets);
+}
+export function buildGensenTanShoubu(plans, oddsMap, axis = null) {
   if (!plans || !oddsMap) return null;
   const tep = (plans.teppan || []).map(norm);
   const bal = (plans.balance || []).map(norm);
   const tepSet = new Set(tep);
-  const set1 = minOddsCombo(oddsMap, tep);
-  const set2 = minOddsCombo(oddsMap, bal.filter((c) => !tepSet.has(c)));
+  const set1 = pickGensenSet(oddsMap, tep, axis);
+  const set2 = pickGensenSet(oddsMap, bal.filter((c) => !tepSet.has(c)), axis);
   const out = [];
   for (const s of [set1, set2]) {
     if (!s) continue;
@@ -127,7 +191,7 @@ export function buildGensenTanShoubu(plans, oddsMap) {
 export function applyGensenTan(race) {
   const p = race && race.prediction;
   if (!p || !p.plans || !p.plansTan || !race.odds) return false;
-  const g = buildGensenTanShoubu(p.plans, race.odds);
+  const g = buildGensenTanShoubu(p.plans, race.odds, axisPairOf(race));
   if (!g) return false;
   p.plansTan.shoubu = g;
   p.tanBasis = 'gensen';
