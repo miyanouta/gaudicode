@@ -87,6 +87,8 @@
   .rec-skip{background:#f3f3f3;color:#777;border:1px solid #ccc}
   details.comment-fold{margin-top:12px}
   details.comment-fold summary{cursor:pointer;color:var(--sub);font-size:13.5px}
+  details.ura-fold{margin-top:12px;border:1px solid #8a6d1f;border-radius:10px;padding:9px 11px;background:rgba(255,176,32,.06)}
+  details.ura-fold summary{cursor:pointer;color:var(--gold);font-size:14.5px;font-weight:700}
   .result-card{border:1px solid var(--accent);background:linear-gradient(180deg,rgba(255,176,32,.10),rgba(255,176,32,.03))}
   .result-top{font-size:17px;font-weight:800;line-height:1.7}
   .hit-badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:700;margin:2px 4px 2px 0;background:#2a2f45;color:var(--sub)}
@@ -667,6 +669,29 @@ function renderContent(){
         }
       }
       html += '<div style="font-size:12px;color:var(--sub);margin-top:6px">鉄板は穴候補を中心にした買い目（全点に穴候補入り、9車立ては6点）。バランスは補助層とGAUDI純正を足したもの、勝負は中核5人（9車立ては6人）のボックスと併合したものです。三連単も穴候補を3着内に入れています。三連単・勝負は「厳選セット版」：鉄板とバランス追加分から、展開の軸（本線ラインの先頭車と番手）を含む組を低オッズの中で優先して2組を選び、その全ての並び（12点）です。勝負追加分が「選定」（3区分で平均オッズ最小）のレースでは3組目が追加されます（18点）。オッズ未取得のレースは本命頭フォーメーションで代用し、厳選セットの並びを併記します。' + (r.odds ? '買い目横の数字は三連複オッズ（取得時点）です。' : '') + '</div>';
+    }
+
+    // 裏三連単・裏三連複（荒れ候補レースのみ: ライン4本以上 かつ 信頼度★3以下。通常のプランとは別枠で、▼で開く）
+    {
+      const uraStars = (String(p.confidence||'').match(/★/g)||[]).length;
+      const uraH = (r.riders||[]).find(x=>x.gaudiMark==='◎');
+      const uraT = (r.riders||[]).find(x=>x.gaudiMark==='○');
+      const uraA = (r.riders||[]).find(x=>x.gaudiMark==='▲');
+      const uraX = p.ana ? p.ana.num : null;
+      const uraD = (r.riders||[]).filter(x=>x.gaudiMark==='△' && x.num!==uraX).sort((a,b)=>(b.tokuten||0)-(a.tokuten||0))[0];
+      if((r.lineup||[]).length >= 4 && uraStars <= 3 && uraH && uraT && uraA && uraX != null && uraD && ![uraH.num,uraT.num,uraA.num].includes(uraX)){
+        const hN=uraH.num, tN=uraT.num, aN=uraA.num, dN=uraD.num;
+        const setOf = arr => arr.slice().sort((a,b)=>a-b).join('-');
+        const uraSets = [...new Set([[uraX,hN,tN],[uraX,hN,aN],[uraX,tN,aN],[uraX,hN,dN],[uraX,tN,dN]].map(setOf))];
+        const uraOrders = [[uraX,hN,tN],[uraX,tN,hN],[uraX,hN,aN],[uraX,aN,hN],[uraX,tN,aN],[uraX,aN,tN],[uraX,hN,dN],[uraX,tN,dN],[hN,uraX,dN],[tN,uraX,dN],[uraX,dN,hN],[uraX,dN,tN]].map(a=>a.join('→'));
+        const uraTanHit = uraOrders.some(o=>hitTan(o));
+        const uraPukuHit = uraSets.some(s=>hitPuku(s));
+        html += '<details class="ura-fold"><summary>裏三連単・裏三連複（荒れ候補） ▼' + (uraTanHit ? ' <span class="hit-badge hit">🎯 三連単的中</span>' : '') + (uraPukuHit ? ' <span class="hit-badge hit">🎯 三連複的中</span>' : '') + '</summary>' +
+          '<div style="font-size:12px;color:var(--sub);margin:6px 0 4px">ライン4本以上で信頼度★3以下のレースだけに出る、通常とは別の買い目です（全点に穴候補入り）。買うかどうかは通常の三連単と比べて判断して下さい。過去439レース・該当43レースでは裏三連複 的中46.5%・回収102.7%（5点）、裏三連単 的中16.3%・回収93.4%（12点）でした（該当件数は少なめです）。</div>' +
+          '<div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">裏三連複（5点）</div><div class="combos">' + uraSets.map(s=>{ const o = r.odds && r.odds[s]; return wrapHit(esc(s) + (o && o < 9999 ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(s)); }).join(' ／ ') + '</div>' +
+          '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">裏三連単（12点）</div><div class="combos" style="font-size:15px">' + uraOrders.map(o=>wrapHit(esc(o), hitTan(o))).join(' ／ ') + '</div>' +
+          '</details>';
+      }
     }
 
     if(p.comment) html += '<details class="comment-fold"><summary>コメント・展開を読む</summary><div class="comment" style="margin-top:8px">'+esc(p.comment)+'</div></details>';
