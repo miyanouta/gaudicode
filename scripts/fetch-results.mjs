@@ -90,8 +90,9 @@ function parseResult(html) {
 
 const norm = (s) => s.split('-').map(Number).sort((a, b) => a - b).join('-');
 
-// 発走済みかどうか (startTime は JST の "H:MM" 表記)。発走後はオッズも
-// 三連単・勝負 (厳選版) も凍結し、レース後のオッズで予想を作り直さない。
+// 発走済みかどうか (startTime は JST の "H:MM" 表記)。発走後は三連単・勝負
+// (厳選版) を凍結し、レース後のオッズで予想を作り直さない。オッズ自体は
+// 結果確定時に確定オッズを1回だけ保存する (旧仕様の復元、下記 main 内)。
 // startTime が取れていないレースは未発走扱い (従来どおり結果が出るまで更新)。
 function raceStarted(r) {
   if (!r.startTime) return false;
@@ -145,6 +146,7 @@ async function main() {
     for (const r of v.races) {
       const link = byKey.get(`${v.id}:${r.no}`);
       if (!link) { pending++; continue; }
+      const hadResult = !!r.result;
       try {
         const html = await fetchHtml(link.url);
         const result = parseResult(html);
@@ -156,6 +158,20 @@ async function main() {
       } catch (e) {
         failed++;
         console.log(`[results] ${v.id} ${r.no}R 取得失敗: ${e.message || e}`);
+      }
+      // 結果が今回確定したレースは、確定オッズを保存する (旧仕様の復元)。
+      // 旧仕様では発走後も「結果が未記録な間はオッズ更新が走る」ため、終了した
+      // レースの保存オッズは最終的に確定オッズになっていた。厳選版の導入で
+      // 発走時点の凍結を入れた際、オッズまで止まってしまったので、結果確定の
+      // タイミングで1回だけ確定オッズを取り直す。三連単・勝負は発走時点で
+      // 凍結されたままにし、ここでは再構築しない (applyGensenTan は呼ばない)。
+      if (!hadResult && r.result) {
+        try {
+          const base = link.url.split('?')[0];
+          const oh = await fetchHtml(base + '?pageType=odds&kakeshikiType=3renhuku');
+          const odds = parseSanrenpukuOdds(oh);
+          if (odds) { r.odds = odds; r.oddsAt = new Date().toISOString(); }
+        } catch { /* 確定オッズの保存失敗は無視 (結果の記録自体は済んでいる) */ }
       }
       // 未確定かつ未発走のレースはオッズを更新し、三連単・勝負 (厳選版) も
       // 最新オッズで作り直す。発走を過ぎたらどちらも凍結する (的中判定は
