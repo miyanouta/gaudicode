@@ -109,6 +109,21 @@ export function computeEV(race) {
 // 受け入れて採用を決定した (2026-11-15)。
 // 実運用ではレース前に取得したオッズで構築し、発走後は凍結する
 // (結果が出た後に作り直さない) ため、確定オッズの検証値とは多少ずれる。
+//
+// ---- B: 選定=勝負追加分のレースだけ3組目を追加 (ユーザー決定 2026-11-15) ----
+// 3区分 (鉄板 / バランス追加分 / 勝負追加分) の平均オッズを比べ、勝負追加分が
+// 選定 (最も低い、同点を含む) になったレースでのみ、勝負追加分の E2 ピックを
+// 3組目として全6順序を加える (そのレースだけ18点、他は従来通り12点)。
+// 平均は区分内のオッズ付き組み合わせの平均 (除外なし)。検証 (上記421レース、
+// 本番コードで再構築): 的中28.7%・回収133.6%・的中万車券10件・平均12.6点、
+// 発動は40レース (9.5%)。非発動レースの出力は E2 のみの従来構築と完全一致。
+// 3組目のピックだけは、未発売の番兵値 9999.9 を「オッズ無し」として除外した
+// 勝負追加分から選ぶ (有効な組が無ければ追加しない)。検証対象では番兵値の
+// 除外は発動レースのピックを変えず (421レース全てで出力一致)、朝の発売前
+// オッズで幻の組を掴まないための安全策として新しい経路にだけ入れている。
+// なお区分平均とセット1・2の選択は、ユーザーが承認した測定 (スタディ) の
+// 定義そのままで、番兵値を除外すると発動が41レース・回収133.4% にずれて
+// 承認済みの数字を再現できなくなるため、そちらには手を入れていない。
 export function minOddsCombo(oddsMap, planList) {
   if (!oddsMap || !Array.isArray(planList) || !planList.length) return null;
   let best = null, bestOdds = Infinity;
@@ -171,11 +186,29 @@ export function buildGensenTanShoubu(plans, oddsMap, axis = null) {
   if (!plans || !oddsMap) return null;
   const tep = (plans.teppan || []).map(norm);
   const bal = (plans.balance || []).map(norm);
+  const sho = (plans.shoubu || []).map(norm);
   const tepSet = new Set(tep);
   const set1 = pickGensenSet(oddsMap, tep, axis);
-  const set2 = pickGensenSet(oddsMap, bal.filter((c) => !tepSet.has(c)), axis);
+  const balAdd = bal.filter((c) => !tepSet.has(c));
+  const set2 = pickGensenSet(oddsMap, balAdd, axis);
+  const sets = [set1, set2];
+  // B: 選定 (区分平均オッズが最小、同点を含む) が勝負追加分のレースだけ、
+  // 勝負追加分の E2 ピックを3組目として追加する (詳細は冒頭コメント)。
+  const covered = new Set([...tep, ...bal]);
+  const shoAdd = sho.filter((c) => !covered.has(c));
+  const portionAvg = (list) => {
+    const vals = [...new Set(list)].filter((c) => oddsMap[c] != null).map((c) => oddsMap[c]);
+    return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : Infinity;
+  };
+  const aS = portionAvg(shoAdd);
+  if (aS <= portionAvg(tep) && aS <= portionAvg(balAdd)) {
+    // 3組目のピックは番兵値 9999.9 を「オッズ無し」として除外して選ぶ
+    const shoValid = shoAdd.filter((c) => oddsMap[c] != null && oddsMap[c] !== 9999.9);
+    const set3 = pickGensenSet(oddsMap, shoValid, axis);
+    if (set3) sets.push(set3);
+  }
   const out = [];
-  for (const s of [set1, set2]) {
+  for (const s of sets) {
     if (!s) continue;
     const [a, b, c] = s.split('-').map(Number);
     for (const p of [[a, b, c], [a, c, b], [b, a, c], [b, c, a], [c, a, b], [c, b, a]]) {
