@@ -663,13 +663,16 @@ function renderContent(){
       {
         const validOdds = o => typeof o === 'number' && Number.isFinite(o) && o < 9999;
         const permsOf = s => { const pt = s.split('-').map(Number); return [[pt[0],pt[1],pt[2]],[pt[0],pt[2],pt[1]],[pt[1],pt[0],pt[2]],[pt[1],pt[2],pt[0]],[pt[2],pt[0],pt[1]],[pt[2],pt[1],pt[0]]].map(x=>x.join('→')); };
-        let gsSets = null, gsOrders = null, gsComputed = false;
+        let gsSets = null, gsOrders = null, gsComputed = false, gsLabels = ['鉄板','バランス追加','勝負追加（選定）'];
         if(p.tanBasis === 'gensen' && p.plansTan && p.plansTan.shoubu && p.plansTan.shoubu.length){
           const seen = new Set(); gsSets = [];
           p.plansTan.shoubu.forEach(o=>{ const s = normC(o.replace(/→/g,'-')); if(!seen.has(s)){ seen.add(s); gsSets.push(s); } });
           if(p.gensenPicks && p.gensenPicks.set1){
-            const want = [p.gensenPicks.set1, p.gensenPicks.set2, p.gensenPicks.set3].filter(Boolean).map(normC);
-            if(want.length >= 2 && want.every(s=>seen.has(s))) gsSets = want;
+            const gp = p.gensenPicks;
+            // X4 (常に2組12点): 選定=勝負追加で、鉄板の組が勝負に入っていないレースは入替済み
+            const swapped = gp.selectedPortion === 'shoubu' && gp.set3 && !seen.has(normC(gp.set1));
+            const want = (swapped ? [gp.set3, gp.set2] : [gp.set1, gp.set2, gp.set3]).filter(Boolean).map(normC);
+            if(want.length >= 2 && want.every(s=>seen.has(s))){ gsSets = want; if(swapped) gsLabels = ['勝負追加（選定）','バランス追加']; }
           }
           gsOrders = p.plansTan.shoubu.slice();
         } else if(r.odds && p.plans.teppan && p.plans.balance){
@@ -702,19 +705,18 @@ function renderContent(){
           if(s1 && s2){ gsSets = [s1, s2]; gsOrders = permsOf(s1).concat(permsOf(s2)); gsComputed = true; }
         }
         if(gsSets && gsSets.length >= 2 && gsOrders){
-          const setLabels = ['鉄板','バランス追加','勝負追加（選定）'];
           const tanHit = gsOrders.some(o=>hitTan(o));
           const fukuHit = gsSets.some(s=>hitPuku(s));
           html += '<div class="gensen-box">' +
             '<div class="gensen-title">✦ 厳選セット' + (fukuHit ? ' <span class="hit-badge hit">🎯 三連複的中</span>' : '') + (tanHit ? ' <span class="hit-badge hit">🎯 三連単的中</span>' : '') + '</div>' +
             (gsComputed ? '<div style="font-size:12px;color:var(--sub);margin:2px 0 4px">このレースの三連単・勝負は本命頭フォーメーションで作られているため、厳選セットの並びを併記します。</div>' : '') +
-            gsSets.map((s,i)=>{ const o = (r.odds && validOdds(r.odds[s])) ? r.odds[s].toFixed(1) + '倍' : 'オッズ無し'; const hit = hitPuku(s); return '<div class="gensen-chip' + (hit ? ' hit' : '') + '"><span class="tag">' + (setLabels[i] || '追加') + '</span><span class="set">' + esc(s) + '</span>' + (hit ? '<span>🎯</span>' : '') + '<span class="odds">' + o + '</span></div>'; }).join('') +
+            gsSets.map((s,i)=>{ const o = (r.odds && validOdds(r.odds[s])) ? r.odds[s].toFixed(1) + '倍' : 'オッズ無し'; const hit = hitPuku(s); return '<div class="gensen-chip' + (hit ? ' hit' : '') + '"><span class="tag">' + (gsLabels[i] || '追加') + '</span><span class="set">' + esc(s) + '</span>' + (hit ? '<span>🎯</span>' : '') + '<span class="odds">' + o + '</span></div>'; }).join('') +
             '<div style="font-size:12px;color:var(--sub);margin:8px 0 4px">厳選セットの並び（三連単）</div>' +
             '<div class="combos" style="font-size:15px">' + gsOrders.map(o=>wrapHit(esc(o), hitTan(o))).join(' ／ ') + '</div>' +
             '</div>';
         }
       }
-      html += '<div style="font-size:12px;color:var(--sub);margin-top:6px">鉄板は穴候補を中心にした買い目（全点に穴候補入り、9車立ては6点）。バランスは補助層とGAUDI純正を足したもの、勝負は中核5人（9車立ては6人）のボックスと併合したものです。三連単も穴候補を3着内に入れています。三連単・勝負は「厳選セット版」：鉄板とバランス追加分から、展開の軸（本線ラインの先頭車と番手）を含む組を低オッズの中で優先して2組を選び、その全ての並び（12点）です。勝負追加分が「選定」（3区分で平均オッズ最小）のレースでは3組目が追加されます（18点）。オッズ未取得のレースは本命頭フォーメーションで代用し、厳選セットの並びを併記します。' + (r.odds ? '買い目横の数字は三連複オッズ（取得時点）です。' : '') + '</div>';
+      html += '<div style="font-size:12px;color:var(--sub);margin-top:6px">鉄板は穴候補を中心にした買い目（全点に穴候補入り、9車立ては6点）。バランスは補助層とGAUDI純正を足したもの、勝負は中核5人（9車立ては6人）のボックスと併合したものです。三連単も穴候補を3着内に入れています。三連単・勝負は「厳選セット版」：鉄板とバランス追加分から、展開の軸（本線ラインの先頭車と番手）を含む組を低オッズの中で優先して2組を選び、その全ての並び（12点）です。勝負追加分が「選定」（3区分で平均オッズ最小）のレースでは、鉄板の組の代わりに勝負追加分の組が入ります（常に2組12点）。オッズ未取得のレースは本命頭フォーメーションで代用し、厳選セットの並びを併記します。' + (r.odds ? '買い目横の数字は三連複オッズ（取得時点）です。' : '') + '</div>';
     }
 
     // 裏三連単・裏三連複（荒れ候補レースのみ: ライン4本以上 かつ 信頼度★3以下。通常のプランとは別枠で、▼で開く）

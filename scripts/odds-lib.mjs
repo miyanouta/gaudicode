@@ -194,9 +194,7 @@ export function buildGensen(plans, oddsMap, axis = null) {
   const set1 = pickGensenSet(oddsMap, tep, axis);
   const balAdd = bal.filter((c) => !tepSet.has(c));
   const set2 = pickGensenSet(oddsMap, balAdd, axis);
-  const sets = [set1, set2];
-  // B: 選定 (区分平均オッズが最小、同点を含む) が勝負追加分のレースだけ、
-  // 勝負追加分の E2 ピックを3組目として追加する (詳細は冒頭コメント)。
+  // 選定: 区分平均オッズが最小 (同点を含む) の区分を判定する。
   const covered = new Set([...tep, ...bal]);
   const shoAdd = sho.filter((c) => !covered.has(c));
   const portionAvg = (list) => {
@@ -206,15 +204,19 @@ export function buildGensen(plans, oddsMap, axis = null) {
   const aT = portionAvg(tep);
   const aB = portionAvg(balAdd);
   const aS = portionAvg(shoAdd);
-  // 選定区分 = 3区分の平均オッズが最も低い区分 (B の発動判定と同じ並び順で決める)
   const selectedPortion = (aS <= aT && aS <= aB) ? 'shoubu' : (aT <= aB ? 'teppan' : 'balance');
   let set3 = null;
   if (aS <= aT && aS <= aB) {
-    // 3組目のピックは番兵値 9999.9 を「オッズ無し」として除外して選ぶ
+    // 勝負追加分のピックは番兵値 9999.9 を「オッズ無し」として除外して選ぶ
     const shoValid = shoAdd.filter((c) => oddsMap[c] != null && oddsMap[c] !== 9999.9);
     set3 = pickGensenSet(oddsMap, shoValid, axis);
-    if (set3) sets.push(set3);
   }
+  // X4 (2026-11-15 ユーザー採用、B=3組追加に代わる): 常に2組12点。
+  // バランス追加 (set2) は固定し、勝負追加分が選定で set3 が取れたレースでは
+  // 鉄板 (set1) の代わりに set3 を使う。464レース検証: 的中 29.1% / 回収 130.3%
+  // / 万車券 10件 (現行B 29.5% / 126.0% / 10件・平均12.6点 に対し、的中 −0.4pt と
+  // 引き換えに回収 +4.3pt・点数は常に12点)。
+  const sets = (selectedPortion === 'shoubu' && set3) ? [set3, set2] : [set1, set2];
   const out = [];
   for (const s of sets) {
     if (!s) continue;
