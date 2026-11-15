@@ -419,6 +419,35 @@ function buildTicker(){
   if(!fin.length){ tk.style.display = 'none'; inner.innerHTML = ''; return; }
   const rate = (key) => Math.round(fin.filter(x => (x.r.result.hits || {})[key]).length / fin.length * 100);
   let text = '📊 ' + (d.date === todayStrJST() ? '本日' : d.date) + 'の的中率（終了' + fin.length + 'R） 三連複：鉄板' + rate('teppan') + '%・バランス' + rate('balance') + '%・勝負' + rate('shoubu') + '% ／ 三連単：鉄板' + rate('tanTeppan') + '%・バランス' + rate('tanBalance') + '%・勝負' + rate('tanShoubu') + '%';
+  // 厳選セットの的中件数 (三連単・勝負が厳選セットの全順序で構成されているレースが対象。組=三連複、並び=三連単)
+  {
+    const normS = (s) => String(s || '').split('-').map(Number).sort((a, b) => a - b).join('-');
+    const setsFromTan = (p) => {
+      const S = p.plansTan && p.plansTan.shoubu;
+      if(!Array.isArray(S) || ![6, 12, 18].includes(S.length)) return null;
+      if(new Set(S).size !== S.length) return null;
+      const sets = [];
+      for(let i = 0; i < S.length; i += 6){
+        const ss = [...new Set(S.slice(i, i + 6).map(o => normS(String(o).replace(/→/g, '-'))))];
+        if(ss.length !== 1) return null;
+        sets.push(ss[0]);
+      }
+      const fuku = new Set(((p.plans || {}).shoubu || []).map(normS));
+      if(fuku.size && !sets.every(s => fuku.has(s))) return null;
+      return sets;
+    };
+    let gN = 0, gF = 0, gT = 0;
+    for(const { r } of fin){
+      const p = r.prediction || {};
+      const sets = setsFromTan(p);
+      if(!sets) continue;
+      gN++;
+      if(r.result.sanrenpuku && sets.includes(normS(r.result.sanrenpuku.combo))) gF++;
+      const cd = String((r.result.sanrentan || {}).combo || '');
+      if(cd && p.plansTan.shoubu.some(o => String(o).replace(/→/g, '-') === cd)) gT++;
+    }
+    if(gN) text += '　　✦ 厳選セット的中：三連複' + gF + '件・三連単' + gT + '件（対象' + gN + 'R）';
+  }
   const mans = [];
   for(const { v, r } of fin){
     const h = r.result.hits || {};
@@ -666,8 +695,9 @@ function renderContent(){
         if(gsSets && gsSets.length >= 2 && gsOrders){
           const setLabels = ['鉄板','バランス追加','勝負追加（選定）'];
           const tanHit = gsOrders.some(o=>hitTan(o));
+          const fukuHit = gsSets.some(s=>hitPuku(s));
           html += '<div class="gensen-box">' +
-            '<div class="gensen-title">✦ 厳選セット' + (tanHit ? ' <span class="hit-badge hit">🎯 三連単的中</span>' : '') + '</div>' +
+            '<div class="gensen-title">✦ 厳選セット' + (fukuHit ? ' <span class="hit-badge hit">🎯 三連複的中</span>' : '') + (tanHit ? ' <span class="hit-badge hit">🎯 三連単的中</span>' : '') + '</div>' +
             (gsComputed ? '<div style="font-size:12px;color:var(--sub);margin:2px 0 4px">このレースの三連単・勝負は本命頭フォーメーションで作られているため、厳選セットの並びを併記します。</div>' : '') +
             gsSets.map((s,i)=>{ const o = (r.odds && validOdds(r.odds[s])) ? r.odds[s].toFixed(1) + '倍' : 'オッズ無し'; const hit = hitPuku(s); return '<div class="gensen-chip' + (hit ? ' hit' : '') + '"><span class="tag">' + (setLabels[i] || '追加') + '</span><span class="set">' + esc(s) + '</span>' + (hit ? '<span>🎯</span>' : '') + '<span class="odds">' + o + '</span></div>'; }).join('') +
             '<div style="font-size:12px;color:var(--sub);margin:8px 0 4px">厳選セットの並び（三連単）</div>' +
