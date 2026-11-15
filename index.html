@@ -238,7 +238,16 @@ function liveUrl(v){
   return v.cd ? 'https://keirin.kdreams.jp/stadium/live/?kyogijoCd=' + v.cd : '';
 }
 function saveSel(){
-  try{ sessionStorage.setItem('gaudi-sel', JSON.stringify({ date: state.data ? state.data.date : '', venueIdx: state.venueIdx, raceIdx: state.raceIdx })); }catch(_){ }
+  try{ localStorage.setItem('gaudi-sel', JSON.stringify({ date: state.data ? state.data.date : '', venueIdx: state.venueIdx, raceIdx: state.raceIdx, at: Date.now() })); }catch(_){ }
+}
+// 閉じてから3時間以内なら、見ていた日付・場・レースを復元する (それ以上たったら最初から)
+const SEL_TTL_MS = 3 * 3600 * 1000;
+function readSel(){
+  try{
+    const sv = JSON.parse(localStorage.getItem('gaudi-sel') || 'null');
+    if(sv && sv.date && sv.at && (Date.now() - sv.at) < SEL_TTL_MS) return sv;
+  }catch(_){ }
+  return null;
 }
 function todayStrJST(){
   const d = jstNow();
@@ -286,9 +295,9 @@ async function load(dateStr, keepSelection){
     state.data = await res.json();
     if(!keepSelection){
       state.venueIdx = 0; state.raceIdx = 0;
-      // ライブ映像など別タブから戻って再読み込みされても、元のレース位置に戻る
+      // 閉じてすぐ開き直したとき (3時間以内) は、元の日付・場・レース位置に戻る
       try{
-        const sv = JSON.parse(sessionStorage.getItem('gaudi-sel') || 'null');
+        const sv = readSel();
         if(sv && sv.date === dateStr && sv.venueIdx < state.data.venues.length){
           state.venueIdx = sv.venueIdx;
           const vv = state.data.venues[state.venueIdx];
@@ -1030,8 +1039,9 @@ $('fetchBtn').addEventListener('click', fetchData);
 $('resultsBtn').addEventListener('click', ()=>updateResults($('dateInput').value || todayStr(), false));
 $('dateInput').addEventListener('change', e=>{ if(e.target.value) load(e.target.value); });
 $('todayBtn').addEventListener('click', ()=>{ const t=todayStr(); $('dateInput').value=t; load(t); });
-$('dateInput').value = todayStr();
-load(todayStr());
+const startSel = readSel();
+$('dateInput').value = startSel ? startSel.date : todayStr();
+load(startSel ? startSel.date : todayStr());
 </script>
 </body>
 </html>
