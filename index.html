@@ -736,6 +736,14 @@ function renderContent(){
           if(s1 && s2){ gsSets = [s1, s2]; gsOrders = permsOf(s1).concat(permsOf(s2)); gsComputed = true; }
         }
         if(gsSets && gsSets.length >= 2 && gsOrders){
+          // 表示順はオッズの低い順 (ラベルは組と一緒に動く。無効オッズの組は最後)
+          const pairs = gsSets.map((s,i)=>({ s, label: gsLabels[i], o: (r.odds && validOdds(r.odds[s])) ? r.odds[s] : Infinity }));
+          pairs.sort((a,b)=>a.o-b.o);
+          gsSets = pairs.map(p=>p.s);
+          gsLabels = pairs.map(p=>p.label);
+          gsOrders = gsSets.flatMap(s=>permsOf(s));
+        }
+        if(gsSets && gsSets.length >= 2 && gsOrders){
           const tanHit = gsOrders.some(o=>hitTan(o));
           const fukuHit = gsSets.some(s=>hitPuku(s));
           html += '<div class="gensen-box">' +

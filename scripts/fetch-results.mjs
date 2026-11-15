@@ -173,12 +173,13 @@ async function main() {
           if (odds) { r.odds = odds; r.oddsAt = new Date().toISOString(); }
         } catch { /* 確定オッズの保存失敗は無視 (結果の記録自体は済んでいる) */ }
       }
-      // 未確定かつ未発走のレースはオッズを更新し、三連単・勝負 (厳選版) も
-      // 最新オッズで作り直す。発走を過ぎたらどちらも凍結する (的中判定は
-      // 発走時点で凍結された勝負に対して行われる)。過去日の再実行でも、
-      // 結果を取りこぼしたレースをレース後オッズで作り直さないよう凍結する。
+      // 朝固定 (2026-11-16 採用): 厳選は朝の生成で確定させ、以後は作り直さ
+      // ない。ここで作るのは、朝に厳選が付かなかったレース (オッズ取得失敗
+      // など) への初回適用だけ。一度付いた厳選と保存オッズは二度と変えない。
+      // 過去日の再実行でも、結果を取りこぼしたレースをレース後オッズで
+      // 作り直さないよう、日付が過ぎたデータは凍結する。
       const frozen = dateStr < jstToday() || raceStarted(r);
-      if (!r.result && r.prediction && !frozen) {
+      if (!r.result && r.prediction && !frozen && r.prediction.tanBasis !== 'gensen') {
         try {
           const base = link.url.split('?')[0];
           const oh = await fetchHtml(base + '?pageType=odds&kakeshikiType=3renhuku');
