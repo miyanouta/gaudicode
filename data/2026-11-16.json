@@ -16072,7 +16072,31 @@
             "4-6-7": 361.7,
             "5-6-7": 130.5
           },
-          "oddsAt": "2026-11-16T01:40:34.480Z"
+          "oddsAt": "2026-11-16T01:53:59.755Z",
+          "result": {
+            "top3": [
+              2,
+              3,
+              5
+            ],
+            "sanrenpuku": {
+              "combo": "2-3-5",
+              "payout": 2810
+            },
+            "sanrentan": {
+              "combo": "2-3-5",
+              "payout": 4820
+            },
+            "hits": {
+              "teppan": false,
+              "balance": false,
+              "shoubu": true,
+              "tanTeppan": false,
+              "tanBalance": false,
+              "tanShoubu": false,
+              "sanrentan": false
+            }
+          }
         },
         {
           "no": 2,
@@ -16349,7 +16373,31 @@
             "3-5-6": 96.4,
             "4-5-6": 48.2
           },
-          "oddsAt": "2026-11-16T01:40:39.024Z"
+          "oddsAt": "2026-11-16T01:54:01.114Z",
+          "result": {
+            "top3": [
+              3,
+              4,
+              5
+            ],
+            "sanrenpuku": {
+              "combo": "3-4-5",
+              "payout": 630
+            },
+            "sanrentan": {
+              "combo": "3-4-5",
+              "payout": 2360
+            },
+            "hits": {
+              "teppan": false,
+              "balance": false,
+              "shoubu": true,
+              "tanTeppan": false,
+              "tanBalance": false,
+              "tanShoubu": false,
+              "sanrentan": false
+            }
+          }
         },
         {
           "no": 3,
@@ -16649,7 +16697,31 @@
             "4-6-7": 51.5,
             "5-6-7": 257.5
           },
-          "oddsAt": "2026-11-16T01:40:43.747Z"
+          "oddsAt": "2026-11-16T01:54:02.548Z",
+          "result": {
+            "top3": [
+              4,
+              2,
+              7
+            ],
+            "sanrenpuku": {
+              "combo": "2-4-7",
+              "payout": 520
+            },
+            "sanrentan": {
+              "combo": "4-2-7",
+              "payout": 940
+            },
+            "hits": {
+              "teppan": false,
+              "balance": false,
+              "shoubu": false,
+              "tanTeppan": false,
+              "tanBalance": false,
+              "tanShoubu": false,
+              "sanrentan": false
+            }
+          }
         },
         {
           "no": 4,
@@ -16954,7 +17026,31 @@
             "4-6-7": 273.3,
             "5-6-7": 269
           },
-          "oddsAt": "2026-11-16T01:40:48.598Z"
+          "oddsAt": "2026-11-16T01:54:03.793Z",
+          "result": {
+            "top3": [
+              1,
+              4,
+              7
+            ],
+            "sanrenpuku": {
+              "combo": "1-4-7",
+              "payout": 430
+            },
+            "sanrentan": {
+              "combo": "1-4-7",
+              "payout": 740
+            },
+            "hits": {
+              "teppan": false,
+              "balance": true,
+              "shoubu": true,
+              "tanTeppan": false,
+              "tanBalance": false,
+              "tanShoubu": false,
+              "sanrentan": false
+            }
+          }
         },
         {
           "no": 5,
@@ -17258,7 +17354,31 @@
             "4-6-7": 34.8,
             "5-6-7": 87.5
           },
-          "oddsAt": "2026-11-16T01:40:53.249Z"
+          "oddsAt": "2026-11-16T01:54:05.012Z",
+          "result": {
+            "top3": [
+              7,
+              2,
+              1
+            ],
+            "sanrenpuku": {
+              "combo": "1-2-7",
+              "payout": 480
+            },
+            "sanrentan": {
+              "combo": "7-2-1",
+              "payout": 3100
+            },
+            "hits": {
+              "teppan": true,
+              "balance": true,
+              "shoubu": true,
+              "tanTeppan": false,
+              "tanBalance": false,
+              "tanShoubu": false,
+              "sanrentan": false
+            }
+          }
         },
         {
           "no": 6,
@@ -17561,7 +17681,31 @@
             "4-6-7": 472.5,
             "5-6-7": 122.6
           },
-          "oddsAt": "2026-11-16T01:40:57.962Z"
+          "oddsAt": "2026-11-16T01:54:06.816Z",
+          "result": {
+            "top3": [
+              5,
+              7,
+              2
+            ],
+            "sanrenpuku": {
+              "combo": "2-5-7",
+              "payout": 580
+            },
+            "sanrentan": {
+              "combo": "5-7-2",
+              "payout": 5110
+            },
+            "hits": {
+              "teppan": false,
+              "balance": true,
+              "shoubu": true,
+              "tanTeppan": false,
+              "tanBalance": false,
+              "tanShoubu": false,
+              "sanrentan": false
+            }
+          }
         },
         {
           "no": 7,
@@ -21508,5 +21652,6 @@
     "errors": [],
     "warnings": 18,
     "checkedAt": "2026-11-16T01:41:59.610Z"
-  }
+  },
+  "resultsUpdatedAt": "2026-11-16T01:54:20.348Z"
 }
