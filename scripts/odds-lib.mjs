@@ -185,8 +185,46 @@ export function pickGensenSet(oddsMap, planList, axis) {
 // 厳選セットの構築本体: 三連単・勝負の順序リストと、選ばれたピック
 // (セット1・セット2・セット3・選定区分) を一緒に返す。
 // picks は prediction.gensenPicks として保存するためのもの (下記参照)。
-export function buildGensen(plans, oddsMap, axis = null) {
-  if (!plans || !oddsMap) return null;
+// オッズを使わない厳選セット選定 (2026-11-16 ユーザー採用「オッズ無し版」):
+// 区分ごとに、本線ラインの軸ペア (先頭+番手) を含む組を優先し、その中で
+// 構成選手の競走得点合計が最大の組を選ぶ。軸ペアを含む組が無ければ区分
+// 全体で得点合計最大。480レース検証 (確定オッズ再計算): 的中 28.7% /
+// 回収 138.5% (オッズ選定の再計算 28.3% / 128.4%)。オッズが要らないため
+// 朝の出走表が出た時点で全レース確定でき、再計算値がそのままライブの
+// 選定になる。X4 型の入替は効果が無かったため set1+set2 の固定とする。
+export function pickGensenSetByScore(planList, axis, tokutenOf) {
+  if (!Array.isArray(planList) || !planList.length || !tokutenOf) return null;
+  const sets = [...new Set(planList.map(norm))];
+  if (!sets.length) return null;
+  const sum = (c) => c.split('-').map(Number).reduce((a, n) => a + (tokutenOf(n) || 0), 0);
+  const pairNums = axis ? [axis.front, axis.second].filter((n) => n != null) : [];
+  const hasAll = (c, nums) => { const ns = c.split('-').map(Number); return nums.every((n) => ns.includes(n)); };
+  const withPair = pairNums.length ? sets.filter((c) => hasAll(c, pairNums)) : [];
+  const pool = withPair.length ? withPair : sets;
+  return [...pool].sort((a, b) => sum(b) - sum(a))[0];
+}
+export function buildGensen(plans, oddsMap, axis = null, riders = null) {
+  if (!plans) return null;
+  if (riders && riders.length) {
+    const tokutenOf = (n) => { const r = riders.find((x) => x.num === n); return r ? r.tokuten : 0; };
+    const tepS = (plans.teppan || []).map(norm);
+    const balS = (plans.balance || []).map(norm);
+    const tepSetS = new Set(tepS);
+    const set1 = pickGensenSetByScore(tepS, axis, tokutenOf);
+    const set2 = pickGensenSetByScore(balS.filter((c) => !tepSetS.has(c)), axis, tokutenOf);
+    if (!set1 || !set2) return null;
+    const outS = [];
+    for (const s of [set1, set2]) {
+      const [a, b, c] = s.split('-').map(Number);
+      for (const p of [[a, b, c], [a, c, b], [b, a, c], [b, c, a], [c, a, b], [c, b, a]]) {
+        const t = p.join('→');
+        if (!outS.includes(t)) outS.push(t);
+      }
+    }
+    if (!outS.length) return null;
+    return { orders: outS, picks: { set1, set2, set3: null, selectedPortion: 'teppan' } };
+  }
+  if (!oddsMap) return null;
   const tep = (plans.teppan || []).map(norm);
   const bal = (plans.balance || []).map(norm);
   const sho = (plans.shoubu || []).map(norm);
@@ -247,8 +285,8 @@ export function buildGensenTanShoubu(plans, oddsMap, axis = null) {
 // gensenPicks は追加フィールドであり、plansTan の内容は従来と同一。
 export function applyGensenTan(race) {
   const p = race && race.prediction;
-  if (!p || !p.plans || !p.plansTan || !race.odds) return false;
-  const g = buildGensen(p.plans, race.odds, axisPairOf(race));
+  if (!p || !p.plans || !p.plansTan) return false;
+  const g = buildGensen(p.plans, race.odds, axisPairOf(race), race.riders);
   if (!g) return false;
   p.plansTan.shoubu = g.orders;
   p.tanBasis = 'gensen';
