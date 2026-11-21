@@ -610,7 +610,7 @@ function renderContent(){
   let vid = '';
   const lu = liveUrl(v);
   if(lu && state.data.date === todayStrJST()) vid += '<a class="vid-btn live" target="_blank" rel="noopener" href="' + lu + '">📺 ライブ映像</a>';
-  if(r.kdreamsUrl && !r.result) vid += '<a class="vid-btn" target="_blank" rel="noopener" href="' + r.kdreamsUrl + '">Kドリームスで買う</a>';
+  if(r.voteUrl && !r.result) vid += '<a class="vid-btn" target="_blank" rel="noopener" href="' + r.voteUrl + '">KEIRIN.JPで買う</a>';
   if(v.cd && v.gradeCd && r.result) vid += '<a class="vid-btn" target="_blank" rel="noopener" href="https://keirin.kdreams.jp/stadium/digest/?kyogijoCd=' + v.cd + '&kaisaiDate=' + ymd + '&gradeCd=' + v.gradeCd + '&raceNo=' + r.no + '">🎬 ダイジェスト</a>';
   if(vid) html += '<div class="vid-row">' + vid + '</div>';
 
