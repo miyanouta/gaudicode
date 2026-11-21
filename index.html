@@ -158,6 +158,10 @@
   .notice-banner{background:#fdecec;border:1px solid #d9534f;color:#8c2b26;border-radius:10px;padding:9px 12px;margin:0 0 12px;font-size:14px;font-weight:700}
   .vid-btn{display:inline-block;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--text);text-decoration:none;font-size:13.5px;font-weight:700}
   .vid-btn.live{border-color:#c2261b;color:#ff9d94}
+  .kj-toggle{display:inline-flex;gap:4px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px}
+  .kj-toggle .kj-label{font-size:12px;color:var(--sub);font-weight:700;padding:0 2px 0 8px;white-space:nowrap}
+  .kj-toggle button{border:0;background:transparent;color:var(--sub);border-radius:999px;padding:6px 13px;font-size:13px;cursor:pointer;font-weight:800;transition:.15s;white-space:nowrap}
+  .kj-toggle button.active{background:var(--gold-grad);color:#191102;box-shadow:0 3px 10px rgba(255,157,0,.3)}
   .ticker{flex:none;overflow:hidden;background:linear-gradient(90deg,rgba(255,176,32,.16),rgba(255,176,32,.04));border-bottom:1px solid var(--line);white-space:nowrap}
   .ticker-inner{display:inline-block;padding:7px 0;font-size:13.5px;font-weight:700;animation:tickmove 40s linear infinite;will-change:transform}
   @keyframes tickmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -171,6 +175,11 @@
     <button id="todayBtn">今日</button>
     <button id="fetchBtn" style="background:var(--accent2);color:#06121f">出走表を取得</button>
     <button id="resultsBtn">更新</button>
+  </div>
+  <div class="kj-toggle" role="group" aria-label="KEIRIN.JPの表示切替">
+    <span class="kj-label">公式サイト</span>
+    <button type="button" id="kjSp">スマホ版</button>
+    <button type="button" id="kjPc">PC版</button>
   </div>
   <div class="meta" id="metaLine">データを読み込んでいます…</div>
 </header>
@@ -195,6 +204,25 @@
 <script>
 const state = { data:null, venueIdx:0, raceIdx:0 };
 const $ = (id)=>document.getElementById(id);
+
+// 「KEIRIN.JPで買う」の飛び先 (スマホ版/PC版) — 右上のトグルで切替、選択は保持する
+let kjMode = 'sp';
+try{ kjMode = localStorage.getItem('gaudi-kj-mode') === 'pc' ? 'pc' : 'sp'; }catch(_){ }
+function kjUrl(pcUrl){ return kjMode === 'pc' ? pcUrl : pcUrl.replace('/pc/','/sp/'); }
+function applyKjMode(){
+  const sp = $('kjSp'), pc = $('kjPc');
+  if(sp) sp.classList.toggle('active', kjMode === 'sp');
+  if(pc) pc.classList.toggle('active', kjMode === 'pc');
+  document.querySelectorAll('a.buy-btn').forEach(a=>{
+    const base = a.getAttribute('data-vote');
+    if(base) a.href = kjUrl(base);
+  });
+}
+function setKjMode(m){
+  kjMode = m;
+  try{ localStorage.setItem('gaudi-kj-mode', m); }catch(_){ }
+  applyKjMode();
+}
 
 function todayStr(){
   const d = new Date();
@@ -610,7 +638,7 @@ function renderContent(){
   let vid = '';
   const lu = liveUrl(v);
   if(lu && state.data.date === todayStrJST()) vid += '<a class="vid-btn live" target="_blank" rel="noopener" href="' + lu + '">📺 ライブ映像</a>';
-  if(r.voteUrl && !r.result){ vid += '<a class="vid-btn" target="_blank" rel="noopener" href="' + r.voteUrl + '">KEIRIN.JPで買う（PC版）</a>'; vid += '<a class="vid-btn" target="_blank" rel="noopener" href="' + r.voteUrl.replace("/pc/","/sp/") + '">KEIRIN.JPで買う（スマホ版）</a>'; }
+  if(r.voteUrl && !r.result){ vid += '<a class="vid-btn buy-btn" target="_blank" rel="noopener" data-vote="' + esc(r.voteUrl) + '" href="' + kjUrl(r.voteUrl) + '">KEIRIN.JPで買う</a>'; }
   if(v.cd && v.gradeCd && r.result) vid += '<a class="vid-btn" target="_blank" rel="noopener" href="https://keirin.kdreams.jp/stadium/digest/?kyogijoCd=' + v.cd + '&kaisaiDate=' + ymd + '&gradeCd=' + v.gradeCd + '&raceNo=' + r.no + '">🎬 ダイジェスト</a>';
   if(vid) html += '<div class="vid-row">' + vid + '</div>';
 
@@ -1084,6 +1112,9 @@ async function fetchData(){
     btn.textContent = old;
   }
 }
+$('kjSp').addEventListener('click', ()=>setKjMode('sp'));
+$('kjPc').addEventListener('click', ()=>setKjMode('pc'));
+applyKjMode();
 $('fetchBtn').addEventListener('click', fetchData);
 $('resultsBtn').addEventListener('click', ()=>updateResults($('dateInput').value || todayStr(), false));
 $('dateInput').addEventListener('change', e=>{ if(e.target.value) load(e.target.value); });
