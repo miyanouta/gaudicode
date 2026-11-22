@@ -211,6 +211,8 @@ const $ = (id)=>document.getElementById(id);
 let kjMode = 'sp';
 try{ kjMode = localStorage.getItem('gaudi-kj-mode') === 'pc' ? 'pc' : 'sp'; }catch(_){ }
 function kjUrl(pcUrl){ return kjMode === 'pc' ? pcUrl : pcUrl.replace('/pc/','/sp/'); }
+// 買うボタンの飛び先は KEIRIN.JP トップに固定する (出走表・投票はサイト内遷移でのみ開けるため)
+const KJ_TOP_URL = 'https://keirin.jp/pc/top';
 function applyKjMode(){
   const sp = $('kjSp'), pc = $('kjPc');
   if(sp) sp.classList.toggle('active', kjMode === 'sp');
@@ -639,7 +641,7 @@ function renderContent(){
   let vid = '';
   const lu = liveUrl(v);
   if(lu && state.data.date === todayStrJST()) vid += '<a class="vid-btn live" target="_blank" rel="noopener" href="' + lu + '">📺 ライブ映像</a>';
-  if(r.voteUrl && !r.result){ vid += '<a class="vid-btn buy-btn" target="_blank" rel="noopener" data-vote="' + esc(r.voteUrl) + '" href="' + kjUrl(r.voteUrl) + '">KEIRIN.JPで買う</a>'; }
+  if(r.voteUrl && !r.result){ vid += '<a class="vid-btn buy-btn" target="_blank" rel="noopener" data-vote="' + KJ_TOP_URL + '" href="' + kjUrl(KJ_TOP_URL) + '">KEIRIN.JPで買う</a>'; }
   if(v.cd && v.gradeCd && r.result) vid += '<a class="vid-btn" target="_blank" rel="noopener" href="https://keirin.kdreams.jp/stadium/digest/?kyogijoCd=' + v.cd + '&kaisaiDate=' + ymd + '&gradeCd=' + v.gradeCd + '&raceNo=' + r.no + '">🎬 ダイジェスト</a>';
   if(vid) html += '<div class="vid-row">' + vid + '</div>';
 
