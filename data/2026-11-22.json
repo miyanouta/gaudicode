@@ -1,6 +1,6 @@
 {
   "date": "2026-11-22",
-  "generatedAt": "2026-11-21T22:02:27.930Z",
+  "generatedAt": "2026-11-22T01:35:31.400Z",
   "source": "楽天Kドリームス",
   "venues": [
     {
@@ -22273,7 +22273,6 @@
   "quality": {
     "errors": [],
     "warnings": 18,
-    "checkedAt": "2026-11-21T22:02:27.940Z"
-  },
-  "resultsUpdatedAt": "2026-11-22T01:14:55.685Z"
+    "checkedAt": "2026-11-22T01:35:31.411Z"
+  }
 }
