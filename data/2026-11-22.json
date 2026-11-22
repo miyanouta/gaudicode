@@ -36,7 +36,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 8,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 12.6
             },
             {
               "waku": 2,
@@ -55,7 +56,8 @@
               "makuri": 6,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 21.2
             },
             {
               "waku": 3,
@@ -74,7 +76,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 5,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 10.59
             },
             {
               "waku": 4,
@@ -93,7 +96,8 @@
               "makuri": 1,
               "sashi": 1,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 15.46
             },
             {
               "waku": 5,
@@ -112,7 +116,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.49
             },
             {
               "waku": 6,
@@ -131,7 +136,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.86
             },
             {
               "waku": 7,
@@ -150,7 +156,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 14.54
             }
           ],
           "lineup": null,
@@ -334,7 +341,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 11,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 15.78
             },
             {
               "waku": 2,
@@ -353,7 +361,8 @@
               "makuri": 1,
               "sashi": 3,
               "mark": 4,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 12
             },
             {
               "waku": 3,
@@ -372,7 +381,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 3,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 17.97
             },
             {
               "waku": 4,
@@ -391,7 +401,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.49
             },
             {
               "waku": 5,
@@ -410,7 +421,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 19.22
             },
             {
               "waku": 6,
@@ -429,7 +441,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.89
             },
             {
               "waku": 7,
@@ -448,7 +461,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.82
             }
           ],
           "lineup": null,
@@ -633,7 +647,8 @@
               "makuri": 6,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 20.61
             },
             {
               "waku": 2,
@@ -652,7 +667,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 8,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 12.91
             },
             {
               "waku": 3,
@@ -671,7 +687,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 3,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.52
             },
             {
               "waku": 4,
@@ -690,7 +707,8 @@
               "makuri": 1,
               "sashi": 2,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.28
             },
             {
               "waku": 5,
@@ -709,7 +727,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 18.17
             },
             {
               "waku": 6,
@@ -728,7 +747,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 21.81
             },
             {
               "waku": 7,
@@ -747,7 +767,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.89
             }
           ],
           "lineup": null,
@@ -932,7 +953,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 12.37
             },
             {
               "waku": 2,
@@ -951,7 +973,8 @@
               "makuri": 2,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 14.47
             },
             {
               "waku": 3,
@@ -970,7 +993,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.88
             },
             {
               "waku": 4,
@@ -989,7 +1013,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.82
             },
             {
               "waku": 5,
@@ -1008,7 +1033,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.29
             },
             {
               "waku": 6,
@@ -1027,7 +1053,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.23
             },
             {
               "waku": 7,
@@ -1046,7 +1073,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 4.77
             }
           ],
           "lineup": null,
@@ -1228,7 +1256,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 5,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 12.49
             },
             {
               "waku": 2,
@@ -1247,7 +1276,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 8.1
             },
             {
               "waku": 3,
@@ -1266,7 +1296,8 @@
               "makuri": 1,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 8.7
             },
             {
               "waku": 4,
@@ -1285,7 +1316,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.43
             },
             {
               "waku": 5,
@@ -1304,7 +1336,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.87
             },
             {
               "waku": 6,
@@ -1323,7 +1356,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.79
             },
             {
               "waku": 7,
@@ -1342,7 +1376,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.81
             }
           ],
           "lineup": null,
@@ -1521,7 +1556,8 @@
               "makuri": 5,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.69
             },
             {
               "waku": 2,
@@ -1540,7 +1576,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 15.37
             },
             {
               "waku": 3,
@@ -1559,7 +1596,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 9.06
             },
             {
               "waku": 4,
@@ -1578,7 +1616,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 9,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.27
             },
             {
               "waku": 5,
@@ -1597,7 +1636,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.97
             },
             {
               "waku": 6,
@@ -1616,7 +1656,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.95
             },
             {
               "waku": 7,
@@ -1635,7 +1676,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 3.4
             }
           ],
           "lineup": null,
@@ -1815,7 +1857,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.4
             },
             {
               "waku": 2,
@@ -1834,7 +1877,8 @@
               "makuri": 1,
               "sashi": 12,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 10.25
             },
             {
               "waku": 3,
@@ -1853,7 +1897,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.83
             },
             {
               "waku": 4,
@@ -1872,7 +1917,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 14.31
             },
             {
               "waku": 5,
@@ -1891,7 +1937,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.4
             },
             {
               "waku": 6,
@@ -1910,7 +1957,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 5.75
             },
             {
               "waku": 7,
@@ -1929,7 +1977,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 5.97
             }
           ],
           "lineup": null,
@@ -2108,7 +2157,8 @@
               "makuri": 3,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 21.3
             },
             {
               "waku": 2,
@@ -2127,7 +2177,8 @@
               "makuri": 0,
               "sashi": 10,
               "mark": 8,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 18.84
             },
             {
               "waku": 3,
@@ -2146,7 +2197,8 @@
               "makuri": 5,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 17.47
             },
             {
               "waku": 4,
@@ -2165,7 +2217,8 @@
               "makuri": 5,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 18.29
             },
             {
               "waku": 5,
@@ -2184,7 +2237,8 @@
               "makuri": 1,
               "sashi": 3,
               "mark": 6,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.22
             },
             {
               "waku": 6,
@@ -2203,7 +2257,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.89
             },
             {
               "waku": 7,
@@ -2222,7 +2277,8 @@
               "makuri": 1,
               "sashi": 7,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 15.41
             }
           ],
           "lineup": null,
@@ -2401,7 +2457,8 @@
               "makuri": 11,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 19.87
             },
             {
               "waku": 2,
@@ -2420,7 +2477,8 @@
               "makuri": 4,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 14.62
             },
             {
               "waku": 3,
@@ -2439,7 +2497,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.33
             },
             {
               "waku": 4,
@@ -2458,7 +2517,8 @@
               "makuri": 0,
               "sashi": 9,
               "mark": 4,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 8.85
             },
             {
               "waku": 5,
@@ -2477,7 +2537,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.82
             },
             {
               "waku": 6,
@@ -2496,7 +2557,8 @@
               "makuri": 0,
               "sashi": 10,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.92
             },
             {
               "waku": 7,
@@ -2515,7 +2577,8 @@
               "makuri": 4,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.5
             }
           ],
           "lineup": null,
@@ -2705,7 +2768,8 @@
               "makuri": 1,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 12.1
             },
             {
               "waku": 2,
@@ -2724,7 +2788,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.14
             },
             {
               "waku": 3,
@@ -2743,7 +2808,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.37
             },
             {
               "waku": 4,
@@ -2762,7 +2828,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 9.93
             },
             {
               "waku": 5,
@@ -2781,7 +2848,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 19.81
             },
             {
               "waku": 6,
@@ -2800,7 +2868,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 3.83
             },
             {
               "waku": 7,
@@ -2819,7 +2888,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.61
             }
           ],
           "lineup": [
@@ -3039,7 +3109,8 @@
               "makuri": 4,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.49
             },
             {
               "waku": 2,
@@ -3058,7 +3129,8 @@
               "makuri": 5,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 24.17
             },
             {
               "waku": 3,
@@ -3077,7 +3149,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 23
             },
             {
               "waku": 4,
@@ -3096,7 +3169,8 @@
               "makuri": 1,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 21.27
             },
             {
               "waku": 5,
@@ -3115,7 +3189,8 @@
               "makuri": 6,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 26.28
             },
             {
               "waku": 6,
@@ -3134,7 +3209,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 26.83
             },
             {
               "waku": 7,
@@ -3153,7 +3229,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 30.23
             }
           ],
           "lineup": [
@@ -3377,7 +3454,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.68
             },
             {
               "waku": 2,
@@ -3396,7 +3474,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.88
             },
             {
               "waku": 3,
@@ -3415,7 +3494,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.59
             },
             {
               "waku": 4,
@@ -3434,7 +3514,8 @@
               "makuri": 0,
               "sashi": 8,
               "mark": 6,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 15.33
             },
             {
               "waku": 5,
@@ -3453,7 +3534,8 @@
               "makuri": 2,
               "sashi": 5,
               "mark": 5,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 13.45
             },
             {
               "waku": 6,
@@ -3472,7 +3554,8 @@
               "makuri": 6,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.25
             },
             {
               "waku": 7,
@@ -3491,7 +3574,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 22.69
             }
           ],
           "lineup": [
@@ -3714,7 +3798,8 @@
               "makuri": 4,
               "sashi": 8,
               "mark": 2,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 15.79
             },
             {
               "waku": 2,
@@ -3733,7 +3818,8 @@
               "makuri": 5,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 16.79
             },
             {
               "waku": 3,
@@ -3752,7 +3838,8 @@
               "makuri": 1,
               "sashi": 8,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.36
             },
             {
               "waku": 4,
@@ -3771,7 +3858,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.81
             },
             {
               "waku": 5,
@@ -3790,7 +3878,8 @@
               "makuri": 0,
               "sashi": 10,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.71
             },
             {
               "waku": 6,
@@ -3809,7 +3898,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 5.87
             },
             {
               "waku": 7,
@@ -3828,7 +3918,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 3,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 13.47
             }
           ],
           "lineup": [
@@ -4050,7 +4141,8 @@
               "makuri": 11,
               "sashi": 8,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 18.74
             },
             {
               "waku": 2,
@@ -4069,7 +4161,8 @@
               "makuri": 0,
               "sashi": 8,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 4.7
             },
             {
               "waku": 3,
@@ -4088,7 +4181,8 @@
               "makuri": 4,
               "sashi": 10,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 11.99
             },
             {
               "waku": 4,
@@ -4107,7 +4201,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.72
             },
             {
               "waku": 5,
@@ -4126,7 +4221,8 @@
               "makuri": 1,
               "sashi": 6,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.3
             },
             {
               "waku": 6,
@@ -4145,7 +4241,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 4.11
             },
             {
               "waku": 7,
@@ -4164,7 +4261,8 @@
               "makuri": 6,
               "sashi": 1,
               "mark": 2,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 12.42
             }
           ],
           "lineup": [
@@ -4387,7 +4485,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.49
             },
             {
               "waku": 2,
@@ -4406,7 +4505,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.91
             },
             {
               "waku": 3,
@@ -4425,7 +4525,8 @@
               "makuri": 2,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 13.73
             },
             {
               "waku": 4,
@@ -4444,7 +4545,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.38
             },
             {
               "waku": 5,
@@ -4462,7 +4564,8 @@
               "nige": 0,
               "makuri": 0,
               "sashi": 1,
-              "mark": 1
+              "mark": 1,
+              "gscore": 7.05
             },
             {
               "waku": 6,
@@ -4481,7 +4584,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 3.84
             },
             {
               "waku": 7,
@@ -4500,7 +4604,8 @@
               "makuri": 3,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.58
             }
           ],
           "lineup": [
@@ -4718,7 +4823,8 @@
               "makuri": 5,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.63
             },
             {
               "waku": 2,
@@ -4737,7 +4843,8 @@
               "makuri": 2,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 9.94
             },
             {
               "waku": 3,
@@ -4756,7 +4863,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.1
             },
             {
               "waku": 4,
@@ -4775,7 +4883,8 @@
               "makuri": 2,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.42
             },
             {
               "waku": 5,
@@ -4794,7 +4903,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.37
             },
             {
               "waku": 6,
@@ -4813,7 +4923,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 5.2
             },
             {
               "waku": 7,
@@ -4832,7 +4943,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 14.97
             }
           ],
           "lineup": [
@@ -5057,7 +5169,8 @@
               "makuri": 1,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.31
             },
             {
               "waku": 2,
@@ -5076,7 +5189,8 @@
               "makuri": 3,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 15.8
             },
             {
               "waku": 3,
@@ -5095,7 +5209,8 @@
               "makuri": 2,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.95
             },
             {
               "waku": 4,
@@ -5114,7 +5229,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 3,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 15.2
             },
             {
               "waku": 5,
@@ -5133,7 +5249,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 4,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.01
             },
             {
               "waku": 6,
@@ -5152,7 +5269,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 4.51
             },
             {
               "waku": 7,
@@ -5171,7 +5289,8 @@
               "makuri": 1,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.96
             }
           ],
           "lineup": [
@@ -5394,7 +5513,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 14.57
             },
             {
               "waku": 2,
@@ -5413,7 +5533,8 @@
               "makuri": 2,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 10.99
             },
             {
               "waku": 3,
@@ -5432,7 +5553,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.69
             },
             {
               "waku": 4,
@@ -5451,7 +5573,8 @@
               "makuri": 1,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.76
             },
             {
               "waku": 5,
@@ -5470,7 +5593,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.65
             },
             {
               "waku": 6,
@@ -5489,7 +5613,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.17
             },
             {
               "waku": 7,
@@ -5508,7 +5633,8 @@
               "makuri": 1,
               "sashi": 4,
               "mark": 3,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 11.76
             }
           ],
           "lineup": [
@@ -5707,7 +5833,8 @@
               "makuri": 3,
               "sashi": 8,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 12.81
             },
             {
               "waku": 2,
@@ -5726,7 +5853,8 @@
               "makuri": 1,
               "sashi": 8,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 10.8
             },
             {
               "waku": 3,
@@ -5745,7 +5873,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.09
             },
             {
               "waku": 4,
@@ -5764,7 +5893,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 14.91
             },
             {
               "waku": 5,
@@ -5783,7 +5913,8 @@
               "makuri": 4,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.54
             },
             {
               "waku": 6,
@@ -5802,7 +5933,8 @@
               "makuri": 6,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.39
             },
             {
               "waku": 7,
@@ -5821,7 +5953,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 12.34
             }
           ],
           "lineup": [
@@ -6031,7 +6164,8 @@
               "makuri": 1,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 11.83
             },
             {
               "waku": 2,
@@ -6050,7 +6184,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 18.47
             },
             {
               "waku": 3,
@@ -6069,7 +6204,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 13.89
             },
             {
               "waku": 4,
@@ -6088,7 +6224,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 18.95
             },
             {
               "waku": 5,
@@ -6107,7 +6244,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.39
             },
             {
               "waku": 6,
@@ -6126,7 +6264,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.21
             },
             {
               "waku": 7,
@@ -6145,7 +6284,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.62
             }
           ],
           "lineup": null,
@@ -6328,7 +6468,8 @@
               "makuri": 0,
               "sashi": 8,
               "mark": 3,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 15.78
             },
             {
               "waku": 2,
@@ -6347,7 +6488,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 17.03
             },
             {
               "waku": 3,
@@ -6366,7 +6508,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 3,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 10.11
             },
             {
               "waku": 4,
@@ -6385,7 +6528,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 15.2
             },
             {
               "waku": 5,
@@ -6404,7 +6548,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.62
             },
             {
               "waku": 6,
@@ -6423,7 +6568,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 18.07
             },
             {
               "waku": 7,
@@ -6442,7 +6588,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 14.23
             }
           ],
           "lineup": null,
@@ -6627,7 +6774,8 @@
               "makuri": 6,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 21.55
             },
             {
               "waku": 2,
@@ -6646,7 +6794,8 @@
               "makuri": 1,
               "sashi": 8,
               "mark": 3,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 13.78
             },
             {
               "waku": 3,
@@ -6665,7 +6814,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 16.44
             },
             {
               "waku": 4,
@@ -6684,7 +6834,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.48
             },
             {
               "waku": 5,
@@ -6703,7 +6854,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.94
             },
             {
               "waku": 6,
@@ -6722,7 +6874,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 21.99
             },
             {
               "waku": 7,
@@ -6741,7 +6894,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.55
             }
           ],
           "lineup": null,
@@ -6926,7 +7080,8 @@
               "makuri": 8,
               "sashi": 5,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 18.74
             },
             {
               "waku": 2,
@@ -6945,7 +7100,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 9.11
             },
             {
               "waku": 3,
@@ -6964,7 +7120,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 4,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 8.32
             },
             {
               "waku": 4,
@@ -6983,7 +7140,8 @@
               "makuri": 2,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.82
             },
             {
               "waku": 5,
@@ -7002,7 +7160,8 @@
               "makuri": 1,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.94
             },
             {
               "waku": 6,
@@ -7021,7 +7180,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 4.04
             }
           ],
           "lineup": null,
@@ -7185,7 +7345,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 2,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 11.89
             },
             {
               "waku": 2,
@@ -7204,7 +7365,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 4,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 10.45
             },
             {
               "waku": 3,
@@ -7223,7 +7385,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 8.9
             },
             {
               "waku": 4,
@@ -7242,7 +7405,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.38
             },
             {
               "waku": 5,
@@ -7261,7 +7425,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.67
             },
             {
               "waku": 6,
@@ -7280,7 +7445,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.41
             },
             {
               "waku": 7,
@@ -7299,7 +7465,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 4.72
             }
           ],
           "lineup": null,
@@ -7482,7 +7649,8 @@
               "makuri": 4,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.23
             },
             {
               "waku": 2,
@@ -7501,7 +7669,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.38
             },
             {
               "waku": 3,
@@ -7520,7 +7689,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.71
             },
             {
               "waku": 4,
@@ -7539,7 +7709,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.82
             },
             {
               "waku": 5,
@@ -7558,7 +7729,8 @@
               "makuri": 4,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.38
             },
             {
               "waku": 6,
@@ -7577,7 +7749,8 @@
               "makuri": 1,
               "sashi": 5,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 8.2
             },
             {
               "waku": 7,
@@ -7596,7 +7769,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 4.66
             }
           ],
           "lineup": null,
@@ -7777,7 +7951,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 10.39
             },
             {
               "waku": 2,
@@ -7796,7 +7971,8 @@
               "makuri": 5,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 16.93
             },
             {
               "waku": 3,
@@ -7815,7 +7991,8 @@
               "makuri": 0,
               "sashi": 8,
               "mark": 2,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.47
             },
             {
               "waku": 4,
@@ -7834,7 +8011,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.54
             },
             {
               "waku": 5,
@@ -7853,7 +8031,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.87
             },
             {
               "waku": 6,
@@ -7872,7 +8051,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.07
             },
             {
               "waku": 7,
@@ -7891,7 +8071,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.9
             }
           ],
           "lineup": null,
@@ -8070,7 +8251,8 @@
               "makuri": 4,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 19.77
             },
             {
               "waku": 2,
@@ -8089,7 +8271,8 @@
               "makuri": 5,
               "sashi": 4,
               "mark": 4,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 19.53
             },
             {
               "waku": 3,
@@ -8108,7 +8291,8 @@
               "makuri": 0,
               "sashi": 8,
               "mark": 6,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 19.75
             },
             {
               "waku": 4,
@@ -8127,7 +8311,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 20.77
             },
             {
               "waku": 5,
@@ -8146,7 +8331,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 13.64
             },
             {
               "waku": 6,
@@ -8165,7 +8351,8 @@
               "makuri": 1,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 22.28
             },
             {
               "waku": 7,
@@ -8184,7 +8371,8 @@
               "makuri": 1,
               "sashi": 2,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.18
             }
           ],
           "lineup": null,
@@ -8371,7 +8559,8 @@
               "makuri": 13,
               "sashi": 5,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 22.86
             },
             {
               "waku": 2,
@@ -8390,7 +8579,8 @@
               "makuri": 6,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 14.92
             },
             {
               "waku": 3,
@@ -8409,7 +8599,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.19
             },
             {
               "waku": 4,
@@ -8428,7 +8619,8 @@
               "makuri": 4,
               "sashi": 4,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 14.92
             },
             {
               "waku": 5,
@@ -8447,7 +8639,8 @@
               "makuri": 4,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.18
             },
             {
               "waku": 6,
@@ -8466,7 +8659,8 @@
               "makuri": 5,
               "sashi": 4,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.1
             },
             {
               "waku": 7,
@@ -8485,7 +8679,8 @@
               "makuri": 1,
               "sashi": 6,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.36
             }
           ],
           "lineup": null,
@@ -8677,7 +8872,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 15.04
             },
             {
               "waku": 2,
@@ -8696,7 +8892,8 @@
               "makuri": 1,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.91
             },
             {
               "waku": 3,
@@ -8715,7 +8912,8 @@
               "makuri": 4,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 14.08
             },
             {
               "waku": 4,
@@ -8734,7 +8932,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 5,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 14.95
             },
             {
               "waku": 5,
@@ -8753,7 +8952,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 14.62
             },
             {
               "waku": 6,
@@ -8772,7 +8972,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 5.98
             },
             {
               "waku": 7,
@@ -8791,7 +8992,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.03
             }
           ],
           "lineup": [
@@ -9012,7 +9214,8 @@
               "makuri": 2,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 13.01
             },
             {
               "waku": 2,
@@ -9031,7 +9234,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.46
             },
             {
               "waku": 3,
@@ -9050,7 +9254,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 10.59
             },
             {
               "waku": 4,
@@ -9069,7 +9274,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 18.9
             },
             {
               "waku": 5,
@@ -9088,7 +9294,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.67
             },
             {
               "waku": 6,
@@ -9107,7 +9314,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.57
             },
             {
               "waku": 7,
@@ -9126,7 +9334,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.82
             }
           ],
           "lineup": [
@@ -9344,7 +9553,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 4,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 12.17
             },
             {
               "waku": 2,
@@ -9363,7 +9573,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.66
             },
             {
               "waku": 3,
@@ -9382,7 +9593,8 @@
               "makuri": 3,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.22
             },
             {
               "waku": 4,
@@ -9401,7 +9613,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 17.27
             },
             {
               "waku": 5,
@@ -9420,7 +9633,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.75
             },
             {
               "waku": 6,
@@ -9439,7 +9653,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.51
             },
             {
               "waku": 7,
@@ -9458,7 +9673,8 @@
               "makuri": 5,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 13.13
             }
           ],
           "lineup": [
@@ -9675,7 +9891,8 @@
               "makuri": 5,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 22.25
             },
             {
               "waku": 2,
@@ -9694,7 +9911,8 @@
               "makuri": 2,
               "sashi": 8,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 11.58
             },
             {
               "waku": 3,
@@ -9713,7 +9931,8 @@
               "makuri": 4,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 22.99
             },
             {
               "waku": 4,
@@ -9732,7 +9951,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 7,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 15.36
             },
             {
               "waku": 5,
@@ -9751,7 +9971,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.92
             },
             {
               "waku": 6,
@@ -9770,7 +9991,8 @@
               "makuri": 5,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.26
             },
             {
               "waku": 7,
@@ -9788,7 +10010,8 @@
               "nige": 0,
               "makuri": 0,
               "sashi": 5,
-              "mark": 2
+              "mark": 2,
+              "gscore": 4.63
             }
           ],
           "lineup": [
@@ -10012,7 +10235,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.53
             },
             {
               "waku": 2,
@@ -10031,7 +10255,8 @@
               "makuri": 3,
               "sashi": 4,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.07
             },
             {
               "waku": 3,
@@ -10050,7 +10275,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 14.72
             },
             {
               "waku": 4,
@@ -10069,7 +10295,8 @@
               "makuri": 5,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 20.75
             },
             {
               "waku": 5,
@@ -10088,7 +10315,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 15.25
             },
             {
               "waku": 6,
@@ -10107,7 +10335,8 @@
               "makuri": 3,
               "sashi": 1,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.58
             },
             {
               "waku": 7,
@@ -10126,7 +10355,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.44
             }
           ],
           "lineup": [
@@ -10347,7 +10577,8 @@
               "makuri": 5,
               "sashi": 6,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 15.26
             },
             {
               "waku": 2,
@@ -10366,7 +10597,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 8.88
             },
             {
               "waku": 3,
@@ -10385,7 +10617,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.96
             },
             {
               "waku": 4,
@@ -10404,7 +10637,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.98
             },
             {
               "waku": 5,
@@ -10423,7 +10657,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.6
             },
             {
               "waku": 6,
@@ -10442,7 +10677,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 4.71
             },
             {
               "waku": 7,
@@ -10461,7 +10697,8 @@
               "makuri": 2,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 11.55
             }
           ],
           "lineup": [
@@ -10678,7 +10915,8 @@
               "makuri": 4,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 18.37
             },
             {
               "waku": 2,
@@ -10697,7 +10935,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.94
             },
             {
               "waku": 3,
@@ -10716,7 +10955,8 @@
               "makuri": 0,
               "sashi": 9,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 10.37
             },
             {
               "waku": 4,
@@ -10735,7 +10975,8 @@
               "makuri": 1,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.12
             },
             {
               "waku": 5,
@@ -10754,7 +10995,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.58
             },
             {
               "waku": 6,
@@ -10773,7 +11015,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.38
             },
             {
               "waku": 7,
@@ -10792,7 +11035,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.02
             }
           ],
           "lineup": [
@@ -11017,7 +11261,8 @@
               "makuri": 2,
               "sashi": 7,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.21
             },
             {
               "waku": 2,
@@ -11036,7 +11281,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.61
             },
             {
               "waku": 3,
@@ -11055,7 +11301,8 @@
               "makuri": 6,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 20.17
             },
             {
               "waku": 4,
@@ -11074,7 +11321,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 13.6
             },
             {
               "waku": 5,
@@ -11093,7 +11341,8 @@
               "makuri": 0,
               "sashi": 9,
               "mark": 2,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 12.3
             },
             {
               "waku": 6,
@@ -11112,7 +11361,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.66
             },
             {
               "waku": 7,
@@ -11131,7 +11381,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 3,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 8.85
             }
           ],
           "lineup": [
@@ -11349,7 +11600,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 13.29
             },
             {
               "waku": 2,
@@ -11368,7 +11620,8 @@
               "makuri": 8,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.09
             },
             {
               "waku": 3,
@@ -11387,7 +11640,8 @@
               "makuri": 1,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.9
             },
             {
               "waku": 4,
@@ -11406,7 +11660,8 @@
               "makuri": 1,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 15.42
             },
             {
               "waku": 5,
@@ -11425,7 +11680,8 @@
               "makuri": 11,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.35
             },
             {
               "waku": 6,
@@ -11444,7 +11700,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.47
             },
             {
               "waku": 7,
@@ -11463,7 +11720,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.41
             }
           ],
           "lineup": [
@@ -11659,7 +11917,8 @@
               "makuri": 0,
               "sashi": 8,
               "mark": 2,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.58
             },
             {
               "waku": 2,
@@ -11678,7 +11937,8 @@
               "makuri": 2,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.95
             },
             {
               "waku": 3,
@@ -11697,7 +11957,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 14.98
             },
             {
               "waku": 4,
@@ -11716,7 +11977,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 15.66
             },
             {
               "waku": 5,
@@ -11735,7 +11997,8 @@
               "makuri": 3,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.18
             },
             {
               "waku": 6,
@@ -11754,7 +12017,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.91
             },
             {
               "waku": 7,
@@ -11773,7 +12037,8 @@
               "makuri": 8,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 15.07
             }
           ],
           "lineup": [
@@ -11985,7 +12250,8 @@
               "makuri": 5,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 29.55
             },
             {
               "waku": 2,
@@ -12004,7 +12270,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 20.33
             },
             {
               "waku": 3,
@@ -12023,7 +12290,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.14
             },
             {
               "waku": 4,
@@ -12042,7 +12310,8 @@
               "makuri": 4,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 17.21
             },
             {
               "waku": 5,
@@ -12061,7 +12330,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 23.5
             },
             {
               "waku": 6,
@@ -12080,7 +12350,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 18.13
             },
             {
               "waku": 7,
@@ -12099,7 +12370,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 21.44
             }
           ],
           "lineup": [
@@ -12318,7 +12590,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 4,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 21.77
             },
             {
               "waku": 2,
@@ -12337,7 +12610,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 31.52
             },
             {
               "waku": 3,
@@ -12356,7 +12630,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 24.02
             },
             {
               "waku": 4,
@@ -12375,7 +12650,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 29.37
             },
             {
               "waku": 5,
@@ -12394,7 +12670,8 @@
               "makuri": 12,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 27.47
             },
             {
               "waku": 6,
@@ -12413,7 +12690,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.21
             },
             {
               "waku": 7,
@@ -12432,7 +12710,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 20.14
             }
           ],
           "lineup": [
@@ -12653,7 +12932,8 @@
               "makuri": 1,
               "sashi": 5,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.45
             },
             {
               "waku": 2,
@@ -12672,7 +12952,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 21.29
             },
             {
               "waku": 3,
@@ -12691,7 +12972,8 @@
               "makuri": 6,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 29.91
             },
             {
               "waku": 4,
@@ -12710,7 +12992,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 9,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 15.42
             },
             {
               "waku": 5,
@@ -12729,7 +13012,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 20.93
             },
             {
               "waku": 6,
@@ -12748,7 +13032,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.79
             },
             {
               "waku": 7,
@@ -12767,7 +13052,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 19.36
             }
           ],
           "lineup": [
@@ -12989,7 +13275,8 @@
               "makuri": 4,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 21.59
             },
             {
               "waku": 2,
@@ -13008,7 +13295,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 19.15
             },
             {
               "waku": 3,
@@ -13027,7 +13315,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.45
             },
             {
               "waku": 4,
@@ -13046,7 +13335,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 18.89
             },
             {
               "waku": 5,
@@ -13065,7 +13355,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 19.47
             },
             {
               "waku": 6,
@@ -13084,7 +13375,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.25
             },
             {
               "waku": 7,
@@ -13103,7 +13395,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 46.19
             }
           ],
           "lineup": [
@@ -13321,7 +13614,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 19.72
             },
             {
               "waku": 2,
@@ -13340,7 +13634,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.85
             },
             {
               "waku": 3,
@@ -13359,7 +13654,8 @@
               "makuri": 4,
               "sashi": 3,
               "mark": 9,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.13
             },
             {
               "waku": 4,
@@ -13378,7 +13674,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.86
             },
             {
               "waku": 5,
@@ -13397,7 +13694,8 @@
               "makuri": 2,
               "sashi": 5,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 15.28
             },
             {
               "waku": 6,
@@ -13416,7 +13714,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 9.26
             }
           ],
           "lineup": [
@@ -13625,7 +13924,8 @@
               "makuri": 12,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 20.02
             },
             {
               "waku": 2,
@@ -13644,7 +13944,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.22
             },
             {
               "waku": 3,
@@ -13663,7 +13964,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.35
             },
             {
               "waku": 4,
@@ -13682,7 +13984,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 13.8
             },
             {
               "waku": 5,
@@ -13701,7 +14004,8 @@
               "makuri": 1,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 23.16
             },
             {
               "waku": 6,
@@ -13720,7 +14024,8 @@
               "makuri": 1,
               "sashi": 1,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.41
             },
             {
               "waku": 7,
@@ -13739,7 +14044,8 @@
               "makuri": 2,
               "sashi": 4,
               "mark": 3,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 7.16
             }
           ],
           "lineup": [
@@ -13970,7 +14276,8 @@
               "makuri": 0,
               "sashi": 10,
               "mark": 5,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 13.25
             },
             {
               "waku": 2,
@@ -13989,7 +14296,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 10.19
             },
             {
               "waku": 3,
@@ -14008,7 +14316,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 6,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 12.29
             },
             {
               "waku": 4,
@@ -14027,7 +14336,8 @@
               "makuri": 2,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.22
             },
             {
               "waku": 5,
@@ -14046,7 +14356,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.06
             },
             {
               "waku": 6,
@@ -14065,7 +14376,8 @@
               "makuri": 4,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.18
             },
             {
               "waku": 7,
@@ -14084,7 +14396,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.11
             }
           ],
           "lineup": [
@@ -14304,7 +14617,8 @@
               "nige": 0,
               "makuri": 0,
               "sashi": 3,
-              "mark": 2
+              "mark": 2,
+              "gscore": 7.7
             },
             {
               "waku": 2,
@@ -14323,7 +14637,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.52
             },
             {
               "waku": 3,
@@ -14342,7 +14657,8 @@
               "makuri": 1,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 17.5
             },
             {
               "waku": 4,
@@ -14361,7 +14677,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.99
             },
             {
               "waku": 5,
@@ -14380,7 +14697,8 @@
               "makuri": 0,
               "sashi": 10,
               "mark": 2,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 15.05
             },
             {
               "waku": 6,
@@ -14399,7 +14717,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.25
             },
             {
               "waku": 7,
@@ -14418,7 +14737,8 @@
               "makuri": 1,
               "sashi": 4,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 12.23
             }
           ],
           "lineup": [
@@ -14613,7 +14933,8 @@
               "makuri": 1,
               "sashi": 4,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 12.01
             },
             {
               "waku": 2,
@@ -14632,7 +14953,8 @@
               "makuri": 2,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.7
             },
             {
               "waku": 3,
@@ -14651,7 +14973,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.08
             },
             {
               "waku": 4,
@@ -14670,7 +14993,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.32
             },
             {
               "waku": 5,
@@ -14689,7 +15013,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 11.31
             },
             {
               "waku": 6,
@@ -14708,7 +15033,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 4.2
             },
             {
               "waku": 7,
@@ -14727,7 +15053,8 @@
               "makuri": 5,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 21.17
             }
           ],
           "lineup": [
@@ -14926,7 +15253,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.66
             },
             {
               "waku": 2,
@@ -14945,7 +15273,8 @@
               "makuri": 1,
               "sashi": 4,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.25
             },
             {
               "waku": 3,
@@ -14964,7 +15293,8 @@
               "makuri": 4,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 21.86
             },
             {
               "waku": 4,
@@ -14983,7 +15313,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 3,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 8.09
             },
             {
               "waku": 5,
@@ -15002,7 +15333,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.24
             },
             {
               "waku": 6,
@@ -15021,7 +15353,8 @@
               "makuri": 1,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.17
             },
             {
               "waku": 7,
@@ -15040,7 +15373,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 3,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 17.05
             }
           ],
           "lineup": [
@@ -15235,7 +15569,8 @@
               "nige": 5,
               "makuri": 4,
               "sashi": 0,
-              "mark": 2
+              "mark": 2,
+              "gscore": 11.58
             },
             {
               "waku": 2,
@@ -15254,7 +15589,8 @@
               "makuri": 2,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 11.48
             },
             {
               "waku": 3,
@@ -15273,7 +15609,8 @@
               "makuri": 4,
               "sashi": 7,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.84
             },
             {
               "waku": 4,
@@ -15292,7 +15629,8 @@
               "makuri": 11,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 14.31
             },
             {
               "waku": 5,
@@ -15311,7 +15649,8 @@
               "makuri": 8,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 18.7
             },
             {
               "waku": 6,
@@ -15330,7 +15669,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.48
             },
             {
               "waku": 7,
@@ -15349,7 +15689,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.37
             }
           ],
           "lineup": [
@@ -15557,7 +15898,8 @@
               "makuri": 0,
               "sashi": 8,
               "mark": 3,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 14.3
             },
             {
               "waku": 2,
@@ -15576,7 +15918,8 @@
               "makuri": 2,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.2
             },
             {
               "waku": 3,
@@ -15595,7 +15938,8 @@
               "makuri": 1,
               "sashi": 4,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.02
             },
             {
               "waku": 4,
@@ -15614,7 +15958,8 @@
               "makuri": 2,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 14.04
             },
             {
               "waku": 5,
@@ -15633,7 +15978,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.21
             },
             {
               "waku": 6,
@@ -15652,7 +15998,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 2.32
             },
             {
               "waku": 7,
@@ -15671,7 +16018,8 @@
               "makuri": 1,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 9.76
             }
           ],
           "lineup": [
@@ -15891,7 +16239,8 @@
               "makuri": 1,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 16.76
             },
             {
               "waku": 2,
@@ -15910,7 +16259,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 14.13
             },
             {
               "waku": 3,
@@ -15929,7 +16279,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.83
             },
             {
               "waku": 4,
@@ -15948,7 +16299,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.97
             },
             {
               "waku": 5,
@@ -15967,7 +16319,8 @@
               "makuri": 1,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 15.46
             },
             {
               "waku": 6,
@@ -15986,7 +16339,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.82
             },
             {
               "waku": 7,
@@ -16005,7 +16359,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.65
             }
           ],
           "lineup": [
@@ -16225,7 +16580,8 @@
               "makuri": 0,
               "sashi": 9,
               "mark": 3,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.69
             },
             {
               "waku": 2,
@@ -16244,7 +16600,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.01
             },
             {
               "waku": 3,
@@ -16263,7 +16620,8 @@
               "makuri": 1,
               "sashi": 6,
               "mark": 2,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 10.51
             },
             {
               "waku": 4,
@@ -16282,7 +16640,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.66
             },
             {
               "waku": 5,
@@ -16301,7 +16660,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.74
             },
             {
               "waku": 6,
@@ -16320,7 +16680,8 @@
               "makuri": 2,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.21
             },
             {
               "waku": 7,
@@ -16339,7 +16700,8 @@
               "makuri": 1,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.06
             }
           ],
           "lineup": [
@@ -16560,7 +16922,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 17.8
             },
             {
               "waku": 2,
@@ -16579,7 +16942,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.27
             },
             {
               "waku": 3,
@@ -16598,7 +16962,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.05
             },
             {
               "waku": 4,
@@ -16617,7 +16982,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 3,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 13.18
             },
             {
               "waku": 5,
@@ -16636,7 +17002,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 21.05
             },
             {
               "waku": 6,
@@ -16655,7 +17022,8 @@
               "makuri": 4,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.47
             },
             {
               "waku": 7,
@@ -16674,7 +17042,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.81
             }
           ],
           "lineup": [
@@ -16890,7 +17259,8 @@
               "makuri": 1,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 15.83
             },
             {
               "waku": 2,
@@ -16909,7 +17279,8 @@
               "makuri": 1,
               "sashi": 10,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 14.74
             },
             {
               "waku": 3,
@@ -16928,7 +17299,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.38
             },
             {
               "waku": 4,
@@ -16947,7 +17319,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.62
             },
             {
               "waku": 5,
@@ -16966,7 +17339,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 21.91
             },
             {
               "waku": 6,
@@ -16985,7 +17359,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 4.55
             },
             {
               "waku": 7,
@@ -17004,7 +17379,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 3,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 14.19
             }
           ],
           "lineup": [
@@ -17218,7 +17594,8 @@
               "makuri": 6,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 23.48
             },
             {
               "waku": 2,
@@ -17237,7 +17614,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.04
             },
             {
               "waku": 3,
@@ -17256,7 +17634,8 @@
               "makuri": 1,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 15.05
             },
             {
               "waku": 4,
@@ -17275,7 +17654,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.83
             },
             {
               "waku": 5,
@@ -17294,7 +17674,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 13.8
             },
             {
               "waku": 6,
@@ -17313,7 +17694,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.53
             },
             {
               "waku": 7,
@@ -17332,7 +17714,8 @@
               "makuri": 2,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.03
             }
           ],
           "lineup": [
@@ -17555,7 +17938,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.12
             },
             {
               "waku": 2,
@@ -17574,7 +17958,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 13.65
             },
             {
               "waku": 3,
@@ -17593,7 +17978,8 @@
               "makuri": 0,
               "sashi": 9,
               "mark": 8,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 17.71
             },
             {
               "waku": 4,
@@ -17612,7 +17998,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 20.14
             },
             {
               "waku": 5,
@@ -17631,7 +18018,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.74
             },
             {
               "waku": 6,
@@ -17650,7 +18038,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 15.01
             },
             {
               "waku": 7,
@@ -17669,7 +18058,8 @@
               "makuri": 3,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.76
             }
           ],
           "lineup": [
@@ -17900,7 +18290,8 @@
               "makuri": 3,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 17.98
             },
             {
               "waku": 2,
@@ -17918,7 +18309,8 @@
               "nige": 0,
               "makuri": 0,
               "sashi": 7,
-              "mark": 3
+              "mark": 3,
+              "gscore": 6.92
             },
             {
               "waku": 3,
@@ -17937,7 +18329,8 @@
               "makuri": 5,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 16.64
             },
             {
               "waku": 4,
@@ -17956,7 +18349,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.89
             },
             {
               "waku": 4,
@@ -17975,7 +18369,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 3,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 15.49
             },
             {
               "waku": 5,
@@ -17994,7 +18389,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 5.38
             },
             {
               "waku": 5,
@@ -18013,7 +18409,8 @@
               "makuri": 2,
               "sashi": 8,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.96
             },
             {
               "waku": 6,
@@ -18032,7 +18429,8 @@
               "makuri": 0,
               "sashi": 8,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.1
             },
             {
               "waku": 6,
@@ -18051,7 +18449,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 18.86
             }
           ],
           "lineup": [
@@ -18317,7 +18716,8 @@
               "makuri": 1,
               "sashi": 5,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 9.76
             },
             {
               "waku": 2,
@@ -18336,7 +18736,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.99
             },
             {
               "waku": 3,
@@ -18355,7 +18756,8 @@
               "makuri": 1,
               "sashi": 4,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 16.17
             },
             {
               "waku": 4,
@@ -18374,7 +18776,8 @@
               "makuri": 2,
               "sashi": 6,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.88
             },
             {
               "waku": 4,
@@ -18393,7 +18796,8 @@
               "makuri": 4,
               "sashi": 6,
               "mark": 3,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 10.97
             },
             {
               "waku": 5,
@@ -18412,7 +18816,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 2.78
             },
             {
               "waku": 5,
@@ -18431,7 +18836,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 3,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 13.58
             },
             {
               "waku": 6,
@@ -18450,7 +18856,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.19
             },
             {
               "waku": 6,
@@ -18469,7 +18876,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 15.27
             }
           ],
           "lineup": [
@@ -18736,7 +19144,8 @@
               "makuri": 5,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 16.74
             },
             {
               "waku": 2,
@@ -18755,7 +19164,8 @@
               "makuri": 6,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 18.97
             },
             {
               "waku": 3,
@@ -18774,7 +19184,8 @@
               "makuri": 1,
               "sashi": 5,
               "mark": 2,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 10.91
             },
             {
               "waku": 4,
@@ -18793,7 +19204,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.28
             },
             {
               "waku": 4,
@@ -18812,7 +19224,8 @@
               "makuri": 7,
               "sashi": 7,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.2
             },
             {
               "waku": 5,
@@ -18831,7 +19244,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 14.1
             },
             {
               "waku": 5,
@@ -18850,7 +19264,8 @@
               "makuri": 7,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.98
             },
             {
               "waku": 6,
@@ -18869,7 +19284,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.88
             },
             {
               "waku": 6,
@@ -18888,7 +19304,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 13.02
             }
           ],
           "lineup": [
@@ -19154,7 +19571,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.49
             },
             {
               "waku": 2,
@@ -19173,7 +19591,8 @@
               "makuri": 4,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.32
             },
             {
               "waku": 3,
@@ -19192,7 +19611,8 @@
               "makuri": 1,
               "sashi": 8,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.3
             },
             {
               "waku": 4,
@@ -19211,7 +19631,8 @@
               "makuri": 4,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.49
             },
             {
               "waku": 4,
@@ -19230,7 +19651,8 @@
               "makuri": 5,
               "sashi": 6,
               "mark": 1,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 10.35
             },
             {
               "waku": 5,
@@ -19249,7 +19671,8 @@
               "makuri": 5,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.29
             },
             {
               "waku": 5,
@@ -19268,7 +19691,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 6,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 11.67
             },
             {
               "waku": 6,
@@ -19287,7 +19711,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 15.27
             },
             {
               "waku": 6,
@@ -19306,7 +19731,8 @@
               "makuri": 3,
               "sashi": 5,
               "mark": 4,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 9.77
             }
           ],
           "lineup": [
@@ -19577,7 +20003,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.66
             },
             {
               "waku": 2,
@@ -19596,7 +20023,8 @@
               "makuri": 7,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 18.24
             },
             {
               "waku": 3,
@@ -19615,7 +20043,8 @@
               "makuri": 7,
               "sashi": 1,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.2
             },
             {
               "waku": 4,
@@ -19634,7 +20063,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 4,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.05
             },
             {
               "waku": 4,
@@ -19653,7 +20083,8 @@
               "makuri": 4,
               "sashi": 4,
               "mark": 2,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 20.95
             },
             {
               "waku": 5,
@@ -19672,7 +20103,8 @@
               "makuri": 7,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.65
             },
             {
               "waku": 5,
@@ -19690,7 +20122,8 @@
               "nige": 0,
               "makuri": 0,
               "sashi": 8,
-              "mark": 3
+              "mark": 3,
+              "gscore": 6.86
             },
             {
               "waku": 6,
@@ -19709,7 +20142,8 @@
               "makuri": 4,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.31
             },
             {
               "waku": 6,
@@ -19728,7 +20162,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 13.28
             }
           ],
           "lineup": [
@@ -19994,7 +20429,8 @@
               "makuri": 0,
               "sashi": 12,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.86
             },
             {
               "waku": 2,
@@ -20013,7 +20449,8 @@
               "makuri": 13,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 15.15
             },
             {
               "waku": 3,
@@ -20032,7 +20469,8 @@
               "makuri": 2,
               "sashi": 10,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 12.4
             },
             {
               "waku": 4,
@@ -20051,7 +20489,8 @@
               "makuri": 0,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 14.96
             },
             {
               "waku": 4,
@@ -20070,7 +20509,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 5,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.28
             },
             {
               "waku": 5,
@@ -20089,7 +20529,8 @@
               "makuri": 1,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.28
             },
             {
               "waku": 5,
@@ -20108,7 +20549,8 @@
               "makuri": 1,
               "sashi": 3,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.5
             },
             {
               "waku": 6,
@@ -20127,7 +20569,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 15.41
             },
             {
               "waku": 6,
@@ -20146,7 +20589,8 @@
               "makuri": 5,
               "sashi": 4,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.41
             }
           ],
           "lineup": [
@@ -20411,7 +20855,8 @@
               "makuri": 4,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 12.63
             },
             {
               "waku": 2,
@@ -20430,7 +20875,8 @@
               "makuri": 13,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 15.64
             },
             {
               "waku": 3,
@@ -20449,7 +20895,8 @@
               "makuri": 0,
               "sashi": 11,
               "mark": 6,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.16
             },
             {
               "waku": 4,
@@ -20468,7 +20915,8 @@
               "makuri": 0,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.11
             },
             {
               "waku": 4,
@@ -20487,7 +20935,8 @@
               "makuri": 2,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.71
             },
             {
               "waku": 5,
@@ -20506,7 +20955,8 @@
               "makuri": 0,
               "sashi": 8,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.72
             },
             {
               "waku": 5,
@@ -20524,7 +20974,8 @@
               "nige": 1,
               "makuri": 2,
               "sashi": 10,
-              "mark": 1
+              "mark": 1,
+              "gscore": 10.41
             },
             {
               "waku": 6,
@@ -20543,7 +20994,8 @@
               "makuri": 7,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.36
             },
             {
               "waku": 6,
@@ -20562,7 +21014,8 @@
               "makuri": 2,
               "sashi": 8,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 7.09
             }
           ],
           "lineup": [
@@ -20829,7 +21282,8 @@
               "nige": 0,
               "makuri": 0,
               "sashi": 2,
-              "mark": 2
+              "mark": 2,
+              "gscore": 10.76
             },
             {
               "waku": 2,
@@ -20848,7 +21302,8 @@
               "makuri": 1,
               "sashi": 9,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.48
             },
             {
               "waku": 3,
@@ -20867,7 +21322,8 @@
               "makuri": 2,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.74
             },
             {
               "waku": 4,
@@ -20886,7 +21342,8 @@
               "makuri": 1,
               "sashi": 6,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.53
             },
             {
               "waku": 4,
@@ -20905,7 +21362,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 10.66
             },
             {
               "waku": 5,
@@ -20924,7 +21382,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.72
             },
             {
               "waku": 5,
@@ -20943,7 +21402,8 @@
               "makuri": 0,
               "sashi": 6,
               "mark": 3,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 11.93
             },
             {
               "waku": 6,
@@ -20962,7 +21422,8 @@
               "makuri": 8,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.14
             },
             {
               "waku": 6,
@@ -20981,7 +21442,8 @@
               "makuri": 6,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.34
             }
           ],
           "lineup": [
@@ -21250,7 +21712,8 @@
               "makuri": 4,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 18.12
             },
             {
               "waku": 2,
@@ -21269,7 +21732,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.59
             },
             {
               "waku": 3,
@@ -21288,7 +21752,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 14.07
             },
             {
               "waku": 4,
@@ -21307,7 +21772,8 @@
               "makuri": 0,
               "sashi": 2,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.96
             },
             {
               "waku": 4,
@@ -21326,7 +21792,8 @@
               "makuri": 12,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 15.54
             },
             {
               "waku": 5,
@@ -21345,7 +21812,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.68
             },
             {
               "waku": 5,
@@ -21364,7 +21832,8 @@
               "makuri": 1,
               "sashi": 10,
               "mark": 7,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 10.6
             },
             {
               "waku": 6,
@@ -21383,7 +21852,8 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.3
             },
             {
               "waku": 6,
@@ -21402,7 +21872,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 6.95
             }
           ],
           "lineup": [
@@ -21669,7 +22140,8 @@
               "makuri": 1,
               "sashi": 4,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.8
             },
             {
               "waku": 2,
@@ -21688,7 +22160,8 @@
               "makuri": 1,
               "sashi": 8,
               "mark": 2,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 12.7
             },
             {
               "waku": 3,
@@ -21707,7 +22180,8 @@
               "makuri": 5,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 21.28
             },
             {
               "waku": 4,
@@ -21726,7 +22200,8 @@
               "makuri": 2,
               "sashi": 1,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.23
             },
             {
               "waku": 4,
@@ -21745,7 +22220,8 @@
               "makuri": 5,
               "sashi": 4,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.88
             },
             {
               "waku": 5,
@@ -21764,7 +22240,8 @@
               "makuri": 0,
               "sashi": 9,
               "mark": 6,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 12.14
             },
             {
               "waku": 5,
@@ -21783,7 +22260,8 @@
               "makuri": 5,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 14.26
             },
             {
               "waku": 6,
@@ -21802,7 +22280,8 @@
               "makuri": 8,
               "sashi": 1,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.03
             },
             {
               "waku": 6,
@@ -21821,7 +22300,8 @@
               "makuri": 0,
               "sashi": 9,
               "mark": 5,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.2
             }
           ],
           "lineup": [
@@ -22081,7 +22561,8 @@
               "makuri": 9,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 23.18
             },
             {
               "waku": 2,
@@ -22100,7 +22581,8 @@
               "makuri": 9,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 20.71
             },
             {
               "waku": 3,
@@ -22119,7 +22601,8 @@
               "makuri": 1,
               "sashi": 10,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.61
             },
             {
               "waku": 4,
@@ -22138,7 +22621,8 @@
               "makuri": 9,
               "sashi": 5,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 14.72
             },
             {
               "waku": 4,
@@ -22157,7 +22641,8 @@
               "makuri": 1,
               "sashi": 2,
               "mark": 0,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 9.27
             },
             {
               "waku": 5,
@@ -22176,7 +22661,8 @@
               "makuri": 5,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.22
             },
             {
               "waku": 5,
@@ -22195,7 +22681,8 @@
               "makuri": 9,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 15.56
             },
             {
               "waku": 6,
@@ -22214,7 +22701,8 @@
               "makuri": 0,
               "sashi": 7,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 8.43
             },
             {
               "waku": 6,
@@ -22233,7 +22721,8 @@
               "makuri": 1,
               "sashi": 12,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.02
             }
           ],
           "lineup": [
@@ -22502,7 +22991,8 @@
               "nige": 0,
               "makuri": 0,
               "sashi": 4,
-              "mark": 1
+              "mark": 1,
+              "gscore": 11.47
             },
             {
               "waku": 2,
@@ -22521,7 +23011,8 @@
               "makuri": 5,
               "sashi": 7,
               "mark": 3,
-              "gaudiMark": "○"
+              "gaudiMark": "○",
+              "gscore": 16.01
             },
             {
               "waku": 3,
@@ -22540,7 +23031,8 @@
               "makuri": 1,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 13.97
             },
             {
               "waku": 4,
@@ -22559,7 +23051,8 @@
               "makuri": 4,
               "sashi": 0,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.23
             },
             {
               "waku": 4,
@@ -22578,7 +23071,8 @@
               "makuri": 0,
               "sashi": 8,
               "mark": 2,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 11.35
             },
             {
               "waku": 5,
@@ -22597,7 +23091,8 @@
               "makuri": 0,
               "sashi": 3,
               "mark": 1,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 10.74
             },
             {
               "waku": 5,
@@ -22616,7 +23111,8 @@
               "makuri": 1,
               "sashi": 6,
               "mark": 0,
-              "gaudiMark": "◎"
+              "gaudiMark": "◎",
+              "gscore": 10.89
             },
             {
               "waku": 6,
@@ -22635,7 +23131,8 @@
               "makuri": 0,
               "sashi": 10,
               "mark": 3,
-              "gaudiMark": "△"
+              "gaudiMark": "△",
+              "gscore": 9.36
             },
             {
               "waku": 6,
@@ -22654,7 +23151,8 @@
               "makuri": 6,
               "sashi": 0,
               "mark": 0,
-              "gaudiMark": "▲"
+              "gaudiMark": "▲",
+              "gscore": 17.01
             }
           ],
           "lineup": [
