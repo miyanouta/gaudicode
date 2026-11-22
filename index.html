@@ -67,6 +67,8 @@
   td.name{text-align:left;font-weight:700}
   .mark{font-size:17px;font-weight:800}
   .mark.hon{color:var(--accent);text-shadow:0 0 10px rgba(255,176,32,.5)}
+  .score-sub{font-size:10px;color:var(--sub);font-weight:400;line-height:1.35;white-space:nowrap}
+  .score-legend{font-size:10.5px;color:var(--sub);margin:0 0 7px}
   .pred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
   .pred-box{background:var(--panel2);border:1px solid rgba(255,255,255,.04);border-radius:11px;padding:10px 12px}
   .pred-box .k{font-size:12px;color:var(--sub);margin-bottom:4px}
@@ -669,14 +671,17 @@ function renderContent(){
   }
 
   // 出走表
-  html += '<div class="card"><h4>出走表</h4><table><thead><tr>' +
+  html += '<div class="card"><h4>出走表</h4><div class="score-legend">得点の下段： R2＝得点＋脚質＋ギア補正（◎○▲の順位キー）／ G＝GAUDI純正スコア</div><table><thead><tr>' +
     '<th>印</th><th>枠</th><th>車</th><th>選手名</th><th>年齢/府県</th><th>期</th><th>級班</th><th>脚質</th><th>得点</th><th>S</th><th>B</th><th>逃</th><th>捲</th><th>差</th><th>マ</th>' +
     '</tr></thead><tbody>';
+  const R2PT = {'逃':5,'両':3,'追':1};
   r.riders.forEach(x=>{
     const hon = x.gaudiMark==='◎' ? ' hon':'';
+    const r2 = Number(x.tokuten||0) + (R2PT[x.style]||0)*0.5 + ((x.gear??0)>=3.93 ? 1.0 : 0);
+    const gtxt = (typeof x.gscore==='number' && Number.isFinite(x.gscore)) ? x.gscore.toFixed(2) : '—';
     html += '<tr><td class="mark'+hon+'">'+esc(x.gaudiMark||'')+'</td><td>'+x.waku+'</td><td>'+x.num+'</td>' +
       '<td class="name">'+esc(x.name)+'</td><td>'+x.age+'/'+esc(x.pref)+'</td><td>'+x.term+'</td><td>'+esc(x.class)+'</td>' +
-      '<td>'+esc(x.style||'-')+'</td><td>'+Number(x.tokuten).toFixed(2)+'</td><td>'+x.s+'</td><td>'+x.b+'</td><td>'+x.nige+'</td><td>'+x.makuri+'</td><td>'+x.sashi+'</td><td>'+x.mark+'</td></tr>';
+      '<td>'+esc(x.style||'-')+'</td><td>'+Number(x.tokuten).toFixed(2)+'<div class="score-sub">R2 '+r2.toFixed(1)+' / G '+gtxt+'</div></td><td>'+x.s+'</td><td>'+x.b+'</td><td>'+x.nige+'</td><td>'+x.makuri+'</td><td>'+x.sashi+'</td><td>'+x.mark+'</td></tr>';
   });
   html += '</tbody></table></div>';
 
