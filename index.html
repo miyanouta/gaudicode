@@ -236,7 +236,7 @@ function jstNow(){
   return new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
 }
 // ライブ映像のリンク先: 場の公式YouTubeチャンネル (全画面で見やすい) を優先し、
-// 無い場は公式配信ページ、それも無い場はKドリームスの場別プレイヤーにする。
+// 無い場はKドリームスの場別プレイヤー (ログイン不要) にし、場コードが無い場合のみ公式配信ページにする。
 const LIVE_MAP = {
   '函館': ['UC7Ehq9agmTeznt6XjZ5faLw', 'https://ch.nicovideo.jp/hakodatekeirin'],
   '青森': ['UCosOaqq60s3QAenTONNxUuQ', 'https://ch.nicovideo.jp/aomorikeirin'],
@@ -279,11 +279,10 @@ const LIVE_MAP = {
 };
 function liveUrl(v){
   const m = LIVE_MAP[v.name];
-  if(m){
-    if(m[0]) return 'https://www.youtube.com/channel/' + m[0] + '/live';
-    if(m[1]) return m[1];
-  }
-  return v.cd ? 'https://keirin.kdreams.jp/stadium/live/?kyogijoCd=' + v.cd : '';
+  if(m && m[0]) return 'https://www.youtube.com/channel/' + m[0] + '/live';
+  if(v.cd) return 'https://keirin.kdreams.jp/stadium/live/?kyogijoCd=' + v.cd;
+  if(m && m[1]) return m[1];
+  return '';
 }
 function saveSel(){
   try{ localStorage.setItem('gaudi-sel', JSON.stringify({ date: state.data ? state.data.date : '', venueIdx: state.venueIdx, raceIdx: state.raceIdx, at: Date.now() })); }catch(_){ }
