@@ -83,6 +83,10 @@
   .plan-panel .combos .odds{font-size:12.5px;color:var(--accent2);font-weight:700;margin-left:3px}
   .combo-hit{background:var(--gold-grad);color:#191102;border-radius:6px;padding:1px 8px;font-weight:800;box-shadow:0 2px 8px rgba(255,157,0,.4);white-space:nowrap}
   .combo-hit .odds{color:#191102}
+  .miss-num{color:#35d07f;font-weight:800}
+  tbody tr.miss-watch{background:rgba(53,208,127,.12)}
+  tbody tr.miss-watch td.name{color:#35d07f}
+  .miss-sample{color:#35d07f;font-weight:800}
   .plan-panel .ana{margin-top:8px;font-size:13.5px;color:var(--accent)}
   .rec-chip{display:inline-block;margin:2px 0 8px;padding:3px 11px;border-radius:999px;font-size:13px;font-weight:700}
   .rec-buy{background:#e3f4e5;color:#1c6b2a;border:1px solid #9ed3a6}
@@ -830,6 +834,21 @@ function scenarioSim(race){
            goalD: topD ? goalOrder(topD) : midOrder.slice(), goalE: topE ? goalOrder(topE) : midOrder.slice() };
 }
 
+// 見落とし注意: 単騎×捲り>=2 で、5パターン全ての想定上位に入っていない選手 (先行測定 896レースで3着内率32.6%)
+function missWatchNums(race){
+  const out = new Set();
+  const s = scenarioSim(race);
+  if(!s) return out;
+  const inTop = new Set();
+  [s.topA, s.topB, s.topC, s.topD, s.topE].forEach(t => { if(t) t.forEach(n => inTop.add(n)); });
+  const soloOf = {};
+  (race.lineup || []).forEach(L => { L.forEach(n => { soloOf[n] = L.length === 1; }); });
+  (race.riders || []).forEach(x => {
+    if(soloOf[x.num] === true && (x.makuri || 0) >= 2 && !inTop.has(x.num)) out.add(x.num);
+  });
+  return out;
+}
+
 function renderScenario(race){
   const s = scenarioSim(race);
   if(!s) return '';
@@ -958,7 +977,15 @@ function renderContent(){
   }
 
   // 出走表
-  html += '<div class="card"><h4>出走表</h4><div class="score-legend">得点の下段： R2＝得点＋脚質＋ギア補正（◎○▲の順位キー）／ G＝GAUDI純正スコア</div><table><thead><tr>' +
+  const missSet = missWatchNums(r);
+  const greenCombo = c => String(c).split(/(→|-)/).map(tok => {
+    if(tok === '→' || tok === '-') return tok;
+    const n = Number(tok);
+    return (tok !== '' && Number.isFinite(n) && missSet.has(n)) ? '<span class="miss-num">' + tok + '</span>' : tok;
+  }).join('');
+  html += '<div class="card"><h4>出走表</h4><div class="score-legend">得点の下段： R2＝得点＋脚質＋ギア補正（◎○▲の順位キー）／ G＝GAUDI純正スコア</div>' +
+    (missSet.size ? '<div class="score-legend"><span class="miss-sample">緑色</span>＝見落とし注意（単騎×捲り≥2・シミュレーション想定外だが3着内率32.6%）</div>' : '') +
+    '<table><thead><tr>' +
     '<th>印</th><th>枠</th><th>車</th><th>選手名</th><th>年齢/府県</th><th>期</th><th>級班</th><th>脚質</th><th>得点</th><th>S</th><th>B</th><th>逃</th><th>捲</th><th>差</th><th>マ</th>' +
     '</tr></thead><tbody>';
   const R2PT = {'逃':5,'両':3,'追':1};
@@ -966,7 +993,7 @@ function renderContent(){
     const hon = x.gaudiMark==='◎' ? ' hon':'';
     const r2 = Number(x.tokuten||0) + (R2PT[x.style]||0)*0.5 + ((x.gear??0)>=3.93 ? 1.0 : 0);
     const gtxt = (typeof x.gscore==='number' && Number.isFinite(x.gscore)) ? x.gscore.toFixed(2) : '—';
-    html += '<tr><td class="mark'+hon+'">'+esc(x.gaudiMark||'')+'</td><td>'+x.waku+'</td><td>'+x.num+'</td>' +
+    html += '<tr'+(missSet.has(x.num)?' class="miss-watch"':'')+'><td class="mark'+hon+'">'+esc(x.gaudiMark||'')+'</td><td>'+x.waku+'</td><td>'+x.num+'</td>' +
       '<td class="name">'+esc(x.name)+'</td><td>'+x.age+'/'+esc(x.pref)+'</td><td>'+x.term+'</td><td>'+esc(x.class)+'</td>' +
       '<td>'+esc(x.style||'-')+'</td><td>'+Number(x.tokuten).toFixed(2)+'<div class="score-sub">R2 '+r2.toFixed(1)+' / G '+gtxt+'</div></td><td>'+x.s+'</td><td>'+x.b+'</td><td>'+x.nige+'</td><td>'+x.makuri+'</td><td>'+x.sashi+'</td><td>'+x.mark+'</td></tr>';
   });
@@ -983,9 +1010,9 @@ function renderContent(){
     const hitTan = c => !!winTanKey && c.replace(/→/g,'-').split('-').map(Number).join('-') === winTanKey;
     const hitWide = c => !!(r.result && r.result.top3) && c.split('-').every(n=>r.result.top3.includes(Number(n)));
     const wrapHit = (inner, hit) => hit ? '<span class="combo-hit">' + inner + ' 🎯</span>' : inner;
-    if(!p.plans && p.sanrenpuku) html += '<div class="pred-box"><div class="k">三連複</div><div class="v">'+p.sanrenpuku.map(c=>wrapHit(esc(c), hitPuku(c))).join(' ／ ')+'</div></div>';
-    if(p.sanrentan) html += '<div class="pred-box"><div class="k">三連単</div><div class="v">'+p.sanrentan.map(c=>wrapHit(esc(c), hitTan(c))).join(' ／ ')+'</div></div>';
-    if(p.wide) html += '<div class="pred-box"><div class="k">ワイド</div><div class="v">'+p.wide.map(c=>wrapHit(esc(c), hitWide(c))).join(' ／ ')+'</div></div>';
+    if(!p.plans && p.sanrenpuku) html += '<div class="pred-box"><div class="k">三連複</div><div class="v">'+p.sanrenpuku.map(c=>wrapHit(greenCombo(c), hitPuku(c))).join(' ／ ')+'</div></div>';
+    if(p.sanrentan) html += '<div class="pred-box"><div class="k">三連単</div><div class="v">'+p.sanrentan.map(c=>wrapHit(greenCombo(c), hitTan(c))).join(' ／ ')+'</div></div>';
+    if(p.wide) html += '<div class="pred-box"><div class="k">ワイド</div><div class="v">'+p.wide.map(c=>wrapHit(greenCombo(c), hitWide(c))).join(' ／ ')+'</div></div>';
     if(p.balance) html += '<div class="pred-box"><div class="k">均衡指数</div><div class="v">'+esc(p.balance)+'</div></div>';
     if(p.confidence) html += '<div class="pred-box"><div class="k">信頼度</div><div class="v">'+esc(p.confidence)+'</div></div>';
     html += '</div>';
@@ -1013,8 +1040,8 @@ function renderContent(){
         });
       }
       html += tiers.map(([k])=>
-        '<div class="plan-panel'+(k===defaultTier?' active':'')+'" data-plan="'+k+'"><div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">三連複</div>' + (avgText[k] ? '<div style="font-size:12px;color:var(--sub);margin-bottom:4px">'+avgText[k]+'</div>' : '') + '<div class="combos">'+p.plans[k].map(c=>{ const o = r.odds && r.odds[c.split('-').map(Number).sort((a,b)=>a-b).join('-')]; return wrapHit(esc(c) + (o ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(c)); }).join(' ／ ')+'</div>' +
-        (p.plansTan && p.plansTan[k] ? '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">三連単</div><div class="combos" style="font-size:15px">'+p.plansTan[k].map(c=>wrapHit(esc(c), hitTan(c))).join(' ／ ')+'</div>' : '') +
+        '<div class="plan-panel'+(k===defaultTier?' active':'')+'" data-plan="'+k+'"><div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">三連複</div>' + (avgText[k] ? '<div style="font-size:12px;color:var(--sub);margin-bottom:4px">'+avgText[k]+'</div>' : '') + '<div class="combos">'+p.plans[k].map(c=>{ const o = r.odds && r.odds[c.split('-').map(Number).sort((a,b)=>a-b).join('-')]; return wrapHit(greenCombo(c) + (o ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(c)); }).join(' ／ ')+'</div>' +
+        (p.plansTan && p.plansTan[k] ? '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">三連単</div><div class="combos" style="font-size:15px">'+p.plansTan[k].map(c=>wrapHit(greenCombo(c), hitTan(c))).join(' ／ ')+'</div>' : '') +
         (k==='shoubu' && p.recommend ? '<div class="rec-chip '+(p.recommend.verdict==='buy'?'rec-buy':'rec-skip')+'">判定：'+esc(p.recommend.label)+'（'+esc(p.recommend.reason)+'）</div>' : '') +
         (k==='shoubu' && p.ana ? '<div class="ana">穴候補: '+p.ana.num+'番 '+esc(p.ana.name)+'（'+esc(p.ana.reason)+'）</div>' : '') +
         '</div>').join('');
@@ -1077,9 +1104,9 @@ function renderContent(){
           html += '<div class="gensen-box">' +
             '<div class="gensen-title">✦ 厳選セット' + (fukuHit ? ' <span class="hit-badge hit">🎯 三連複的中</span>' : '') + (tanHit ? ' <span class="hit-badge hit">🎯 三連単的中</span>' : '') + '</div>' +
             (gsComputed ? '<div style="font-size:12px;color:var(--sub);margin:2px 0 4px">このレースの三連単・勝負は本命頭フォーメーションで作られているため、厳選セットの並びを併記します。</div>' : '') +
-            gsSets.map((s,i)=>{ const o = (r.odds && validOdds(r.odds[s])) ? r.odds[s].toFixed(1) + '倍' : 'オッズ無し'; const hit = hitPuku(s); return '<div class="gensen-chip' + (hit ? ' hit' : '') + '"><span class="tag">' + (gsLabels[i] || '追加') + '</span><span class="set">' + esc(s) + '</span>' + (hit ? '<span>🎯</span>' : '') + '<span class="odds">' + o + '</span></div>'; }).join('') +
+            gsSets.map((s,i)=>{ const o = (r.odds && validOdds(r.odds[s])) ? r.odds[s].toFixed(1) + '倍' : 'オッズ無し'; const hit = hitPuku(s); return '<div class="gensen-chip' + (hit ? ' hit' : '') + '"><span class="tag">' + (gsLabels[i] || '追加') + '</span><span class="set">' + greenCombo(s) + '</span>' + (hit ? '<span>🎯</span>' : '') + '<span class="odds">' + o + '</span></div>'; }).join('') +
             '<div style="font-size:12px;color:var(--sub);margin:8px 0 4px">厳選セットの並び（三連単）</div>' +
-            '<div class="combos" style="font-size:15px">' + gsOrders.map(o=>wrapHit(esc(o), hitTan(o))).join(' ／ ') + '</div>' +
+            '<div class="combos" style="font-size:15px">' + gsOrders.map(o=>wrapHit(greenCombo(o), hitTan(o))).join(' ／ ') + '</div>' +
             '</div>';
         }
       }
@@ -1103,8 +1130,8 @@ function renderContent(){
         const uraPukuHit = uraSets.some(s=>hitPuku(s));
         html += '<details class="ura-fold"><summary>裏三連単・裏三連複（荒れ候補） ▼' + (uraTanHit ? ' <span class="hit-badge hit">🎯 三連単的中</span>' : '') + (uraPukuHit ? ' <span class="hit-badge hit">🎯 三連複的中</span>' : '') + '</summary>' +
           '<div style="font-size:12px;color:var(--sub);margin:6px 0 4px">ライン4本以上で信頼度★3以下のレースだけに出る、通常とは別の買い目です（全点に穴候補入り）。買うかどうかは通常の三連単と比べて判断して下さい。過去439レース・該当43レースでは裏三連複 的中46.5%・回収102.7%（5点）、裏三連単 的中16.3%・回収93.4%（12点）でした（該当件数は少なめです）。</div>' +
-          '<div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">裏三連複（5点）</div><div class="combos">' + uraSets.map(s=>{ const o = r.odds && r.odds[s]; return wrapHit(esc(s) + (o && o < 9999 ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(s)); }).join(' ／ ') + '</div>' +
-          '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">裏三連単（12点）</div><div class="combos" style="font-size:15px">' + uraOrders.map(o=>wrapHit(esc(o), hitTan(o))).join(' ／ ') + '</div>' +
+          '<div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">裏三連複（5点）</div><div class="combos">' + uraSets.map(s=>{ const o = r.odds && r.odds[s]; return wrapHit(greenCombo(s) + (o && o < 9999 ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(s)); }).join(' ／ ') + '</div>' +
+          '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">裏三連単（12点）</div><div class="combos" style="font-size:15px">' + uraOrders.map(o=>wrapHit(greenCombo(o), hitTan(o))).join(' ／ ') + '</div>' +
           '</details>';
       }
     }
