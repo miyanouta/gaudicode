@@ -98,6 +98,23 @@
   .gensen-chip .odds{font-size:14.5px;color:var(--gold);font-weight:800;margin-left:auto;white-space:nowrap}
   .gensen-chip.hit{border-color:var(--gold);box-shadow:0 0 10px rgba(255,176,32,.5)}
   details.ura-fold summary{cursor:pointer;color:var(--gold);font-size:14.5px;font-weight:700}
+  .class-chip{display:inline-block;padding:3px 12px;border-radius:999px;font-size:13px;font-weight:800;border:1px solid var(--accent2);color:var(--accent2);background:rgba(77,163,255,.08);margin-bottom:10px}
+  details.scen-fold{margin-bottom:15px;border:1px solid var(--line);border-radius:14px;padding:11px 14px;background:rgba(77,163,255,.04)}
+  details.scen-fold summary{cursor:pointer;color:var(--accent2);font-size:15px;font-weight:800}
+  .scen-pat{border-top:1px solid var(--line);padding:10px 0 5px;margin-top:10px}
+  .scen-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .scen-name{font-size:15px;font-weight:800}
+  .scen-pct{font-size:13.5px;font-weight:800;color:var(--accent)}
+  .scen-bar{height:6px;border-radius:3px;background:var(--panel2);margin:5px 0 7px;overflow:hidden}
+  .scen-bar i{display:block;height:100%;background:var(--gold-grad);border-radius:3px}
+  .scen-desc{font-size:13px;color:var(--sub);line-height:1.65}
+  .scen-phase{display:flex;align-items:center;gap:5px;margin:5px 0;flex-wrap:wrap}
+  .scen-phase .pl{flex:0 0 62px;font-size:11.5px;color:var(--sub);font-weight:700}
+  .scen-car{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:12px;font-weight:800;border:2px solid transparent;flex:none}
+  .scen-car.main{border-color:var(--accent);box-shadow:0 0 6px rgba(255,176,32,.45)}
+  .scen-arrow{color:var(--sub);font-size:11px}
+  .scen-top{font-size:13.5px;margin-top:5px;line-height:1.65}
+  .scen-note{font-size:12px;color:var(--sub);margin-top:9px;line-height:1.65}
   .result-card{border:1px solid var(--accent);background:linear-gradient(180deg,rgba(255,176,32,.10),rgba(255,176,32,.03))}
   .result-top{font-size:17px;font-weight:800;line-height:1.7}
   .hit-badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:700;margin:2px 4px 2px 0;background:#2a2f45;color:var(--sub)}
@@ -623,6 +640,138 @@ function renderRaces(){
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
+// ===== 級別構成の推奨段（出し分け・表示専用） =====
+// 過去1,024レース測定 (2026-11-09〜22) で前半/後半とも符号が安定した3パターンだけを出す。
+// それ以外は「ファミリー単独では決まらない」ため何も表示しない。
+const CLASS_RANK = { SS:6, S1:5, S2:4, A1:3, A2:2, A3:1 };
+function classTierTip(race){
+  const rs = race.riders || [];
+  if(!rs.length) return null;
+  const men = rs.filter(x => x.class !== 'L1');
+  if(men.length === rs.length){
+    let topRank = 0;
+    men.forEach(x => { topRank = Math.max(topRank, CLASS_RANK[x.class] || 0); });
+    const topCount = men.filter(x => (CLASS_RANK[x.class] || 0) === topRank).length;
+    if(topRank > 0 && topCount <= 2) return '級構成：勝負向き';
+  }
+  if(rs.every(x => x.class === 'A3')) return '級構成：鉄板向き';
+  if(rs.every(x => x.class === 'SS' || x.class === 'S1' || x.class === 'S2')) return '級構成：バランス向き';
+  return null;
+}
+
+// ===== 展開シミュレーション（図式・3パターン／表示専用） =====
+// 本線ライン = 得点最上位の選手がいるライン。
+// 起こりやすさは過去943レース (2026-11-09〜22) の実測を土台にした目安:
+//   土台 A(本線の先頭が勝つ) 35.0% / B(本線の番手・3番手が勝つ) 19.5% / C(別線が勝つ) 45.5%
+//   先頭の逃+捲が多いほど A が上がり C が下がる (実測: 逃+捲0〜2 → A 21.3%/C 67.4%、7以上 → A 41.5%/C 37.3%)
+//   番手の差しが多いほど B が上がる (実測: 差し0〜1 → B 18.5%、4以上 → B 24.9%。本線が単騎なら B は実測 0%)
+//   別線の先頭の逃+捲が多いほど C が上がる (実測: 相手0〜2 → C 36.7%、7以上 → C 49.6%)
+// 補正係数は同データで検証済み (全体の予測平均 34.4/19.6/46.1 vs 実測 35.0/19.5/45.5)。
+function scenarioSim(race){
+  const rs = race.riders || [];
+  if(rs.length < 3 || !(race.lineup || []).length) return null;
+  const byNum = {}; rs.forEach(x => { byNum[x.num] = x; });
+  let top = null;
+  rs.forEach(x => { if(!top || (x.tokuten || 0) > (top.tokuten || 0)) top = x; });
+  if(!top) return null;
+  let line = null;
+  (race.lineup || []).forEach(L => { if(!line && L.includes(top.num)) line = L; });
+  if(!line) line = [top.num];
+  const lead = byNum[line[0]];
+  if(!lead) return null;
+  const ban = line.length >= 2 ? byNum[line[1]] : null;
+  const third = line.length >= 3 ? byNum[line[2]] : null;
+  const atk = (lead.nige || 0) + (lead.makuri || 0);
+  const sashi = ban ? (ban.sashi || 0) : 0;
+  let rivLine = null, riv = 0;
+  (race.lineup || []).forEach(L => {
+    if(L === line) return;
+    const x = byNum[L[0]]; if(!x) return;
+    const a = (x.nige || 0) + (x.makuri || 0);
+    if(rivLine === null || a > riv){ riv = a; rivLine = L; }
+  });
+  let A = 35.0, B = 19.5, C = 45.5;
+  if(atk <= 2){ A *= 0.55; C *= 1.55; }
+  else if(atk <= 4){ A *= 0.80; C *= 1.12; }
+  else if(atk <= 6){ A *= 0.85; C *= 1.12; }
+  else { A *= 1.20; C *= 0.80; }
+  if(!ban){ B = 0; }
+  else if(sashi >= 4){ B *= 1.30; A *= 0.92; }
+  else if(sashi <= 1){ B *= 0.95; }
+  if(riv <= 2){ A *= 1.25; C *= 0.80; }
+  else if(riv <= 4){ A *= 1.10; C *= 0.97; }
+  else if(riv <= 6){ C *= 0.94; }
+  else { A *= 0.90; C *= 1.09; }
+  const tot = A + B + C;
+  const raw = [A / tot * 100, B / tot * 100, C / tot * 100];
+  const pct = raw.map(v => Math.floor(v));
+  let rest = 100 - pct.reduce((a, b) => a + b, 0);
+  raw.map((v, i) => [v - pct[i], i]).sort((a, b) => b[0] - a[0]).forEach(([ , i]) => { if(rest > 0){ pct[i]++; rest--; } });
+  // 想定上位と隊列
+  const inLine = new Set(line);
+  const byTk = rs.slice().sort((a, b) => (b.tokuten || 0) - (a.tokuten || 0)).map(x => x.num);
+  const fill = arr => {
+    const out = [];
+    arr.forEach(n => { if(n != null && byNum[n] && !out.includes(n)) out.push(n); });
+    for(const n of byTk){ if(out.length >= 3) break; if(!out.includes(n)) out.push(n); }
+    return out.slice(0, 3);
+  };
+  const topA = fill([line[0], line[1], line[2]]);
+  const topB = ban ? fill([line[1], line[2] != null ? line[2] : line[0], line[0]]) : null;
+  const rivLead = rivLine ? rivLine[0] : null;
+  const topC = rivLead != null
+    ? fill([rivLead, line[0], rivLine[1] != null ? rivLine[1] : line[1]])
+    : fill([byTk.find(n => !inLine.has(n)), line[0], line[1]]);
+  const others = (race.lineup || []).filter(L => L !== line);
+  const atkOf = L => { const x = byNum[L[0]]; return x ? (x.nige || 0) + (x.makuri || 0) : 0; };
+  const midOrder = line.concat(others.slice().sort((a, b) => atkOf(b) - atkOf(a)).flat());
+  const startOrder = (race.lineup || []).flat().filter(n => byNum[n]);
+  const goalOrder = t => t.concat(midOrder.filter(n => !t.includes(n)));
+  const finA = midOrder.slice();
+  const finB = topB ? goalOrder(topB) : midOrder.slice();
+  const finC = rivLead != null ? [rivLead].concat(midOrder.filter(n => n !== rivLead)) : midOrder.slice();
+  return { line, lead, ban, third, atk, sashi, riv, rivLine, rivLead, pct, topA, topB, topC,
+           startOrder, midOrder, finA, finB, finC, goalA: goalOrder(topA), goalB: finB, goalC: goalOrder(topC) };
+}
+
+function renderScenario(race){
+  const s = scenarioSim(race);
+  if(!s) return '';
+  const nameOf = n => { const x = (race.riders || []).find(y => y.num === n); return x ? esc(x.name) : ''; };
+  const carChip = n => {
+    const cc = CAR_COLORS[n] || ['#888', '#fff'];
+    return '<span class="scen-car' + (s.line.includes(n) ? ' main' : '') + '" style="background:' + cc[0] + ';color:' + cc[1] + '">' + n + '</span>';
+  };
+  const phaseRow = (label, order) => '<div class="scen-phase"><span class="pl">' + label + '</span>' + order.map(carChip).join('<span class="scen-arrow">›</span>') + '</div>';
+  const topLine = t => t ? '<div class="scen-top">想定上位：' + t.map((n, i) => (i + 1) + '着 ' + n + '番 ' + nameOf(n)).join(' ／ ') + '</div>' : '';
+  const pat = (name, pct, desc, fin, goal, top) =>
+    '<div class="scen-pat"><div class="scen-head"><span class="scen-name">' + name + '</span><span class="scen-pct">目安 ' + pct + '%</span></div>' +
+    '<div class="scen-bar"><i style="width:' + pct + '%"></i></div>' +
+    '<div class="scen-desc">' + desc + '</div>' +
+    phaseRow('発走', s.startOrder) + phaseRow('中盤', s.midOrder) + phaseRow('最終周回', fin) + phaseRow('ゴール想定', goal) +
+    topLine(top) + '</div>';
+  const leadTxt = s.lead.num + '番 ' + esc(s.lead.name);
+  const banTxt = s.ban ? s.ban.num + '番 ' + esc(s.ban.name) : '';
+  const rivTxt = s.rivLead != null ? s.rivLead + '番 ' + nameOf(s.rivLead) : '';
+  let html = '<details class="scen-fold"><summary>展開シミュレーション（図式・3パターン） ▼</summary>' +
+    '<div class="scen-note">本線ラインは得点最上位の選手がいるライン（このレースは ' + s.line.join('→') + '、先頭 ' + leadTxt + '）。金枠が本線ラインです。起こりやすさは過去943レース（2026-11-09〜22）の実測を土台に、先頭の決まり手・番手の差し・別線の強さで補正した目安で、3つの合計が100%になるよう調整しています。</div>';
+  html += pat('A 本線ライン決着', s.pct[0],
+    '本線の先頭 ' + leadTxt + '（逃' + (s.lead.nige || 0) + '・捲' + (s.lead.makuri || 0) + '）が主導権を取り、番手' + (s.ban ? ' ' + banTxt : '') + 'とラインで決まる展開。',
+    s.finA, s.goalA, s.topA);
+  html += pat('B 番手・差し浮上', s.pct[1],
+    s.ban
+      ? '本線の先頭が終盤に垂れて、番手 ' + banTxt + '（差' + (s.ban.sashi || 0) + '）' + (s.third ? 'や3番手 ' + s.third.num + '番 ' + esc(s.third.name) : '') + 'が差して浮上する展開。'
+      : '本線が単騎のため番手・3番手がおらず、この形は想定しにくい展開（実測でも本線単騎のレースでこの形は起きていません）。',
+    s.finB, s.goalB, s.topB);
+  html += pat('C 捲り・別線決着', s.pct[2],
+    rivTxt
+      ? '別線の先頭 ' + rivTxt + '（逃+捲 ' + s.riv + '）や単騎の捲りが決まって、本線が崩れる展開。'
+      : '別線の捲りが決まって、本線が崩れる展開。',
+    s.finC, s.goalC, s.topC);
+  html += '</details>';
+  return html;
+}
+
 function renderContent(){
   const v = state.data.venues[state.venueIdx];
   const r = v.races[state.raceIdx];
@@ -637,6 +786,8 @@ function renderContent(){
     (r.startTime? '<small>発走 '+r.startTime+'</small>' : '') +
     '<small>'+esc(r.name||'')+'</small></h3>';
   if(r.notice) html += '<div class="notice-banner">⚠ ' + esc(r.notice) + '</div>';
+  const ctip = classTierTip(r);
+  if(ctip) html += '<div><span class="class-chip">🏷 ' + ctip + '</span></div>';
   const ymd = (state.data.date || '').replace(/-/g, '');
   let vid = '';
   const lu = liveUrl(v);
@@ -826,6 +977,9 @@ function renderContent(){
     if(p.comment) html += '<details class="comment-fold"><summary>コメント・展開を読む</summary><div class="comment" style="margin-top:8px">'+esc(p.comment)+'</div></details>';
     html += '</div>';
   }
+
+  // 展開シミュレーション（図式・3パターン）
+  html += renderScenario(r);
 
   // 展開アニメーション
   html += '<div class="card"><h4>🏁 展開アニメーション <span class="anim-note">シミュレーション（予想ベース）</span></h4>' +
