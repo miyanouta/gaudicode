@@ -115,6 +115,11 @@
   .scen-arrow{color:var(--sub);font-size:11px}
   .scen-top{font-size:13.5px;margin-top:5px;line-height:1.65}
   .scen-note{font-size:12px;color:var(--sub);margin-top:9px;line-height:1.65}
+  .scen-bets{border-top:1px solid var(--line);padding:10px 0 5px;margin-top:10px}
+  .scen-bets-title{font-size:14.5px;font-weight:800}
+  .scen-bets-note{font-size:12px;color:var(--sub);margin:4px 0 7px;line-height:1.65}
+  .scen-bet-row{font-size:13.5px;margin:3px 0;line-height:1.6}
+  .scen-bets-total{font-size:13.5px;font-weight:800;margin-top:7px;line-height:1.6}
   .result-card{border:1px solid var(--accent);background:linear-gradient(180deg,rgba(255,176,32,.10),rgba(255,176,32,.03))}
   .result-top{font-size:17px;font-weight:800;line-height:1.7}
   .hit-badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:700;margin:2px 4px 2px 0;background:#2a2f45;color:var(--sub)}
@@ -785,8 +790,30 @@ function scenarioSim(race){
   // D = 別線の差し最上位の番手 + そのラインの先頭 + 本線先頭 (補充は得点順)
   // E = 別線の捲り最上位の先頭・単騎 + その番手 (いれば) + 本線先頭 (補充はR2順)
   // D/E とも 2026-11-23 の測定 (968レース) で追加効果を確認: 完全一致 37.2%→43.0%、勝者入り 90.9%→95.5%
-  const topD = dAxis != null ? fillBy([dAxis, dGrp ? dGrp[0] : null, lineNums[0]], byTkN) : null;
-  const topE = eAxis != null ? fillBy([eAxis, eGrp ? eGrp[1] : null, lineNums[0]], byR2) : null;
+  // D/E フォールバック (想定上位・隊列図の表示専用。%モデルには使わない):
+  //   D: 別線に番手のいるラインが無い場合、別線の単騎で差し最上位を軸にする (C のフォールバックと同方針)
+  //   E: 別線グループが無い場合、本線以外の選手で捲り最上位を軸にする
+  //   それでも軸が無い場合 (全員が本線の1ラインのみ等) は null のまま (説明文のみ)。
+  let dTopAxis = dAxis, dTopGrp = dGrp, dFallback = false;
+  if(dTopAxis == null){
+    const restNums = nonMainGrps.flat();
+    if(restNums.length){
+      dTopAxis = bestByNum(restNums, x => (x.sashi || 0) * 1000 + (x.tokuten || 0));
+      dTopGrp = nonMainGrps.find(g => g.includes(dTopAxis)) || null;
+      dFallback = dTopAxis != null;
+    }
+  }
+  let eTopAxis = eAxis, eTopGrp = eGrp, eFallback = false;
+  if(eTopAxis == null){
+    const restNums = rs.filter(x => !inLine.has(x.num)).map(x => x.num);
+    if(restNums.length){
+      eTopAxis = bestByNum(restNums, x => (x.makuri || 0) * 100000 + ((x.nige || 0) + (x.makuri || 0)) * 100 + (x.tokuten || 0));
+      eTopGrp = null;
+      eFallback = eTopAxis != null;
+    }
+  }
+  const topD = dTopAxis != null ? fillBy([dTopAxis, dTopGrp && dTopGrp[0] !== dTopAxis ? dTopGrp[0] : null, lineNums[0]], byTkN) : null;
+  const topE = eTopAxis != null ? fillBy([eTopAxis, eTopGrp ? eTopGrp[1] : null, lineNums[0]], byR2) : null;
   const others = (race.lineup || []).filter(L => L !== line);
   const atkOf = L => { const x = byNum[L[0]]; return x ? (x.nige || 0) + (x.makuri || 0) : 0; };
   const midOrder = line.concat(others.slice().sort((a, b) => atkOf(b) - atkOf(a)).flat());
@@ -796,9 +823,9 @@ function scenarioSim(race){
   const finB = topB ? goalOrder(topB) : midOrder.slice();
   const finC = rivLead != null ? [rivLead].concat(midOrder.filter(n => n !== rivLead)) : midOrder.slice();
   const finD = topD ? goalOrder(topD) : midOrder.slice();
-  const finE = eAxis != null ? [eAxis].concat(midOrder.filter(n => n !== eAxis)) : midOrder.slice();
+  const finE = eTopAxis != null ? [eTopAxis].concat(midOrder.filter(n => n !== eTopAxis)) : midOrder.slice();
   return { line, lead, ban, third, atk, sashi, riv, rivLine, rivLead, pct, topA, topB, topC, topD, topE,
-           dAxis, eAxis, dGrp, eGrp,
+           dAxis, eAxis, dGrp, eGrp, dAxisTop: dTopAxis, dGrpTop: dTopGrp, dFallback, eAxisTop: eTopAxis, eFallback,
            startOrder, midOrder, finA, finB, finC, finD, finE, goalA: goalOrder(topA), goalB: finB, goalC: goalOrder(topC),
            goalD: topD ? goalOrder(topD) : midOrder.slice(), goalE: topE ? goalOrder(topE) : midOrder.slice() };
 }
@@ -822,9 +849,9 @@ function renderScenario(race){
   const leadTxt = s.lead.num + '番 ' + esc(s.lead.name);
   const banTxt = s.ban ? s.ban.num + '番 ' + esc(s.ban.name) : '';
   const rivTxt = s.rivLead != null ? s.rivLead + '番 ' + nameOf(s.rivLead) : '';
-  const dTxt = s.dAxis != null ? s.dAxis + '番 ' + nameOf(s.dAxis) : '';
-  const dLeadTxt = s.dGrp ? s.dGrp[0] + '番 ' + nameOf(s.dGrp[0]) : '';
-  const eTxt = s.eAxis != null ? s.eAxis + '番 ' + nameOf(s.eAxis) : '';
+  const dTxt = s.dAxisTop != null ? s.dAxisTop + '番 ' + nameOf(s.dAxisTop) : '';
+  const dLeadTxt = s.dGrpTop ? s.dGrpTop[0] + '番 ' + nameOf(s.dGrpTop[0]) : '';
+  const eTxt = s.eAxisTop != null ? s.eAxisTop + '番 ' + nameOf(s.eAxisTop) : '';
   let html = '<details class="scen-fold"><summary>展開シミュレーション（図式・5パターン） ▼</summary>' +
     '<div class="scen-note">本線ラインは得点最上位の選手がいるライン（このレースは ' + s.line.join('→') + '、先頭 ' + leadTxt + '）。金枠が本線ラインです。起こりやすさは過去968レース（2026-11-09〜23）の実測を土台に、先頭の決まり手・番手の差し・別線の強さで補正した目安で、5つの合計が100%になるよう調整しています。</div>';
   html += pat('A 本線ライン決着', s.pct[0],
@@ -841,15 +868,34 @@ function renderScenario(race){
       : '別線の捲りが決まって、本線が崩れる展開。',
     s.finC, s.goalC, s.topC);
   html += pat('D 別線番手・差し浮上', s.pct[3],
-    s.dAxis != null
-      ? '別線の番手 ' + dTxt + '（差' + (((race.riders || []).find(y => y.num === s.dAxis) || {}).sashi || 0) + '）が、先頭 ' + dLeadTxt + ' の作る流れに乗って差して浮上する展開。'
-      : '別線に番手のいるラインがなく、この形は想定しにくい展開。',
+    s.dFallback
+      ? '別線に番手のいるラインがないため、別線の単騎で差しの利く ' + dTxt + '（差' + (((race.riders || []).find(y => y.num === s.dAxisTop) || {}).sashi || 0) + '）が本線の流れに乗って浮上する展開。'
+      : s.dAxisTop != null
+        ? '別線の番手 ' + dTxt + '（差' + (((race.riders || []).find(y => y.num === s.dAxisTop) || {}).sashi || 0) + '）が、先頭 ' + dLeadTxt + ' の作る流れに乗って差して浮上する展開。'
+        : '別線に番手のいるラインがなく、この形は想定しにくい展開。',
     s.finD, s.goalD, s.topD);
   html += pat('E 捲り・自力決着', s.pct[4],
-    s.eAxis != null
-      ? '自力の ' + eTxt + '（捲' + (((race.riders || []).find(y => y.num === s.eAxis) || {}).makuri || 0) + '・逃' + (((race.riders || []).find(y => y.num === s.eAxis) || {}).nige || 0) + '）が捲りを決めて押し切る展開。'
-      : '別線のライン・単騎がなく、この形は想定しにくい展開。',
+    s.eFallback
+      ? '並びに別線のラインがないため、本線以外の自力 ' + eTxt + '（捲' + (((race.riders || []).find(y => y.num === s.eAxisTop) || {}).makuri || 0) + '・逃' + (((race.riders || []).find(y => y.num === s.eAxisTop) || {}).nige || 0) + '）が捲りを決めて押し切る展開。'
+      : s.eAxisTop != null
+        ? '自力の ' + eTxt + '（捲' + (((race.riders || []).find(y => y.num === s.eAxisTop) || {}).makuri || 0) + '・逃' + (((race.riders || []).find(y => y.num === s.eAxisTop) || {}).nige || 0) + '）が捲りを決めて押し切る展開。'
+        : '別線のライン・単騎がなく、この形は想定しにくい展開。',
     s.finE, s.goalE, s.topE);
+  // シミュレーション買い目 (表示専用): 各パターンの想定上位を三連複の組として並べ、重複を除いた合計点数を出す
+  const comboOf = t => t ? t.slice().sort((a, b) => a - b).join('-') : null;
+  const seenCombo = {};
+  const uniqCombos = [];
+  const betRows = [['A', s.topA], ['B', s.topB], ['C', s.topC], ['D', s.topD], ['E', s.topE]].map(([L, t]) => {
+    const c = comboOf(t);
+    if(!c) return '<div class="scen-bet-row"><b>' + L + '</b>：—（想定上位なし）</div>';
+    if(seenCombo[c]) return '<div class="scen-bet-row"><b>' + L + '</b>：' + c + '（' + seenCombo[c] + 'と同じ）</div>';
+    seenCombo[c] = L; uniqCombos.push(c);
+    return '<div class="scen-bet-row"><b>' + L + '</b>：' + c + '</div>';
+  }).join('');
+  html += '<div class="scen-bets"><div class="scen-bets-title">シミュレーション買い目（三連複・表示専用）</div>' +
+    '<div class="scen-bets-note">各パターンの想定上位3人をそのまま三連複の組にした参考表示です。GAUDICODE予想の買い目（鉄板／バランス／勝負）とは別枠で、予想には含まれません。</div>' +
+    betRows +
+    '<div class="scen-bets-total">合計 ' + uniqCombos.length + '点' + (uniqCombos.length ? '：' + uniqCombos.join(' ／ ') : '') + '</div></div>';
   html += '</details>';
   return html;
 }
