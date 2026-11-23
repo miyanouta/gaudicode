@@ -106,6 +106,12 @@
   .rec-chip{display:inline-block;margin:2px 0 8px;padding:3px 11px;border-radius:999px;font-size:13px;font-weight:700}
   .rec-buy{background:#e3f4e5;color:#1c6b2a;border:1px solid #9ed3a6}
   .rec-skip{background:#f3f3f3;color:#777;border:1px solid #ccc}
+  @keyframes recglow{0%,100%{box-shadow:0 0 0 2px #6db9ff,0 0 10px 2px rgba(109,185,255,.45)}50%{box-shadow:0 0 0 2px #a8d4ff,0 0 22px 8px rgba(109,185,255,.9)}}
+  .plan-tab.rec-tab{animation:recglow 1.7s ease-in-out infinite;color:#d6ecff}
+  .plan-tab.rec-tab.active{color:#191102}
+  .plan-panel.rec-panel{border-color:rgba(109,185,255,.6);box-shadow:0 0 14px rgba(109,185,255,.30)}
+  .rec-tag{display:inline-block;background:linear-gradient(135deg,#6db9ff,#2f7fe0);color:#04182e;border-radius:5px;padding:0 7px;font-size:11px;font-weight:800;margin-left:7px;vertical-align:2px}
+  .osusume-chip{display:inline-flex;align-items:center;padding:7px 14px;border-radius:999px;border:1px solid #6db9ff;background:rgba(47,127,224,.18);color:#a8d4ff;font-size:13.5px;font-weight:800;box-shadow:0 0 10px rgba(109,185,255,.35)}
   details.comment-fold{margin-top:12px}
   details.comment-fold summary{cursor:pointer;color:var(--sub);font-size:13.5px}
   details.ura-fold{margin-top:12px;border:1px solid #8a6d1f;border-radius:10px;padding:9px 11px;background:rgba(255,176,32,.06)}
@@ -849,6 +855,16 @@ function scenarioSim(race){
            goalD: topD ? goalOrder(topD) : midOrder.slice(), goalE: topE ? goalOrder(topE) : midOrder.slice() };
 }
 
+// 推奨プランの段キー: 保存データの prediction.recommend (verdict=buy のみ) の label から teppan/balance/shoubu を返す。無ければ null
+function recTierKey(p){
+  if(!p || !p.recommend || p.recommend.verdict !== 'buy') return null;
+  const L = String(p.recommend.label || '');
+  if(L.indexOf('鉄板') >= 0) return 'teppan';
+  if(L.indexOf('バランス') >= 0) return 'balance';
+  if(L.indexOf('勝負') >= 0) return 'shoubu';
+  return null;
+}
+
 // 見落とし注意: 単騎×捲り>=2 で、5パターン全ての想定上位に入っていない選手 (先行測定 896レースで3着内率32.6%)
 function missWatchNums(race){
   const out = new Set();
@@ -1010,6 +1026,8 @@ function renderContent(){
   if(lu && state.data.date === todayStrJST()) vid += '<a class="vid-btn live" target="_blank" rel="noopener" href="' + lu + '">📺 ライブ映像</a>';
   if(r.voteUrl && !r.result){ vid += '<a class="vid-btn buy-btn" target="_blank" rel="noopener" data-vote="' + KJ_TOP_URL + '" href="' + kjUrl(KJ_TOP_URL) + '">KEIRIN.JPで買う</a>'; }
   if(v.cd && v.gradeCd && r.result) vid += '<a class="vid-btn" target="_blank" rel="noopener" href="https://keirin.kdreams.jp/stadium/digest/?kyogijoCd=' + v.cd + '&kaisaiDate=' + ymd + '&gradeCd=' + v.gradeCd + '&raceNo=' + r.no + '">🎬 ダイジェスト</a>';
+  const recK = recTierKey(r.prediction);
+  if(recK) vid += '<span class="osusume-chip">⭐ おすすめ：' + ({teppan:'鉄板', balance:'バランス', shoubu:'勝負'})[recK] + '</span>';
   if(vid) html += '<div class="vid-row">' + vid + '</div>';
 
   // 結果 (確定していれば)
@@ -1094,7 +1112,7 @@ function renderContent(){
         .filter(([k])=>p.plans[k] && p.plans[k].length);
       const defaultTier = p.plans.balance ? 'balance' : (tiers[0] && tiers[0][0]);
       html += '<div class="plan-tabs">' + tiers.map(([k,label])=>
-        '<button class="plan-tab'+(k===defaultTier?' active':'')+'" onclick="switchPlan(this,\''+k+'\')">'+label+'（'+p.plans[k].length+'点）</button>').join('') + '</div>';
+        '<button class="plan-tab'+(k===defaultTier?' active':'')+(k===recK?' rec-tab':'')+'" onclick="switchPlan(this,\''+k+'\')">'+label+'（'+p.plans[k].length+'点）</button>').join('') + '</div>';
       // 区分別平均オッズ（鉄板／バランス追加分／勝負追加分、除外なしの単純平均）
       const normC = c => c.split('-').map(Number).sort((a,b)=>a-b).join('-');
       const planSet = {};
@@ -1111,7 +1129,7 @@ function renderContent(){
         });
       }
       html += tiers.map(([k])=>
-        '<div class="plan-panel'+(k===defaultTier?' active':'')+'" data-plan="'+k+'"><div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">三連複</div>' + (avgText[k] ? '<div style="font-size:12px;color:var(--sub);margin-bottom:4px">'+avgText[k]+'</div>' : '') + '<div class="combos">'+p.plans[k].map(c=>{ const o = r.odds && r.odds[c.split('-').map(Number).sort((a,b)=>a-b).join('-')]; return wrapHit(greenCombo(c) + (o ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(c)); }).join(' ／ ')+'</div>' +
+        '<div class="plan-panel'+(k===defaultTier?' active':'')+(k===recK?' rec-panel':'')+'" data-plan="'+k+'"><div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">三連複'+(k===recK?'<span class="rec-tag">⭐ おすすめ</span>':'')+'</div>' + (avgText[k] ? '<div style="font-size:12px;color:var(--sub);margin-bottom:4px">'+avgText[k]+'</div>' : '') + '<div class="combos">'+p.plans[k].map(c=>{ const o = r.odds && r.odds[c.split('-').map(Number).sort((a,b)=>a-b).join('-')]; return wrapHit(greenCombo(c) + (o ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(c)); }).join(' ／ ')+'</div>' +
         (p.plansTan && p.plansTan[k] ? '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">三連単</div><div class="combos" style="font-size:15px">'+p.plansTan[k].map(c=>wrapHit(greenCombo(c), hitTan(c))).join(' ／ ')+'</div>' : '') +
         (k==='shoubu' && p.recommend ? '<div class="rec-chip '+(p.recommend.verdict==='buy'?'rec-buy':'rec-skip')+'">判定：'+esc(p.recommend.label)+'（'+esc(p.recommend.reason)+'）</div>' : '') +
         (k==='shoubu' && p.ana ? '<div class="ana">穴候補: '+p.ana.num+'番 '+esc(p.ana.name)+'（'+esc(p.ana.reason)+'）</div>' : '') +
