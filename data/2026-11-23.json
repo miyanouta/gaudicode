@@ -1,6 +1,6 @@
 {
   "date": "2026-11-23",
-  "generatedAt": "2026-11-22T22:03:17.728Z",
+  "generatedAt": "2026-11-23T02:03:33.588Z",
   "source": "楽天Kドリームス",
   "venues": [
     {
@@ -16691,7 +16691,7 @@
               "class": "A1",
               "style": "追",
               "tokuten": 91.2,
-              "gear": 3.93,
+              "gear": null,
               "s": 9,
               "b": 0,
               "nige": 0,
@@ -29602,7 +29602,6 @@
   "quality": {
     "errors": [],
     "warnings": 0,
-    "checkedAt": "2026-11-22T22:03:17.742Z"
-  },
-  "resultsUpdatedAt": "2026-11-23T01:15:19.945Z"
+    "checkedAt": "2026-11-23T02:03:33.611Z"
+  }
 }
