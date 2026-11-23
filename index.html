@@ -708,6 +708,11 @@ function scenarioSim(race){
   let rest = 100 - pct.reduce((a, b) => a + b, 0);
   raw.map((v, i) => [v - pct[i], i]).sort((a, b) => b[0] - a[0]).forEach(([ , i]) => { if(rest > 0){ pct[i]++; rest--; } });
   // 想定上位と隊列
+  // 選出ルールは 2026-11-23 の測定 (968レース) で最良だった組み合わせ:
+  //   A = 本線の先頭・番手 + 3人目は別線のR2最上位 (完全一致 28.6%→37.2%、前半/後半とも改善)
+  //   B = 従来どおり (番手・3番手・先頭)
+  //   C = 対抗ラインの並び順3人
+  // R2キー = 得点 + 脚質点 (逃5・両3・追1)×0.5 + ギア補正 (3.93以上で+1.0)
   const inLine = new Set(line);
   const byTk = rs.slice().sort((a, b) => (b.tokuten || 0) - (a.tokuten || 0)).map(x => x.num);
   const fill = arr => {
@@ -716,11 +721,23 @@ function scenarioSim(race){
     for(const n of byTk){ if(out.length >= 3) break; if(!out.includes(n)) out.push(n); }
     return out.slice(0, 3);
   };
-  const topA = fill([line[0], line[1], line[2]]);
+  const SCEN_STYLE_PTS = { '逃': 5, '両': 3, '追': 1 };
+  const r2Of = x => (x.tokuten || 0) + (SCEN_STYLE_PTS[x.style] || 0) * 0.5 + ((x.gear != null && x.gear >= 3.93) ? 1.0 : 0);
+  const byR2 = rs.slice().sort((a, b) => r2Of(b) - r2Of(a) || (b.tokuten || 0) - (a.tokuten || 0) || a.num - b.num).map(x => x.num);
+  const byTkN = rs.slice().sort((a, b) => (b.tokuten || 0) - (a.tokuten || 0) || a.num - b.num).map(x => x.num);
+  const fillBy = (seeds, sortedNums) => {
+    const out = [];
+    seeds.forEach(n => { if(n != null && byNum[n] && !out.includes(n)) out.push(n); });
+    for(const n of sortedNums){ if(out.length >= 3) break; if(!out.includes(n)) out.push(n); }
+    return out.slice(0, 3);
+  };
+  const lineNums = line.filter(n => byNum[n]);
+  const outByR2 = byR2.filter(n => !lineNums.includes(n));
+  const topA = fillBy([lineNums[0], lineNums[1], outByR2[0]], byR2);
   const topB = ban ? fill([line[1], line[2] != null ? line[2] : line[0], line[0]]) : null;
   const rivLead = rivLine ? rivLine[0] : null;
-  const topC = rivLead != null
-    ? fill([rivLead, line[0], rivLine[1] != null ? rivLine[1] : line[1]])
+  const topC = rivLine
+    ? fillBy([rivLine[0], rivLine[1], rivLine[2]], byTkN)
     : fill([byTk.find(n => !inLine.has(n)), line[0], line[1]]);
   const others = (race.lineup || []).filter(L => L !== line);
   const atkOf = L => { const x = byNum[L[0]]; return x ? (x.nige || 0) + (x.makuri || 0) : 0; };
