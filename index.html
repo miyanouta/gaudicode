@@ -87,6 +87,21 @@
   tbody tr.miss-watch{background:rgba(53,208,127,.12)}
   tbody tr.miss-watch td.name{color:#35d07f}
   .miss-sample{color:#35d07f;font-weight:800}
+  .intui-num{color:#4dff9d;font-weight:900}
+  tbody tr.intui-watch td.name{color:#4dff9d;font-weight:800}
+  tbody tr.intui-watch td.num{color:#4dff9d;font-weight:800}
+  .intui-badge{display:inline-block;background:#0f9d58;color:#fff;border-radius:5px;padding:0 6px;font-size:11px;font-weight:800;margin-left:6px}
+  .intui-btn{border:1px solid #0f9d58;background:transparent;color:#8fa3c8;border-radius:999px;padding:2px 10px;font-size:11.5px;font-weight:800;cursor:pointer;white-space:nowrap}
+  .intui-btn.on{background:#0f9d58;color:#fff}
+  .intui-sample{color:#4dff9d;font-weight:900}
+  .fin-num{color:#4ade80;font-weight:900}
+  tbody tr.fin-watch{background:rgba(22,163,74,.15)}
+  tbody tr.fin-watch td.name{color:#4ade80}
+  tbody tr.fin-watch td.num{color:#4ade80;font-weight:800}
+  .fin-badge{display:inline-block;background:#16a34a;color:#fff;border-radius:5px;padding:0 6px;font-size:11px;font-weight:800;margin-left:6px}
+  .missed-banner{margin:0 0 10px;padding:7px 12px;border:1px solid #16a34a;border-radius:10px;background:rgba(22,163,74,.10);color:#4ade80;font-size:13.5px;font-weight:700}
+  .scen-pat.fin-match{border:1.5px solid #16a34a;border-radius:10px;padding-left:10px;padding-right:10px;background:rgba(22,163,74,.06)}
+  .fin-pat-badge{display:inline-block;background:#16a34a;color:#fff;border-radius:5px;padding:1px 8px;font-size:11.5px;font-weight:800}
   .plan-panel .ana{margin-top:8px;font-size:13.5px;color:var(--accent)}
   .rec-chip{display:inline-block;margin:2px 0 8px;padding:3px 11px;border-radius:999px;font-size:13px;font-weight:700}
   .rec-buy{background:#e3f4e5;color:#1c6b2a;border:1px solid #9ed3a6}
@@ -849,22 +864,68 @@ function missWatchNums(race){
   return out;
 }
 
+// 全プラン不的中レース判定: 結果確定済みで、実際の三連複の組が鉄板/バランス/勝負のどれにも入っていないレース
+function allPlansMissed(race){
+  const z = race && race.result;
+  if(!z || !Array.isArray(z.top3) || z.top3.length !== 3) return false;
+  const key = z.top3.map(Number).sort((a, b) => a - b).join('-');
+  const norm = c => String(c).split('-').map(Number).sort((a, b) => a - b).join('-');
+  const plans = race.prediction && race.prediction.plans;
+  if(plans && (Array.isArray(plans.teppan) || Array.isArray(plans.balance) || Array.isArray(plans.shoubu))){
+    return !['teppan', 'balance', 'shoubu'].some(k => Array.isArray(plans[k]) && plans[k].some(c => norm(c) === key));
+  }
+  if(z.hits) return z.hits.teppan === false && z.hits.balance === false && z.hits.shoubu === false;
+  return false;
+}
+// 全プラン不的中レースのみ {車番: 着順(1〜3)} を返す。それ以外は null
+function finMapOf(race){
+  if(!allPlansMissed(race)) return null;
+  const m = {};
+  race.result.top3.forEach((n, i) => { m[n] = i + 1; });
+  return m;
+}
+
+// 直感マーク: ユーザーが「気になる」選手に自分で付ける印。localStorage に端末保存 (キー: 日付|場|レース番号|車番)
+const INTUI_STORE_KEY = 'gaudi-intuition-v1';
+function loadIntuitionMarks(){
+  try{ const o = JSON.parse(localStorage.getItem(INTUI_STORE_KEY) || '{}'); return (o && typeof o === 'object' && !Array.isArray(o)) ? o : {}; }catch(_){ return {}; }
+}
+function intuitionKey(date, venue, raceNo, num){ return (date || '') + '|' + (venue || '') + '|' + raceNo + '|' + num; }
+function intuitionNums(date, venue, race){
+  const marks = loadIntuitionMarks();
+  const out = new Set();
+  (race.riders || []).forEach(x => { if(marks[intuitionKey(date, venue, race.no, x.num)]) out.add(x.num); });
+  return out;
+}
+function toggleIntuition(btn){
+  const d = btn.dataset || {};
+  const marks = loadIntuitionMarks();
+  const k = intuitionKey(d.date, d.venue, d.race, d.num);
+  if(marks[k]) delete marks[k]; else marks[k] = 1;
+  try{ localStorage.setItem(INTUI_STORE_KEY, JSON.stringify(marks)); }catch(_){ }
+  renderContent();
+}
+
 function renderScenario(race){
   const s = scenarioSim(race);
   if(!s) return '';
+  const finMap = finMapOf(race);
+  const finKey = finMap ? race.result.top3.map(Number).sort((a, b) => a - b).join('-') : null;
   const nameOf = n => { const x = (race.riders || []).find(y => y.num === n); return x ? esc(x.name) : ''; };
   const carChip = n => {
     const cc = CAR_COLORS[n] || ['#888', '#fff'];
     return '<span class="scen-car' + (s.line.includes(n) ? ' main' : '') + '" style="background:' + cc[0] + ';color:' + cc[1] + '">' + n + '</span>';
   };
   const phaseRow = (label, order) => '<div class="scen-phase"><span class="pl">' + label + '</span>' + order.map(carChip).join('<span class="scen-arrow">›</span>') + '</div>';
-  const topLine = t => t ? '<div class="scen-top">想定上位：' + t.map((n, i) => (i + 1) + '着 ' + n + '番 ' + nameOf(n)).join(' ／ ') + '</div>' : '';
-  const pat = (name, pct, desc, fin, goal, top) =>
-    '<div class="scen-pat"><div class="scen-head"><span class="scen-name">' + name + '</span><span class="scen-pct">目安 ' + pct + '%</span></div>' +
+  const topLine = t => t ? '<div class="scen-top">想定上位：' + t.map((n, i) => (i + 1) + '着 ' + (finMap && finMap[n] ? '<span class="fin-num">' + n + '</span>' : n) + '番 ' + nameOf(n)).join(' ／ ') + '</div>' : '';
+  const pat = (name, pct, desc, fin, goal, top) => {
+    const isActual = !!(finKey && top && top.map(Number).sort((a, b) => a - b).join('-') === finKey);
+    return '<div class="scen-pat' + (isActual ? ' fin-match' : '') + '"><div class="scen-head"><span class="scen-name">' + name + '</span>' + (isActual ? '<span class="fin-pat-badge">実際の展開</span>' : '') + '<span class="scen-pct">目安 ' + pct + '%</span></div>' +
     '<div class="scen-bar"><i style="width:' + pct + '%"></i></div>' +
     '<div class="scen-desc">' + desc + '</div>' +
     phaseRow('発走', s.startOrder) + phaseRow('中盤', s.midOrder) + phaseRow('最終周回', fin) + phaseRow('ゴール想定', goal) +
     topLine(top) + '</div>';
+  };
   const leadTxt = s.lead.num + '番 ' + esc(s.lead.name);
   const banTxt = s.ban ? s.ban.num + '番 ' + esc(s.ban.name) : '';
   const rivTxt = s.rivLead != null ? s.rivLead + '番 ' + nameOf(s.rivLead) : '';
@@ -942,6 +1003,7 @@ function renderContent(){
   if(r.notice) html += '<div class="notice-banner">⚠ ' + esc(r.notice) + '</div>';
   const ctip = classTierTip(r);
   if(ctip) html += '<div><span class="class-chip">🏷 ' + ctip + '</span></div>';
+  if(finMapOf(r)) html += '<div class="missed-banner">全プラン不的中 ― 実際に来た展開は緑色（着順バッジ付き）で示しています</div>';
   const ymd = (state.data.date || '').replace(/-/g, '');
   let vid = '';
   const lu = liveUrl(v);
@@ -977,25 +1039,34 @@ function renderContent(){
   }
 
   // 出走表
+  const finMap = finMapOf(r);
   const missSet = missWatchNums(r);
+  const intuiSet = intuitionNums(state.data.date, v.name, r);
   const greenCombo = c => String(c).split(/(→|-)/).map(tok => {
     if(tok === '→' || tok === '-') return tok;
     const n = Number(tok);
+    if(tok !== '' && Number.isFinite(n) && intuiSet.has(n)) return '<span class="intui-num">' + tok + '</span>';
     return (tok !== '' && Number.isFinite(n) && missSet.has(n)) ? '<span class="miss-num">' + tok + '</span>' : tok;
   }).join('');
   html += '<div class="card"><h4>出走表</h4><div class="score-legend">得点の下段： R2＝得点＋脚質＋ギア補正（◎○▲の順位キー）／ G＝GAUDI純正スコア</div>' +
     (missSet.size ? '<div class="score-legend"><span class="miss-sample">緑色</span>＝見落とし注意（単騎×捲り≥2・シミュレーション想定外だが3着内率32.6%）</div>' : '') +
+    (finMap ? '<div class="score-legend"><span class="fin-badge" style="margin-left:0">1着</span> 等の緑バッジ＝実際の着順（全プラン不的中のレースで、実際に来た選手）</div>' : '') +
+    '<div class="score-legend"><span class="intui-sample">緑</span>＋「直感」バッジ＝自分で付けた直感マーク（端末に保存）／ 行の「直感」ボタンで付け外しできます</div>' +
     '<table><thead><tr>' +
-    '<th>印</th><th>枠</th><th>車</th><th>選手名</th><th>年齢/府県</th><th>期</th><th>級班</th><th>脚質</th><th>得点</th><th>S</th><th>B</th><th>逃</th><th>捲</th><th>差</th><th>マ</th>' +
+    '<th>印</th><th>枠</th><th>車</th><th>選手名</th><th>年齢/府県</th><th>期</th><th>級班</th><th>脚質</th><th>得点</th><th>S</th><th>B</th><th>逃</th><th>捲</th><th>差</th><th>マ</th><th>直感</th>' +
     '</tr></thead><tbody>';
   const R2PT = {'逃':5,'両':3,'追':1};
   r.riders.forEach(x=>{
     const hon = x.gaudiMark==='◎' ? ' hon':'';
     const r2 = Number(x.tokuten||0) + (R2PT[x.style]||0)*0.5 + ((x.gear??0)>=3.93 ? 1.0 : 0);
     const gtxt = (typeof x.gscore==='number' && Number.isFinite(x.gscore)) ? x.gscore.toFixed(2) : '—';
-    html += '<tr'+(missSet.has(x.num)?' class="miss-watch"':'')+'><td class="mark'+hon+'">'+esc(x.gaudiMark||'')+'</td><td>'+x.waku+'</td><td>'+x.num+'</td>' +
-      '<td class="name">'+esc(x.name)+'</td><td>'+x.age+'/'+esc(x.pref)+'</td><td>'+x.term+'</td><td>'+esc(x.class)+'</td>' +
-      '<td>'+esc(x.style||'-')+'</td><td>'+Number(x.tokuten).toFixed(2)+'<div class="score-sub">R2 '+r2.toFixed(1)+' / G '+gtxt+'</div></td><td>'+x.s+'</td><td>'+x.b+'</td><td>'+x.nige+'</td><td>'+x.makuri+'</td><td>'+x.sashi+'</td><td>'+x.mark+'</td></tr>';
+    const intui = intuiSet.has(x.num);
+    const finPos = finMap ? finMap[x.num] : null;
+    const rowCls = finPos ? ' class="fin-watch"' : (intui ? ' class="intui-watch"' : (missSet.has(x.num) ? ' class="miss-watch"' : ''));
+    html += '<tr'+rowCls+'><td class="mark'+hon+'">'+esc(x.gaudiMark||'')+'</td><td>'+x.waku+'</td><td class="num">'+x.num+'</td>' +
+      '<td class="name">'+esc(x.name)+(finPos?'<span class="fin-badge">'+finPos+'着</span>':'')+(intui?'<span class="intui-badge">直感</span>':'')+'</td><td>'+x.age+'/'+esc(x.pref)+'</td><td>'+x.term+'</td><td>'+esc(x.class)+'</td>' +
+      '<td>'+esc(x.style||'-')+'</td><td>'+Number(x.tokuten).toFixed(2)+'<div class="score-sub">R2 '+r2.toFixed(1)+' / G '+gtxt+'</div></td><td>'+x.s+'</td><td>'+x.b+'</td><td>'+x.nige+'</td><td>'+x.makuri+'</td><td>'+x.sashi+'</td><td>'+x.mark+'</td>' +
+      '<td><button type="button" class="intui-btn'+(intui?' on':'')+'" data-date="'+esc(state.data.date||'')+'" data-venue="'+esc(v.name)+'" data-race="'+r.no+'" data-num="'+x.num+'" onclick="toggleIntuition(this)">直感</button></td></tr>';
   });
   html += '</tbody></table></div>';
 
