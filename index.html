@@ -112,6 +112,9 @@
   .plan-panel.rec-panel{border-color:rgba(109,185,255,.6);box-shadow:0 0 14px rgba(109,185,255,.30)}
   .rec-tag{display:inline-block;background:linear-gradient(135deg,#6db9ff,#2f7fe0);color:#04182e;border-radius:5px;padding:0 7px;font-size:11px;font-weight:800;margin-left:7px;vertical-align:2px}
   .osusume-chip{display:inline-flex;align-items:center;padding:7px 14px;border-radius:999px;border:1px solid #6db9ff;background:rgba(47,127,224,.18);color:#a8d4ff;font-size:13.5px;font-weight:800;box-shadow:0 0 10px rgba(109,185,255,.35)}
+  .osusume-none{display:inline-flex;align-items:center;padding:7px 14px;border-radius:999px;border:1px dashed var(--line);color:var(--sub);font-size:12.5px;font-weight:700}
+  .rec-mark{display:inline-block;font-size:10px;font-weight:800;border-radius:6px;padding:0 3px;margin-left:2px;background:rgba(47,127,224,.28);color:#a8d4ff;line-height:1.5;vertical-align:1px}
+  .fallback-banner{background:#fff4d6;border:1px solid #d9a821;color:#6b5316;border-radius:10px;padding:9px 12px;margin:0 0 12px;font-size:14px;font-weight:700}
   details.comment-fold{margin-top:12px}
   details.comment-fold summary{cursor:pointer;color:var(--sub);font-size:13.5px}
   details.ura-fold{margin-top:12px;border:1px solid #8a6d1f;border-radius:10px;padding:9px 11px;background:rgba(255,176,32,.06)}
@@ -241,6 +244,7 @@
     <select id="venueSelect" class="venue-select" aria-label="競輪場"></select>
   </aside>
   <main>
+    <div id="fallbackBanner" class="fallback-banner" style="display:none"></div>
     <div class="races" id="raceList"></div>
     <div id="content"></div>
   </main>
@@ -251,7 +255,7 @@
 </footer>
 
 <script>
-const state = { data:null, venueIdx:0, raceIdx:0 };
+const state = { data:null, venueIdx:0, raceIdx:0, planPick:null };
 const $ = (id)=>document.getElementById(id);
 
 // 「KEIRIN.JPで買う」の飛び先 (スマホ版/PC版) — 右上のトグルで切替、選択は保持する
@@ -382,13 +386,73 @@ function setupLiveRefresh(dateStr){
 let resultsTimer = null;
 let ensurePollingFor = null;
 
+// 当日データ未生成時の自動フォールバック (表示のみ。保存データは変更しない)
+const prefetched = {};
+let fallbackNote = null; // { requested: 当日, showing: 代わりに表示している日 }
+let fallbackTimer = null;
+let fallbackBusy = false;
+function stopFallbackWatch(){ if(fallbackTimer){ clearInterval(fallbackTimer); fallbackTimer = null; } }
+function startFallbackWatch(requested){
+  stopFallbackWatch();
+  fallbackTimer = setInterval(async ()=>{
+    try{
+      const res = await fetch('data/' + requested + '.json?ts=' + Date.now(), { cache:'no-store' });
+      if(res.ok){
+        stopFallbackWatch();
+        fallbackNote = null;
+        const di = $('dateInput'); if(di) di.value = requested;
+        load(requested);
+      }
+    }catch(_){ /* 次のポーリングで再試行 */ }
+  }, 3 * 60 * 1000);
+}
+function updateFallbackBanner(){
+  const bn = $('fallbackBanner');
+  if(!bn) return;
+  if(fallbackNote && state.data && state.data.date === fallbackNote.showing){
+    bn.textContent = '本日のデータは生成待ちです（毎朝6:30ごろ）— 最新の ' + fallbackNote.showing + ' のデータを表示中です';
+    bn.style.display = '';
+  }else{
+    bn.style.display = 'none';
+  }
+}
+// 当日のデータがまだ無い場合、取得できる最新日 (最大7日前まで) を代わりに表示する
+async function fallbackToLatest(requested){
+  if(fallbackBusy) return;
+  fallbackBusy = true;
+  try{
+    const base = new Date(requested + 'T12:00:00');
+    const p = (n)=>String(n).padStart(2,'0');
+    for(let i = 1; i <= 7; i++){
+      const d = new Date(base.getTime() - i * 86400000);
+      const ds = d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate());
+      try{
+        const res = await fetch('data/' + ds + '.json', { cache:'no-store' });
+        if(!res.ok) continue;
+        prefetched[ds] = await res.json();
+        fallbackNote = { requested, showing: ds };
+        const di = $('dateInput'); if(di) di.value = ds;
+        startFallbackWatch(requested);
+        await load(ds);
+        return;
+      }catch(_){ /* 次の日を試す */ }
+    }
+  }finally{ fallbackBusy = false; }
+  ensureData(requested);
+}
+
 async function load(dateStr, keepSelection){
   $('metaLine').textContent = 'データを読み込んでいます…';
+  if(!fallbackNote || fallbackNote.showing !== dateStr){ const bn0 = $('fallbackBanner'); if(bn0) bn0.style.display = 'none'; }
   if(!keepSelection){ $('venueList').innerHTML=''; $('raceList').innerHTML=''; $('content').innerHTML=''; }
   try{
-    const res = await fetch('data/'+dateStr+'.json', {cache:'no-store'});
-    if(!res.ok) throw new Error('not found');
-    state.data = await res.json();
+    if(prefetched[dateStr]){ state.data = prefetched[dateStr]; delete prefetched[dateStr]; }
+    else{
+      const res = await fetch('data/'+dateStr+'.json', {cache:'no-store'});
+      if(!res.ok) throw new Error('not found');
+      state.data = await res.json();
+    }
+    if(fallbackNote && state.data.date !== fallbackNote.showing){ fallbackNote = null; stopFallbackWatch(); }
     if(!keepSelection){
       state.venueIdx = 0; state.raceIdx = 0;
       // 閉じてすぐ開き直したとき (3時間以内) は、元の日付・場・レース位置に戻る
@@ -409,9 +473,11 @@ async function load(dateStr, keepSelection){
     buildTicker();
     setupResultsAutoRefresh(dateStr);
     setupLiveRefresh(dateStr);
+    updateFallbackBanner();
   }catch(e){
     state.data = null;
     if(resultsTimer){ clearInterval(resultsTimer); resultsTimer = null; }
+    if(dateStr === todayStr()){ fallbackToLatest(dateStr); return; }
     ensureData(dateStr);
   }
 }
@@ -661,7 +727,9 @@ function renderRaces(){
       else if(h.shoubu) chips += '<span class="hit-chip chip-sho">勝</span>';
       if(h.tanTeppan||h.tanBalance||h.tanShoubu) chips += '<span class="hit-chip chip-tan">単</span>';
     }
-    b.innerHTML = r.no + 'R' + (manHit?'💴':'') + chips + (r.startTime? '<span class="rt">'+r.startTime+'</span>' : '');
+    const rk = recTierKey(r.prediction, r);
+    const recMark = rk ? '<span class="rec-mark">⭐' + ({teppan:'鉄', balance:'バ', shoubu:'勝'})[rk] + '</span>' : '';
+    b.innerHTML = r.no + 'R' + (manHit?'💴':'') + chips + recMark + (r.startTime? '<span class="rt">'+r.startTime+'</span>' : '');
     b.onclick = ()=>{ state.raceIdx=i; renderRaces(); renderContent(); };
     el.appendChild(b);
   });
@@ -855,10 +923,39 @@ function scenarioSim(race){
            goalD: topD ? goalOrder(topD) : midOrder.slice(), goalE: topE ? goalOrder(topE) : midOrder.slice() };
 }
 
-// 推奨プランの段キー: 保存データの prediction.recommend (verdict=buy のみ) の label から teppan/balance/shoubu を返す。無ければ null
-function recTierKey(p){
-  if(!p || !p.recommend || p.recommend.verdict !== 'buy') return null;
-  const L = String(p.recommend.label || '');
+// 表示用推奨: 生成側 recommendFor (scripts/fetch-and-build.mjs) と同一ロジックで、表示時に
+// riders の得点と prediction.balance から再計算する (過去日にも鉄板・バランス推奨が出る)。
+// 保存データは一切書き換えない。再計算できない場合のみ保存済み recommend (buy のみ) を使う。
+function computeRecommend(race){
+  const p = (race && race.prediction) || {};
+  const m = String(p.balance || '').match(/([\d.]+)/);
+  if(m){
+    const b = Number(m[1]);
+    if(b >= 1 && b < 4) return { verdict:'buy', label:'勝負推奨', reason:'配当妙味ゾーン（均衡' + b + '）' };
+  }
+  const tk = ((race && race.riders) || []).map(x => x.tokuten).filter(x => typeof x === 'number');
+  if(tk.length < 3) return null;
+  const mean = tk.reduce((a, b) => a + b, 0) / tk.length;
+  if(!(mean > 0)) return null;
+  const sd = Math.sqrt(tk.reduce((a, b) => a + (b - mean) ** 2, 0) / tk.length);
+  const cv = sd / mean;
+  const cvs = cv.toFixed(3);
+  if(cv < 0.04) return { verdict:'buy', label:'バランス推奨', reason:'得点が揃う混戦（CV ' + cvs + '）— 鉄板は弱くバランスの回収が最良' };
+  if(cv < 0.055) return { verdict:'buy', label:'バランス推奨', reason:'得点の開きは中程度（CV ' + cvs + '）— バランスの回収が最良' };
+  return { verdict:'buy', label:'鉄板推奨', reason:'得点の散らばり大（CV ' + cvs + '）— 鉄板が最も来る' };
+}
+function displayRecommend(race){
+  const rec = computeRecommend(race);
+  if(rec) return rec;
+  const st = race && race.prediction && race.prediction.recommend;
+  if(st && st.verdict === 'buy') return st;
+  return null;
+}
+// 推奨プランの段キー: 表示用推奨の label から teppan/balance/shoubu を返す。無ければ null
+function recTierKey(p, race){
+  const rec = race ? displayRecommend(race) : (p && p.recommend && p.recommend.verdict === 'buy' ? p.recommend : null);
+  if(!rec) return null;
+  const L = String(rec.label || '');
   if(L.indexOf('鉄板') >= 0) return 'teppan';
   if(L.indexOf('バランス') >= 0) return 'balance';
   if(L.indexOf('勝負') >= 0) return 'shoubu';
@@ -1026,8 +1123,11 @@ function renderContent(){
   if(lu && state.data.date === todayStrJST()) vid += '<a class="vid-btn live" target="_blank" rel="noopener" href="' + lu + '">📺 ライブ映像</a>';
   if(r.voteUrl && !r.result){ vid += '<a class="vid-btn buy-btn" target="_blank" rel="noopener" data-vote="' + KJ_TOP_URL + '" href="' + kjUrl(KJ_TOP_URL) + '">KEIRIN.JPで買う</a>'; }
   if(v.cd && v.gradeCd && r.result) vid += '<a class="vid-btn" target="_blank" rel="noopener" href="https://keirin.kdreams.jp/stadium/digest/?kyogijoCd=' + v.cd + '&kaisaiDate=' + ymd + '&gradeCd=' + v.gradeCd + '&raceNo=' + r.no + '">🎬 ダイジェスト</a>';
-  const recK = recTierKey(r.prediction);
+  const dispRec = displayRecommend(r);
+  const recK = dispRec ? recTierKey(r.prediction, r) : null;
   if(recK) vid += '<span class="osusume-chip">⭐ おすすめ：' + ({teppan:'鉄板', balance:'バランス', shoubu:'勝負'})[recK] + '</span>';
+  else if(dispRec) vid += '<span class="osusume-chip">⭐ ' + esc(dispRec.label) + '</span>';
+  else vid += '<span class="osusume-none">推奨なし</span>';
   if(vid) html += '<div class="vid-row">' + vid + '</div>';
 
   // 結果 (確定していれば)
@@ -1110,7 +1210,8 @@ function renderContent(){
     if(p.plans){
       const tiers = [['teppan','鉄板'],['balance','バランス'],['shoubu','勝負']]
         .filter(([k])=>p.plans[k] && p.plans[k].length);
-      const defaultTier = p.plans.balance ? 'balance' : (tiers[0] && tiers[0][0]);
+      let defaultTier = (recK && p.plans[recK]) ? recK : (p.plans.balance ? 'balance' : (tiers[0] && tiers[0][0]));
+      if(state.planPick && state.planPick.key === raceViewKey() && p.plans[state.planPick.tier]) defaultTier = state.planPick.tier;
       html += '<div class="plan-tabs">' + tiers.map(([k,label])=>
         '<button class="plan-tab'+(k===defaultTier?' active':'')+(k===recK?' rec-tab':'')+'" onclick="switchPlan(this,\''+k+'\')">'+label+'（'+p.plans[k].length+'点）</button>').join('') + '</div>';
       // 区分別平均オッズ（鉄板／バランス追加分／勝負追加分、除外なしの単純平均）
@@ -1131,7 +1232,7 @@ function renderContent(){
       html += tiers.map(([k])=>
         '<div class="plan-panel'+(k===defaultTier?' active':'')+(k===recK?' rec-panel':'')+'" data-plan="'+k+'"><div class="k" style="font-size:12px;color:var(--sub);margin-bottom:4px">三連複'+(k===recK?'<span class="rec-tag">⭐ おすすめ</span>':'')+'</div>' + (avgText[k] ? '<div style="font-size:12px;color:var(--sub);margin-bottom:4px">'+avgText[k]+'</div>' : '') + '<div class="combos">'+p.plans[k].map(c=>{ const o = r.odds && r.odds[c.split('-').map(Number).sort((a,b)=>a-b).join('-')]; return wrapHit(greenCombo(c) + (o ? '<span class="odds">' + o.toFixed(1) + '倍</span>' : ''), hitPuku(c)); }).join(' ／ ')+'</div>' +
         (p.plansTan && p.plansTan[k] ? '<div class="k" style="font-size:12px;color:var(--sub);margin:8px 0 4px">三連単</div><div class="combos" style="font-size:15px">'+p.plansTan[k].map(c=>wrapHit(greenCombo(c), hitTan(c))).join(' ／ ')+'</div>' : '') +
-        (k==='shoubu' && p.recommend ? '<div class="rec-chip '+(p.recommend.verdict==='buy'?'rec-buy':'rec-skip')+'">判定：'+esc(p.recommend.label)+'（'+esc(p.recommend.reason)+'）</div>' : '') +
+        (k==='shoubu' && dispRec ? '<div class="rec-chip rec-buy">判定：'+esc(dispRec.label)+'（'+esc(dispRec.reason)+'）</div>' : '') +
         (k==='shoubu' && p.ana ? '<div class="ana">穴候補: '+p.ana.num+'番 '+esc(p.ana.name)+'（'+esc(p.ana.reason)+'）</div>' : '') +
         '</div>').join('');
       // 厳選セット（三連単・勝負が実際に使った組。非gensenレースは保存オッズから算出して併記）
@@ -1249,7 +1350,9 @@ function renderContent(){
   initAnim(r);
 }
 
+function raceViewKey(){ return (state.data ? state.data.date : '') + '|' + state.venueIdx + '|' + state.raceIdx; }
 function switchPlan(btn, key){
+  state.planPick = { key: raceViewKey(), tier: key };
   const card = btn.closest('.card');
   card.querySelectorAll('.plan-tab').forEach(b=>b.classList.toggle('active', b===btn));
   card.querySelectorAll('.plan-panel').forEach(pn=>pn.classList.toggle('active', pn.dataset.plan===key));
