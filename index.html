@@ -115,7 +115,7 @@
   .scen-arrow{color:var(--sub);font-size:11px}
   .scen-top{font-size:13.5px;margin-top:5px;line-height:1.65}
   .scen-note{font-size:12px;color:var(--sub);margin-top:9px;line-height:1.65}
-  .scen-bets{border-top:1px solid var(--line);padding:10px 0 5px;margin-top:10px}
+  .scen-bets-card{margin-bottom:15px}
   .scen-bets-title{font-size:14.5px;font-weight:800}
   .scen-bets-note{font-size:12px;color:var(--sub);margin:4px 0 7px;line-height:1.65}
   .scen-bet-row{font-size:13.5px;margin:3px 0;line-height:1.6}
@@ -881,23 +881,30 @@ function renderScenario(race){
         ? '自力の ' + eTxt + '（捲' + (((race.riders || []).find(y => y.num === s.eAxisTop) || {}).makuri || 0) + '・逃' + (((race.riders || []).find(y => y.num === s.eAxisTop) || {}).nige || 0) + '）が捲りを決めて押し切る展開。'
         : '別線のライン・単騎がなく、この形は想定しにくい展開。',
     s.finE, s.goalE, s.topE);
-  // シミュレーション買い目 (表示専用): 各パターンの想定上位を三連複の組として並べ、重複を除いた合計点数を出す
+  html += '</details>';
+  return html;
+}
+
+// シミュレーション買い目 (表示専用・独立欄): 各パターンの想定上位を三連複の組として並べ、重複を除いた合計点数を出す
+function renderScenarioBets(race){
+  const s = scenarioSim(race);
+  if(!s) return '';
+  const winKey = race.result ? (race.result.sanrenpuku ? race.result.sanrenpuku.combo.split('-').map(Number).sort((a, b) => a - b).join('-') : (race.result.top3 ? [...race.result.top3].sort((a, b) => a - b).join('-') : null)) : null;
   const comboOf = t => t ? t.slice().sort((a, b) => a - b).join('-') : null;
   const seenCombo = {};
   const uniqCombos = [];
+  const showCombo = c => (winKey && c === winKey) ? '<span class="combo-hit">' + c + ' 🎯</span>' : c;
   const betRows = [['A', s.topA], ['B', s.topB], ['C', s.topC], ['D', s.topD], ['E', s.topE]].map(([L, t]) => {
     const c = comboOf(t);
     if(!c) return '<div class="scen-bet-row"><b>' + L + '</b>：—（想定上位なし）</div>';
     if(seenCombo[c]) return '<div class="scen-bet-row"><b>' + L + '</b>：' + c + '（' + seenCombo[c] + 'と同じ）</div>';
     seenCombo[c] = L; uniqCombos.push(c);
-    return '<div class="scen-bet-row"><b>' + L + '</b>：' + c + '</div>';
+    return '<div class="scen-bet-row"><b>' + L + '</b>：' + showCombo(c) + '</div>';
   }).join('');
-  html += '<div class="scen-bets"><div class="scen-bets-title">シミュレーション買い目（三連複・表示専用）</div>' +
+  return '<div class="card scen-bets-card"><h4>シミュレーション買い目 <span class="anim-note">三連複・表示専用</span></h4>' +
     '<div class="scen-bets-note">各パターンの想定上位3人をそのまま三連複の組にした参考表示です。GAUDICODE予想の買い目（鉄板／バランス／勝負）とは別枠で、予想には含まれません。</div>' +
     betRows +
-    '<div class="scen-bets-total">合計 ' + uniqCombos.length + '点' + (uniqCombos.length ? '：' + uniqCombos.join(' ／ ') : '') + '</div></div>';
-  html += '</details>';
-  return html;
+    '<div class="scen-bets-total">合計 ' + uniqCombos.length + '点' + (uniqCombos.length ? '：' + uniqCombos.map(showCombo).join(' ／ ') : '') + '</div></div>';
 }
 
 function renderContent(){
@@ -1108,6 +1115,9 @@ function renderContent(){
 
   // 展開シミュレーション（図式・5パターン）
   html += renderScenario(r);
+
+  // シミュレーション買い目（独立欄）
+  html += renderScenarioBets(r);
 
   // 展開アニメーション
   html += '<div class="card"><h4>🏁 展開アニメーション <span class="anim-note">シミュレーション（予想ベース）</span></h4>' +
