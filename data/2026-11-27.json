@@ -1,6 +1,6 @@
 {
   "date": "2026-11-27",
-  "generatedAt": "2026-11-26T22:03:17.244Z",
+  "generatedAt": "2026-11-27T03:50:56.830Z",
   "source": "楽天Kドリームス",
   "venues": [
     {
@@ -20353,7 +20353,7 @@
               "sashi": 1,
               "mark": 1,
               "gaudiMark": "◎",
-              "gscore": 23.47
+              "gscore": 18.14
             },
             {
               "waku": 2,
@@ -20373,7 +20373,7 @@
               "sashi": 5,
               "mark": 3,
               "gaudiMark": "○",
-              "gscore": 13.24
+              "gscore": 8.72
             },
             {
               "waku": 3,
@@ -20393,7 +20393,7 @@
               "sashi": 1,
               "mark": 5,
               "gaudiMark": "▲",
-              "gscore": 21.51
+              "gscore": 14.98
             },
             {
               "waku": 4,
@@ -20413,7 +20413,7 @@
               "sashi": 0,
               "mark": 1,
               "gaudiMark": "△",
-              "gscore": 12.09
+              "gscore": 21.77
             },
             {
               "waku": 5,
@@ -20433,7 +20433,7 @@
               "sashi": 4,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 19.31
+              "gscore": 12.78
             },
             {
               "waku": 6,
@@ -20453,7 +20453,7 @@
               "sashi": 1,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 21.36
+              "gscore": 9.02
             },
             {
               "waku": 7,
@@ -20473,10 +20473,32 @@
               "sashi": 0,
               "mark": 1,
               "gaudiMark": "△",
-              "gscore": 20.09
+              "gscore": 13.56
             }
           ],
-          "lineup": null,
+          "lineup": [
+            [
+              6
+            ],
+            [
+              3
+            ],
+            [
+              2
+            ],
+            [
+              1
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              7
+            ]
+          ],
           "prediction": {
             "honmei": {
               "num": 1,
@@ -20656,8 +20678,8 @@
               "makuri": 4,
               "sashi": 9,
               "mark": 3,
-              "gaudiMark": "◎",
-              "gscore": 14.95
+              "gscore": 11.52,
+              "gaudiMark": "◎"
             },
             {
               "waku": 2,
@@ -20677,7 +20699,7 @@
               "sashi": 6,
               "mark": 2,
               "gaudiMark": "○",
-              "gscore": 14.81
+              "gscore": 10.33
             },
             {
               "waku": 3,
@@ -20697,7 +20719,7 @@
               "sashi": 5,
               "mark": 1,
               "gaudiMark": "▲",
-              "gscore": 18.6
+              "gscore": 13.31
             },
             {
               "waku": 4,
@@ -20717,7 +20739,7 @@
               "sashi": 3,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 29.91
+              "gscore": 24.62
             },
             {
               "waku": 5,
@@ -20737,7 +20759,7 @@
               "sashi": 1,
               "mark": 7,
               "gaudiMark": "△",
-              "gscore": 19.8
+              "gscore": 13.31
             },
             {
               "waku": 6,
@@ -20757,7 +20779,7 @@
               "sashi": 1,
               "mark": 5,
               "gaudiMark": "△",
-              "gscore": 18.97
+              "gscore": 12.49
             },
             {
               "waku": 7,
@@ -20777,10 +20799,32 @@
               "sashi": 2,
               "mark": 2,
               "gaudiMark": "△",
-              "gscore": 17.28
+              "gscore": 11.85
             }
           ],
-          "lineup": null,
+          "lineup": [
+            [
+              2
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ],
+            [
+              1
+            ],
+            [
+              3
+            ],
+            [
+              5
+            ],
+            [
+              4
+            ]
+          ],
           "prediction": {
             "honmei": {
               "num": 1,
@@ -20962,7 +21006,7 @@
               "sashi": 2,
               "mark": 2,
               "gaudiMark": "◎",
-              "gscore": 11.1
+              "gscore": 13.38
             },
             {
               "waku": 2,
@@ -20982,7 +21026,7 @@
               "sashi": 4,
               "mark": 0,
               "gaudiMark": "▲",
-              "gscore": 9.89
+              "gscore": 10.4
             },
             {
               "waku": 3,
@@ -21002,7 +21046,7 @@
               "sashi": 0,
               "mark": 0,
               "gaudiMark": "○",
-              "gscore": 15.22
+              "gscore": 14.7
             },
             {
               "waku": 4,
@@ -21022,7 +21066,7 @@
               "sashi": 4,
               "mark": 1,
               "gaudiMark": "△",
-              "gscore": 8.79
+              "gscore": 19.82
             },
             {
               "waku": 5,
@@ -21041,8 +21085,7 @@
               "makuri": 1,
               "sashi": 3,
               "mark": 2,
-              "gaudiMark": "△",
-              "gscore": 7.24
+              "gscore": 5.11
             },
             {
               "waku": 6,
@@ -21062,7 +21105,7 @@
               "sashi": 3,
               "mark": 1,
               "gaudiMark": "△",
-              "gscore": 5.31
+              "gscore": 6.85
             },
             {
               "waku": 7,
@@ -21082,10 +21125,26 @@
               "sashi": 0,
               "mark": 1,
               "gaudiMark": "△",
-              "gscore": 4.59
+              "gscore": 1.41
             }
           ],
-          "lineup": null,
+          "lineup": [
+            [
+              2,
+              6
+            ],
+            [
+              3,
+              1,
+              4
+            ],
+            [
+              5
+            ],
+            [
+              7
+            ]
+          ],
           "prediction": {
             "honmei": {
               "num": 1,
@@ -21261,7 +21320,7 @@
               "sashi": 3,
               "mark": 1,
               "gaudiMark": "◎",
-              "gscore": 11.51
+              "gscore": 18.89
             },
             {
               "waku": 2,
@@ -21281,7 +21340,7 @@
               "sashi": 2,
               "mark": 5,
               "gaudiMark": "○",
-              "gscore": 9.29
+              "gscore": 10.72
             },
             {
               "waku": 3,
@@ -21300,28 +21359,8 @@
               "makuri": 0,
               "sashi": 0,
               "mark": 2,
-              "gaudiMark": "△",
-              "gscore": 7.05
-            },
-            {
-              "waku": 4,
-              "num": 4,
-              "name": "齋藤 宗徳",
-              "pref": "千 葉",
-              "age": 41,
-              "term": 100,
-              "class": "A2",
-              "style": "逃",
-              "tokuten": 81.28,
-              "gear": 3.92,
-              "s": 3,
-              "b": 5,
-              "nige": 1,
-              "makuri": 2,
-              "sashi": 2,
-              "mark": 0,
-              "gaudiMark": "▲",
-              "gscore": 12.31
+              "gscore": 4.84,
+              "gaudiMark": "▲"
             },
             {
               "waku": 5,
@@ -21341,7 +21380,7 @@
               "sashi": 0,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 6.3
+              "gscore": 3.06
             },
             {
               "waku": 6,
@@ -21361,7 +21400,7 @@
               "sashi": 1,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 11.45
+              "gscore": 9.87
             },
             {
               "waku": 7,
@@ -21381,10 +21420,26 @@
               "sashi": 0,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 3.61
+              "gscore": 0.6
             }
           ],
-          "lineup": null,
+          "lineup": [
+            [
+              6,
+              2,
+              1
+            ],
+            [
+              3
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              7
+            ]
+          ],
           "prediction": {
             "honmei": {
               "num": 1,
@@ -21562,7 +21617,7 @@
               "sashi": 2,
               "mark": 1,
               "gaudiMark": "○",
-              "gscore": 16.11
+              "gscore": 20.48
             },
             {
               "waku": 2,
@@ -21582,7 +21637,7 @@
               "sashi": 1,
               "mark": 1,
               "gaudiMark": "◎",
-              "gscore": 11.33
+              "gscore": 13.42
             },
             {
               "waku": 3,
@@ -21602,7 +21657,7 @@
               "sashi": 4,
               "mark": 3,
               "gaudiMark": "△",
-              "gscore": 9.29
+              "gscore": 12.67
             },
             {
               "waku": 4,
@@ -21622,7 +21677,7 @@
               "sashi": 2,
               "mark": 0,
               "gaudiMark": "▲",
-              "gscore": 15.4
+              "gscore": 11.7
             },
             {
               "waku": 5,
@@ -21642,7 +21697,7 @@
               "sashi": 3,
               "mark": 1,
               "gaudiMark": "△",
-              "gscore": 7.05
+              "gscore": 10.84
             },
             {
               "waku": 6,
@@ -21662,7 +21717,7 @@
               "sashi": 0,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 5.55
+              "gscore": 12.02
             },
             {
               "waku": 7,
@@ -21682,10 +21737,24 @@
               "sashi": 2,
               "mark": 1,
               "gaudiMark": "△",
-              "gscore": 5.91
+              "gscore": 7.34
             }
           ],
-          "lineup": null,
+          "lineup": [
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              5,
+              6
+            ],
+            [
+              4,
+              7
+            ]
+          ],
           "prediction": {
             "honmei": {
               "num": 2,
@@ -21863,7 +21932,7 @@
               "sashi": 1,
               "mark": 0,
               "gaudiMark": "◎",
-              "gscore": 18.3
+              "gscore": 16.79
             },
             {
               "waku": 2,
@@ -21883,7 +21952,7 @@
               "sashi": 4,
               "mark": 1,
               "gaudiMark": "○",
-              "gscore": 9.35
+              "gscore": 15.33
             },
             {
               "waku": 3,
@@ -21903,7 +21972,7 @@
               "sashi": 3,
               "mark": 1,
               "gaudiMark": "▲",
-              "gscore": 9.17
+              "gscore": 10.87
             },
             {
               "waku": 4,
@@ -21923,7 +21992,7 @@
               "sashi": 3,
               "mark": 1,
               "gaudiMark": "△",
-              "gscore": 6.56
+              "gscore": 14.81
             },
             {
               "waku": 5,
@@ -21943,7 +22012,7 @@
               "sashi": 0,
               "mark": 3,
               "gaudiMark": "△",
-              "gscore": 6.14
+              "gscore": 11.02
             },
             {
               "waku": 6,
@@ -21963,7 +22032,7 @@
               "sashi": 1,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 10.74
+              "gscore": 9.56
             },
             {
               "waku": 7,
@@ -21983,10 +22052,22 @@
               "sashi": 1,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 9.43
+              "gscore": 10.19
             }
           ],
-          "lineup": null,
+          "lineup": [
+            [
+              1,
+              2,
+              4,
+              5
+            ],
+            [
+              6,
+              3,
+              7
+            ]
+          ],
           "prediction": {
             "honmei": {
               "num": 1,
@@ -22168,7 +22249,7 @@
               "sashi": 5,
               "mark": 2,
               "gaudiMark": "△",
-              "gscore": 11.75
+              "gscore": 15.6
             },
             {
               "waku": 2,
@@ -22188,7 +22269,7 @@
               "sashi": 5,
               "mark": 2,
               "gaudiMark": "◎",
-              "gscore": 12.21
+              "gscore": 12.56
             },
             {
               "waku": 3,
@@ -22208,7 +22289,7 @@
               "sashi": 4,
               "mark": 0,
               "gaudiMark": "▲",
-              "gscore": 10.33
+              "gscore": 8.92
             },
             {
               "waku": 4,
@@ -22228,7 +22309,7 @@
               "sashi": 1,
               "mark": 0,
               "gaudiMark": "○",
-              "gscore": 9.95
+              "gscore": 12.93
             },
             {
               "waku": 5,
@@ -22248,7 +22329,7 @@
               "sashi": 2,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 12.28
+              "gscore": 17.64
             },
             {
               "waku": 6,
@@ -22268,7 +22349,7 @@
               "sashi": 2,
               "mark": 1,
               "gaudiMark": "△",
-              "gscore": 6.85
+              "gscore": 8.11
             },
             {
               "waku": 7,
@@ -22288,10 +22369,24 @@
               "sashi": 4,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 5.34
+              "gscore": 10.71
             }
           ],
-          "lineup": null,
+          "lineup": [
+            [
+              4,
+              1,
+              7
+            ],
+            [
+              2,
+              6
+            ],
+            [
+              5,
+              3
+            ]
+          ],
           "prediction": {
             "honmei": {
               "num": 2,
@@ -22469,7 +22564,7 @@
               "sashi": 2,
               "mark": 0,
               "gaudiMark": "◎",
-              "gscore": 12.74
+              "gscore": 15.36
             },
             {
               "waku": 2,
@@ -22489,7 +22584,7 @@
               "sashi": 10,
               "mark": 4,
               "gaudiMark": "▲",
-              "gscore": 9.7
+              "gscore": 11.48
             },
             {
               "waku": 3,
@@ -22509,7 +22604,7 @@
               "sashi": 5,
               "mark": 1,
               "gaudiMark": "△",
-              "gscore": 8.73
+              "gscore": 13.03
             },
             {
               "waku": 4,
@@ -22529,7 +22624,7 @@
               "sashi": 0,
               "mark": 0,
               "gaudiMark": "○",
-              "gscore": 13.89
+              "gscore": 19.59
             },
             {
               "waku": 5,
@@ -22548,8 +22643,7 @@
               "makuri": 0,
               "sashi": 5,
               "mark": 1,
-              "gaudiMark": "△",
-              "gscore": 8.75
+              "gscore": 10.22
             },
             {
               "waku": 6,
@@ -22569,7 +22663,7 @@
               "sashi": 2,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 6.89
+              "gscore": 6.21
             },
             {
               "waku": 7,
@@ -22589,10 +22683,26 @@
               "sashi": 1,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 6.29
+              "gscore": 8.81
             }
           ],
-          "lineup": null,
+          "lineup": [
+            [
+              6,
+              1,
+              3
+            ],
+            [
+              5
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              7
+            ]
+          ],
           "prediction": {
             "honmei": {
               "num": 1,
@@ -22768,7 +22878,7 @@
               "sashi": 4,
               "mark": 2,
               "gaudiMark": "◎",
-              "gscore": 16.83
+              "gscore": 16.54
             },
             {
               "waku": 2,
@@ -22788,7 +22898,7 @@
               "sashi": 11,
               "mark": 2,
               "gaudiMark": "○",
-              "gscore": 10.85
+              "gscore": 15.64
             },
             {
               "waku": 3,
@@ -22808,7 +22918,7 @@
               "sashi": 8,
               "mark": 5,
               "gaudiMark": "▲",
-              "gscore": 10.16
+              "gscore": 12.72
             },
             {
               "waku": 4,
@@ -22828,7 +22938,7 @@
               "sashi": 0,
               "mark": 0,
               "gaudiMark": "△",
-              "gscore": 12.64
+              "gscore": 17.92
             },
             {
               "waku": 5,
@@ -22848,7 +22958,7 @@
               "sashi": 6,
               "mark": 3,
               "gaudiMark": "△",
-              "gscore": 6.77
+              "gscore": 13.68
             },
             {
               "waku": 6,
@@ -22868,7 +22978,7 @@
               "sashi": 1,
               "mark": 3,
               "gaudiMark": "△",
-              "gscore": 11.48
+              "gscore": 14.26
             },
             {
               "waku": 7,
@@ -22888,10 +22998,24 @@
               "sashi": 3,
               "mark": 4,
               "gaudiMark": "△",
-              "gscore": 7.05
+              "gscore": 9.64
             }
           ],
-          "lineup": null,
+          "lineup": [
+            [
+              4,
+              2,
+              5
+            ],
+            [
+              1,
+              7
+            ],
+            [
+              6,
+              3
+            ]
+          ],
           "prediction": {
             "honmei": {
               "num": 1,
@@ -25450,9 +25574,31 @@
     }
   ],
   "quality": {
-    "errors": [],
-    "warnings": 9,
-    "checkedAt": "2026-11-26T22:03:17.255Z"
-  },
-  "resultsUpdatedAt": "2026-11-27T03:15:13.492Z"
+    "errors": [
+      "久留米4R: teppanに不正な買い目 1-4-6",
+      "久留米4R: teppanに不正な買い目 1-3-4",
+      "久留米4R: balanceに不正な買い目 1-4-6",
+      "久留米4R: balanceに不正な買い目 1-3-4",
+      "久留米4R: balanceに不正な買い目 1-2-4",
+      "久留米4R: balanceに不正な買い目 4-6-2",
+      "久留米4R: shoubuに不正な買い目 1-4-6",
+      "久留米4R: shoubuに不正な買い目 1-3-4",
+      "久留米4R: shoubuに不正な買い目 1-2-4",
+      "久留米4R: shoubuに不正な買い目 4-6-2",
+      "久留米4R: shoubuに不正な買い目 2-3-4",
+      "久留米4R: shoubuに不正な買い目 3-4-6",
+      "久留米4R: 三連単balanceに不正な買い目 4→1→6",
+      "久留米4R: 三連単balanceに不正な買い目 4→6→1",
+      "久留米4R: 三連単balanceに不正な買い目 4→1→2",
+      "久留米4R: 三連単balanceに不正な買い目 4→2→1",
+      "久留米4R: 三連単shoubuに不正な買い目 1→2→4",
+      "久留米4R: 三連単shoubuに不正な買い目 1→4→2",
+      "久留米4R: 三連単shoubuに不正な買い目 2→1→4",
+      "久留米4R: 三連単shoubuに不正な買い目 2→4→1",
+      "久留米4R: 三連単shoubuに不正な買い目 4→1→2",
+      "久留米4R: 三連単shoubuに不正な買い目 4→2→1"
+    ],
+    "warnings": 0,
+    "checkedAt": "2026-11-27T03:50:56.840Z"
+  }
 }
